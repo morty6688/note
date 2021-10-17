@@ -1,0 +1,22 @@
+- 删除右键菜单，建议用win terminal
+
+  - https://blog.csdn.net/yelllowcong/article/details/77663442
+
+- bash.bashrc文件
+
+  - 代名 
+
+    ```bash
+    alias python3=python
+    ```
+
+  - 历史记录 
+
+    ```bash
+    PROMPT_COMMAND='history -a'
+    ```
+
+- 所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行。使用scoop cleanup清理旧版本时，需要备份bash.bashrc文件，并重新设置win terminal中的路径。
+
+  
+
