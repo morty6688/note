@@ -41,7 +41,9 @@ iwr -useb get.scoop.sh | iex
    ```
    scoop list
    scoop update
+   # 列出全部可更新软件
    scoop status
+   # 全部更新
    scoop update '*'
    ```
 
@@ -60,8 +62,6 @@ iwr -useb get.scoop.sh | iex
    ```
 
    
-
-
 
 开发工具安装，其他工具见[此处](./常用软件/即装即用.md)：
 
@@ -82,6 +82,8 @@ iwr -useb get.scoop.sh | iex
    ```
 
    https://maven.aliyun.com/
+
+   [settings.xml](settings.xml)
 
 2. python
 

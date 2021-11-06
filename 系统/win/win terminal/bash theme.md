@@ -10,7 +10,7 @@
     "cursorShape": "bar",
     "font": {
       "face": "Consolas",
-      "size": 14
+      "size": 12
     },
     "hidden": false,
     "historySize": 9001,
@@ -38,7 +38,7 @@
     "cursorShape": "bar",
     "font": {
       "face": "Consolas",
-      "size": 14
+      "size": 12
     },
     "hidden": false,
     "historySize": 9001,

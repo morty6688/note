@@ -16,10 +16,17 @@ echo 'source ~/tools/theme/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 zsh
 ```
 
-- 设置为默认
+- ubuntu设置为默认
 
 ```bash
 cat /etc/shells
 chsh -s /bin/zsh
 ```
 
+- win10中的git bash安装zsh：
+
+  https://gist.github.com/fworks/af4c896c9de47d827d4caa6fd7154b6b
+
+  但是不要安装oh-my-zsh，安装powerlevel10k，并在bash.bashrc中设置zsh默认
+
+- 
