@@ -27,7 +27,7 @@
   ```json
   // Git Bash
   {
-    "commandline": "C:\\Users\\lijian\\scoop\\apps\\git\\2.33.1.windows.1\\bin\\bash.exe",
+    "commandline": "C:\\Users\\lijian\\scoop\\apps\\git\\current\\bin\\bash.exe",
     "guid": "{399574cd-94a3-4fe2-bb49-4d6e2b3ec624}",
     "name": "Git Bash",
     "startingDirectory": "D:\\projs",

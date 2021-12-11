@@ -1,3 +1,5 @@
+介绍：https://sspai.com/post/52710
+
 启动：
 
 ```powershell
@@ -45,6 +47,11 @@ iwr -useb get.scoop.sh | iex
    scoop status
    # 全部更新
    scoop update '*'
+   
+   # 禁止某个软件更新
+   scoop hold git
+   # 取消
+   scoop unhold git
    ```
 
 5. 清除缓存（安装失败时清除残留）
@@ -52,6 +59,7 @@ iwr -useb get.scoop.sh | iex
    ```
    scoop cache show
    scoop cache rm qbittorrent
+   scoop cache rm '*'
    ```
 
 
@@ -73,7 +81,7 @@ iwr -useb get.scoop.sh | iex
 
    ```
    scoop bucket add java
-   scoop install openjdk11
+   scoop install openjdk17
    ```
 
    ```
@@ -91,7 +99,50 @@ iwr -useb get.scoop.sh | iex
    scoop install python
    ```
 
-3. mysql
+   使用如下命令代替pip命令，以解决Fatal error in launcher: Unable to create process using '"'的问题：
+
+   ```
+   python -m pip 
+   ```
+
+   换源：
+
+   ```
+   # 清华源
+   python -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+   
+   # 或：
+   # 阿里源
+   python -m pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+   # 腾讯源
+   python -m pip config set global.index-url http://mirrors.cloud.tencent.com/pypi/simple
+   # 豆瓣源
+   python -m pip config set global.index-url http://pypi.douban.com/simple/
+   ```
+
+   
+
+3. go
+
+   ```
+   scoop install go 
+   ```
+
+   换源（三选一）：
+
+   ```
+   go env -w GOPROXY=https://goproxy.cn,direct
+   go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
+   go env -w GOPROXY=https://goproxy.io,direct
+   ```
+
+   ```
+   go env | grep GOPROXY
+   ```
+
+   
+
+4. mysql
 
    ```
    scoop install mysql
@@ -113,3 +164,48 @@ iwr -useb get.scoop.sh | iex
    mysqladmin -uroot -p password
    ```
 
+   ```
+   # 关闭计划任务
+   控制面板-搜索计划任务-MySQL-Installer-先导出后删除
+   ```
+
+   
+
+5. redis
+
+   ```
+   
+   ```
+
+   
+
+6. zookeeper
+
+   ```
+    scoop install zookeeper
+   ```
+
+   启动：
+
+   ```
+   # 启动zookeeper，无需start，直接运行
+   zkserver
+   # 启动客户端
+   zkcli
+   # 创建节点
+   create /node value
+   # 获取节点的值
+   get /node
+   # 设置节点的值
+   set /node newValue
+   # 删除节点
+   delete /node
+   ```
+
+7. kafka
+
+   ```
+   scoop install kafka
+   ```
+
+   
