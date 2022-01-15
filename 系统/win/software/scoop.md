@@ -98,9 +98,9 @@ scoop install git
 
 - Git Bash设置如下：
 
-​		[Git Bash设置](Git%20Bash.md)
+​		[Git Bash设置](git_bash.md)
 
-​		其他关于git的问题参考该目录[git配置与问题记录](../../../系统/通用工具/git/配置与问题.md)
+​		其他关于git的问题参考该文件：[git配置与问题记录](../../../系统/通用工具/git/配置与问题.md)
 
 ```
 scoop install openjdk17
@@ -112,7 +112,7 @@ scoop install maven
 
 https://maven.aliyun.com/
 
-[settings.xml](settings.xml)
+[settings.xml](resources/settings.xml)
 
 #### 2. python
 

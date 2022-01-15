@@ -2,9 +2,9 @@
 
   将以下ico文件放到C:\icons\terminal.ico目录，运行如下脚本，
   
-  [Add open Windows terminal here into right-click context menu.bat](win-terminal-here.bat)
+  [Add open Windows terminal here into right-click context menu.bat](resources/win-terminal-here.bat)
   
-  [terminal.ico](terminal.ico)
+  [terminal.ico](resources/terminal.ico)
   
 - 设置git bash为默认
   - 先打开Terminal，添加新配置文件，选择Git Bash安装目录下的bin目录中的bash.exe。
