@@ -96,6 +96,12 @@ scoop info openjdk
 scoop install git
 ```
 
+- Git Bash设置如下：
+
+​		[Git Bash设置](Git%20Bash.md)
+
+​		其他关于git的问题参考该目录[git配置与问题记录](../../../系统/通用工具/git/配置与问题.md)
+
 ```
 scoop install openjdk17
 ```
@@ -225,6 +231,10 @@ delete /node
   scoop install autohotkey-installer
   ```
 
+  - 使用如下设置，并将快捷方式放到Windows启动目录：
+
+    [AHK启动脚本](ahk.md)
+
 - ```
   scoop install qbittorrent
   ```
@@ -273,6 +283,8 @@ delete /node
   scoop install typora
   ```
 
+  - [typora配置](typora.md)
+  
 - ```
   scoop install filezilla
   ```
@@ -311,7 +323,7 @@ delete /node
   scoop install neteasemusic
   ```
 
-#### 其他
+### 其他
 
 - 暂不方便用 scoop
 
