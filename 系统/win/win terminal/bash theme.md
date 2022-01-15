@@ -20,7 +20,7 @@
     "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
     "name": "Ubuntu",
     "source": "Windows.Terminal.Wsl",
-    "startingDirectory": "//wsl$/Ubuntu/home/lijian"
+    "startingDirectory": "\\\\wsl$\\Ubuntu\\home\\lijian"
   }
   ```
 

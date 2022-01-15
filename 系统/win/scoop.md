@@ -1,3 +1,5 @@
+### 介绍与启动
+
 介绍：https://sspai.com/post/52710
 
 启动：
@@ -7,205 +9,334 @@ Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 iwr -useb get.scoop.sh | iex
 ```
 
-预备工作：
+### 使用方法
 
-1. ```
-   scoop install aria2
-   scoop config aria2-split 32
-   scoop config aria2-max-connection-per-server 16
-   scoop config aria2-min-split-size 1M
-   ```
-   
-2. 代理
-   
-   ```
-   scoop config proxy 127.0.0.1:10809
-   ```
-   
-   ```
-   scoop config rm proxy
-   ```
+#### 0. 添加仓库
 
-   ```
-   scoop update
-   ```
-   
-3. 换源（不生效，待完善）
+```
+scoop bucket add java
+scoop bucket add main
+scoop bucket add extras
+scoop bucket add dorado
+scoop bucket add ash258.ash258
+```
 
-   ```
-   scoop config SCOOP_REPO https://gitee.com/squallliu/scoop
-   scoop config rm SCOOP_REPO
-   scoop update
-   ```
+#### 1. 安装 aria2
 
-4. 更新
+```
+scoop install aria2
+scoop config aria2-split 32
+scoop config aria2-max-connection-per-server 16
+scoop config aria2-min-split-size 1M
+```
 
-   ```
-   scoop list
-   scoop update
-   # 列出全部可更新软件
-   scoop status
-   # 全部更新
-   scoop update '*'
-   
-   # 禁止某个软件更新
-   scoop hold git
-   # 取消
-   scoop unhold git
-   ```
+#### 2. 代理
 
-5. 清除缓存（安装失败时清除残留）
+```
+scoop config proxy 127.0.0.1:10809
+```
 
-   ```
-   scoop cache show
-   scoop cache rm qbittorrent
-   scoop cache rm '*'
-   ```
+```
+scoop config rm proxy
+```
 
+```
+scoop update
+```
 
-6. 删除旧版本
+#### 3. 换源（不生效，待完善）
 
-   ```
-   scoop cleanup '*'
-   ```
+```
+scoop config SCOOP_REPO https://gitee.com/squallliu/scoop
+scoop config rm SCOOP_REPO
+scoop update
+```
 
-   
+#### 4. 更新
 
-开发工具安装，其他工具见[此处](./常用软件/即装即用.md)：
+```
+scoop list
+scoop update
+# 列出全部可更新软件
+scoop status
+# 全部更新
+scoop update '*'
 
-1. java
+# 禁止某个软件更新
+scoop hold git
+# 取消
+scoop unhold git
+```
 
-   ```
-   scoop install git
-   ```
+#### 5. 清除缓存（安装失败时清除残留）
 
-   ```
-   scoop bucket add java
-   scoop install openjdk17
-   ```
+```
+scoop cache show
+scoop cache rm qbittorrent
+scoop cache rm '*'
+```
 
-   ```
-   scoop bucket add main
-   scoop install maven
-   ```
+#### 6. 删除旧版本
 
-   https://maven.aliyun.com/
+```
+scoop cleanup '*'
+```
 
-   [settings.xml](settings.xml)
+#### 7. 软件信息
 
-2. python
+```
+scoop info openjdk
+```
 
-   ```
-   scoop install python
-   ```
+### 开发工具安装
 
-   使用如下命令代替pip命令，以解决Fatal error in launcher: Unable to create process using '"'的问题：
+#### 1. java
 
-   ```
-   python -m pip 
-   ```
+```
+scoop install git
+```
 
-   换源：
+```
+scoop install openjdk17
+```
 
-   ```
-   # 清华源
-   python -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-   
-   # 或：
-   # 阿里源
-   python -m pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
-   # 腾讯源
-   python -m pip config set global.index-url http://mirrors.cloud.tencent.com/pypi/simple
-   # 豆瓣源
-   python -m pip config set global.index-url http://pypi.douban.com/simple/
-   ```
+```
+scoop install maven
+```
 
-   
+https://maven.aliyun.com/
 
-3. go
+[settings.xml](settings.xml)
 
-   ```
-   scoop install go 
-   ```
+#### 2. python
 
-   换源（三选一）：
+```
+scoop install python
+```
 
-   ```
-   go env -w GOPROXY=https://goproxy.cn,direct
-   go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
-   go env -w GOPROXY=https://goproxy.io,direct
-   ```
+使用如下命令代替 pip 命令，以解决 Fatal error in launcher: Unable to create process using '"'的问题：
 
-   ```
-   go env | grep GOPROXY
-   ```
+```
+python -m pip
+```
 
-   
+换源：
 
-4. mysql
+```
+# 清华源
+python -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-   ```
-   scoop install mysql
-   ```
+# 或：
+# 阿里源
+python -m pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+# 腾讯源
+python -m pip config set global.index-url http://mirrors.cloud.tencent.com/pypi/simple
+# 豆瓣源
+python -m pip config set global.index-url http://pypi.douban.com/simple/
+```
 
-   ```powershell(管理员)
-   # 注册为服务
-   mysqld --install MySQL
-   # 删除服务
-   mysqld -remove MySQL
-   # 启动服务
-   net start MySQL
-   # 停止服务
-   net stop MySQL
-   ```
+#### 3. go
 
-   ```
-   # 修改密码
-   mysqladmin -uroot -p password
-   ```
+```
+scoop install go
+```
 
-   ```
-   # 关闭计划任务
-   控制面板-搜索计划任务-MySQL-Installer-先导出后删除
-   ```
+换源（三选一）：
 
-   
+```
+go env -w GOPROXY=https://goproxy.cn,direct
+go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
+go env -w GOPROXY=https://goproxy.io,direct
+```
 
-5. redis
+```
+go env | grep GOPROXY
+```
 
-   ```
-   
-   ```
+#### 4. mysql
 
-   
+```
+scoop install mysql
+```
 
-6. zookeeper
+```powershell(管理员)
+# 注册为服务
+mysqld --install MySQL
+# 删除服务
+mysqld -remove MySQL
+# 启动服务
+net start MySQL
+# 停止服务
+net stop MySQL
+```
 
-   ```
-    scoop install zookeeper
-   ```
+```
+# 修改密码
+mysqladmin -uroot -p password
+```
 
-   启动：
+```
+# 关闭计划任务
+控制面板-搜索计划任务-MySQL-Installer-先导出后删除
+```
 
-   ```
-   # 启动zookeeper，无需start，直接运行
-   zkserver
-   # 启动客户端
-   zkcli
-   # 创建节点
-   create /node value
-   # 获取节点的值
-   get /node
-   # 设置节点的值
-   set /node newValue
-   # 删除节点
-   delete /node
-   ```
+#### 5. zookeeper
 
-7. kafka
+```
+ scoop install zookeeper
+```
 
-   ```
-   scoop install kafka
-   ```
+启动：
 
-   
+```
+# 启动zookeeper，无需start，直接运行
+zkserver
+# 启动客户端
+zkcli
+# 创建节点
+create /node value
+# 获取节点的值
+get /node
+# 设置节点的值
+set /node newValue
+# 删除节点
+delete /node
+```
+
+### 常用软件安装
+
+#### 1. 日常使用
+
+- everything
+
+  ```
+  scoop install everything
+  ```
+
+  - 设置开机自启动和显示窗口快捷键（Alt+F），并集成到资源管理器右键菜单
+
+- ```
+  scoop install trafficmonitor
+  ```
+
+- autohotkey：使用管理员模式运行
+
+  ```
+  scoop install autohotkey-installer
+  ```
+
+- ```
+  scoop install qbittorrent
+  ```
+
+- ```
+  scoop install bandizip
+  ```
+
+  - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
+
+- ```
+  scoop install pdf-xchange-editor
+  ```
+
+  - 勾选打开上次的文件，设置 Esc 键为选择文本快捷键
+
+#### 2. 图像影音
+
+- ```
+  scoop install sharex
+  ```
+
+- ```
+  scoop install imageglass
+  ```
+
+- ```
+  scoop install screenoff
+  ```
+
+  ```
+  scoop install ffmpeg
+  ```
+
+- ```
+  scoop install screentogif
+  ```
+
+#### 3. 编程相关
+
+- ```
+  scoop install mobaxterm
+  ```
+
+- ```
+  scoop install typora
+  ```
+
+- ```
+  scoop install filezilla
+  ```
+
+- ```
+  scoop install switchhosts
+  ```
+
+#### 4. 系统相关
+
+- ```
+  scoop install rufus
+  ```
+
+- ```
+  scoop install dismplusplus
+  ```
+
+#### 5. 游戏相关
+
+- ```
+  scoop install steampp
+  ```
+
+#### 6. 国内软件
+
+- ```
+  scoop install neteaseuu
+  ```
+
+- ```
+  scoop install wechat
+  ```
+
+- ```
+  scoop install neteasemusic
+  ```
+
+#### 其他
+
+- 暂不方便用 scoop
+
+  - steam
+  - mouseinc
+  - v2rayn
+  - chrome
+  - vscode
+  - idea
+  - kodi
+  - potplayer
+  - docker-desktop
+
+- 付费：
+
+  - displayfusion
+  - directory opus
+  - quicker
+
+- 国内：
+
+  - 火绒
+
+  - pico 串流助手
+
+  - 115
+
+  - pdf 补丁丁
