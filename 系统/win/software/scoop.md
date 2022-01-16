@@ -100,7 +100,7 @@ scoop install git
 
 ​		[Git Bash设置](git_bash.md)
 
-​		其他关于git的问题参考该文件：[git配置与问题记录](../../../系统/通用工具/git/配置与问题.md)
+​		其他关于git的问题参考该文件：[git配置与问题记录](../../../系统/通用工具/git/config&problem.md)
 
 ```
 scoop install openjdk17
