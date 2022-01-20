@@ -5,11 +5,17 @@
 1. config命令
 
 ```bash
+git config --list
+
 git config --global user.name lijian12345
 git config --global user.email 
-git config --list
 git config --global --unset user.name
 git config --global --unset user.email
+
+git config --local user.name lijian12345
+git config --local user.email 
+git config --local --unset user.name
+git config --local --unset user.email
 ```
 
 2. 代理
