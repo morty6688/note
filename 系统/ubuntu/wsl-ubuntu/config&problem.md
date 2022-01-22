@@ -45,9 +45,11 @@ uname -a
 
 #### 2. 中间件安装
 
-1. ##### kafka
+1. ##### kafka安装及启动
 
    参考：https://dcrunch.dev/blog/kafka/set-up-and-run-apache-kafka-on-windows-wsl-2/#dc-install-java
+   
+   及该站点下其他kafka相关文章，还有官方文档
 
 ```bash
 wget https://downloads.apache.org/kafka/3.0.0/kafka_2.13-3.0.0.tgz
@@ -59,6 +61,24 @@ bin/zookeeper-server-start.sh config/zookeeper.properties
 
 # 启动kafka broker在另一个终端
 bin/kafka-server-start.sh config/server.properties
+
+# 创建topic
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic quickstart-events --partitions 3 --replication-factor 1
+
+# 列出所有topic
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+# topic详情
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic quickstart-events
+
+# 删除topic
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic quickstart-events
+
+# 生产
+bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
+
+# 消费，可以被多个客户端消费无限次
+bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
 ```
 
 

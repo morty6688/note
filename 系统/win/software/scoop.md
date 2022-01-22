@@ -110,9 +110,21 @@ scoop install openjdk17
 scoop install maven
 ```
 
-https://maven.aliyun.com/
+- 换源：
 
-[settings.xml](resources/settings.xml)
+​	https://maven.aliyun.com/
+
+​	[settings.xml](resources/settings.xml)
+
+- 3.8.1以上版本禁用https：
+
+  ```xml
+  <mirror>
+      <id>maven-default-http-blocker</id>
+      <mirrorOf>!*</mirrorOf>
+      <url>http://0.0.0.0/</url>
+  </mirror>
+  ```
 
 #### 2. python
 
