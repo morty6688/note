@@ -61,7 +61,10 @@ bin/zookeeper-server-start.sh config/zookeeper.properties
 
 # 启动kafka broker在另一个终端
 bin/kafka-server-start.sh config/server.properties
+```
 
+```bash
+# 正常情况下的命令
 # 创建topic
 bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic quickstart-events --partitions 3 --replication-factor 1
 
@@ -81,7 +84,35 @@ bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server local
 bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
 ```
 
+​		但是由于在WSL2中安装kafka时，localhost无法正确映射，导致idea访问不到。所以要将localhost改为ipv6环回地址，即::1。具体方法如下：
 
+​		注：zsh无法解析方括号[]，所以命令行中加方括号要转义，添加反斜杠\
+
+```
+# 修改配置文件
+code config/server.properties
+listeners=PLAINTEXT://[::1]:9092
+```
+
+```
+# 创建topic
+bin/kafka-topics.sh --bootstrap-server ::1:9092 --create --topic quickstart-events --partitions 3 --replication-factor 1
+
+# 列出所有topic
+bin/kafka-topics.sh --bootstrap-server ::1:9092 --list
+
+# topic详情
+bin/kafka-topics.sh --bootstrap-server ::1:9092 --describe --topic quickstart-events
+
+# 删除topic
+bin/kafka-topics.sh --bootstrap-server ::1:9092 --delete --topic quickstart-events
+
+# 生产
+bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server ::1:9092
+
+# 消费，可以被多个客户端消费无限次
+bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server ::1:9092
+```
 
 
 ### 问题
