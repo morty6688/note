@@ -4,7 +4,7 @@
 
   - 但是不要安装oh-my-zsh，安装powerlevel10k，并在bash.bashrc中设置zsh默认
 
-  - 所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scoop cleanup清理旧版本时，需要备份bash.bashrc文件，重新安装zsh。
+  - 所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scoop cleanup清理旧版本时，需要备份[bash.bashrc](resources/bash.bashrc)文件到/etc目录，并重新安装[zsh](resources/zsh-5.8-5-x86_64.pkg.tar.zst)。
 
 - 删除右键菜单，建议用win terminal
 

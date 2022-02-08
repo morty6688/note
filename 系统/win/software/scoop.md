@@ -153,6 +153,8 @@ python -m pip config set global.index-url http://mirrors.cloud.tencent.com/pypi/
 python -m pip config set global.index-url http://pypi.douban.com/simple/
 ```
 
+安装后请运行install-pep-514.reg
+
 #### 3. go
 
 ```
