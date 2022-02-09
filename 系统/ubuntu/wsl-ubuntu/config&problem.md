@@ -89,7 +89,7 @@ uname -a
 
 #### 3. 中间件安装
 
-1. ##### kafka安装及启动
+1. ##### ~~kafka安装及启动~~（建议使用docker）
 
    参考：https://dcrunch.dev/blog/kafka/set-up-and-run-apache-kafka-on-windows-wsl-2/#dc-install-java
    
