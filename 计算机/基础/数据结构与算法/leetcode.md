@@ -36,15 +36,15 @@ http://www.cyc2018.xyz/
 
 2. 依分类
 
-   - 双指针：15, 88, 141, 165, 167, 345, 524, 633, 680
+   - 双指针：15, 88, 165, 167, 345, 524, 633, 680
    - 排序：75, 179, 215, 347, 451
-   - 贪心：53, 55, 121, 122, 392, 406, 435, 452, 455, 605, 665, 763
+   - 贪心：55, 121, 122, 392, 406, 435, 452, 455, 605, 665, 763
    - 二分：34, 69, 153, 162, 278, 540, 744
    - 分治：95, 241
    - 搜索：17, 31, 37, 39, 40, 46, 47, 51, 77, 78, 79, 90, 93, 127, 130, 131, 200, 216, 257, 279, 417, 547, 695, 1091
-   - 动态规划：62, 64, 70, 72, 91, 123, 139, 188, 198, 213, 279, 300, 303, 309, 322, 343, 376, 377, 413, 416, 474, 494, 518, 583, 646, 650, 714, 1143
+   - 动态规划：53, 62, 64, 70, 72, 91, 123, 139, 188, 198, 213, 279, 300, 303, 309, 322, 343, 376, 377, 413, 416, 474, 494, 518, 583, 646, 650, 714, 1143
    - 数学：50, 67, 168, 169, 172, 204, 238, 292, 326, 367, 405, 415, 462, 470, 504, 628
-   - 链表：19, 21, 24, 83, 147, 160, 206, 234, 328, 725
+   - 链表：19, 21, 24, 83, 141, 142, 147, 160, 206, 234, 328, 725
    - 树：94, 101, 104, 108, 109, 110, 111, 112, 113, 144, 145, 208, 226, 230, 235, 236, 337, 404, 501, 513, 530, 538, 543, 572, 617, 637, 653, 662, 669, 671, 677, 687
    - 栈和队列：20, 155, 225, 232, 503
    - 哈希表：1, 128, 217, 594
@@ -148,10 +148,7 @@ http://www.cyc2018.xyz/
 - 先序遍历
 
   ```java
-  public static void preOrder(TreeNode root) {
-      if (root == null) {
-          return;
-      }
+  public void preOrder(TreeNode root) {
       Deque<TreeNode> stack = new ArrayDeque<>();
       while (root != null || !stack.isEmpty()) {
           while (root != null) {
@@ -167,7 +164,55 @@ http://www.cyc2018.xyz/
   }
   ```
 
+- 中序遍历
+
+  ```java
+  // 跟上述区别是先入栈再访问，会了一个很快就会另一个
+  public void inOrder(TreeNode root) {
+      Deque<TreeNode> stack = new ArrayDeque<>();
+      while (root != null || !stack.isEmpty()) {
+          while (root != null) {
+              stack.push(root);
+              root = root.left;
+          }
+          
+          root = stack.pop();
+          /* do sth. about root.val */
   
+          root = root.right;
+      }
+  }
+  ```
+
+- 后序遍历
+
+  ```java
+  public void postOrder(TreeNode root) {
+      Deque<TreeNode> stack = new ArrayDeque<>();
+      TreeNode pre = null;
+      while (!stack.isEmpty() || root != null) {
+          while (root != null) {
+              stack.push(root);
+              root = root.left;
+          }
+          root = stack.pop();
+          // 右子树存在 && 未访问过
+          if (root.right != null && root.right != pre) {
+              // 重复压栈以记录当前路径分叉节点
+              stack.push(root);
+              root = root.right;
+          } else {
+              // 此时node的左右子树应均已完成访问
+              /* do sth. about root.val */
+  
+              // 避免重复访问右子树
+              pre = root;
+              // 避免重复访问左子树
+              root = null;
+          }
+      }
+  }
+  ```
 
 #### 4. 常用算法模板
 
@@ -193,6 +238,101 @@ http://www.cyc2018.xyz/
   }
   ```
 
+###### 4.1.2 快速排序
+
+​		快速排序采用分治的思想，每一次partition将一个pivot的放到其正确的位置上，随后递归的处理左右两半。partition函数使用双指针处理pivot并最终返回其正确序号。
+
+- ```java
+  private void quickSort(int[] a, int left, int right) {
+      if (left >= right) {
+          return;
+      }
+      int index = partition(a, left, right);
+      quickSort(a, left, index - 1);
+      quickSort(a, index + 1, right);
+  }
+  
+  private int partition(int[] a, int left, int right) {
+      int randomI = random.nextInt(right - left + 1) + left;
+      swap(a, randomI, right);
+  
+      int pivot = a[right];
+      int i = left - 1;
+      for (int j = left; j < right; j++) {
+          if (a[j] <= pivot) {
+              i++;
+              // 保证i位置上一定是比pivot小的数
+              swap(a, i, j);
+          }
+      }
+      swap(a, i + 1, right);
+      return i + 1;
+  }
+  ```
+
+###### 4.1.3 归并排序
+
+​		归并排序同样为分治的思想，只是每次将左右两边的subList排序好，最后通过merge两个有序的subList得到最终结果。
+
+- 对数组的归并简单的方法是建立一个新数组进行copy，核心方法如下：
+
+  ```java
+  private void mergeSort(int[] nums, int left, int right) {
+      int mid = left + (right - left) / 2;
+      if (left < right) {
+          mergeSort(nums, left, mid);
+          mergeSort(nums, mid + 1, right);
+          merge(nums, left, mid, right);
+      }
+  }
+  
+  private void merge(int[] nums, int left, int mid, int right) {
+      int[] temp = new int[right - left + 1];
+      int i = left, j = mid + 1, k = 0;
+      while (i <= mid && j <= right) {
+          if (nums[i] < nums[j]) {
+              temp[k++] = nums[i++];
+          } else {
+              temp[k++] = nums[j++];
+          }
+      }
+      while (i <= mid) {
+          temp[k++] = nums[i++];
+      }
+      while (j <= right) {
+          temp[k++] = nums[j++];
+      }
+  
+      System.arraycopy(temp, 0, nums, left, temp.length);
+  }
+  ```
+
+- merge in place方法如下：
+
+  ```java
+  // TODO：添加原理
+  private void merge(int[] nums, int left, int mid, int right) {
+      int i = left, j = mid + 1;
+      while (i < j && j <= right) {
+          while (i < j && nums[i] <= nums[j]) {
+              i++;
+          }
+          int index = j;
+          while (j <= right && nums[j] <= nums[i]) {
+              j++;
+          }
+          swapAdjacentBlocks(nums, i, index - i, j - index);
+          i += (j - index);
+      }
+  }
+  
+  private void swapAdjacentBlocks(int arr[], int bias, int oneSize, int anotherSize) {
+      reverse(arr, bias, bias + oneSize - 1);
+      reverse(arr, bias + oneSize, bias + oneSize + anotherSize - 1);
+      reverse(arr, bias, bias + oneSize + anotherSize - 1);
+  }
+  ```
+
 ##### 4.2 搜索
 
 ###### 4.2.1 二分
@@ -201,36 +341,110 @@ http://www.cyc2018.xyz/
 
   - 标准二分如下，能准确找到target值，搜索条件为l <= h：
 
-
-  ```java
-  while (l <= h) {
-      int m = l + (h - l) / 2;
-      if (nums[m] == key) {
-          return m;
-      } else if (nums[m] > key) {
-          h = m - 1;
-      } else {
-          l = m + 1;
-      }
-  }
-  ```
+    ```java
+    while (l <= h) {
+        int m = l + (h - l) / 2;
+        if (nums[m] == key) {
+            return m;
+        } else if (nums[m] > key) {
+            h = m - 1;
+        } else {
+            l = m + 1;
+        }
+    }
+    ```
 
   - 若选择搜索区时需要保留mid值，则循环结束时low一定等于high：
 
-
-  ```java
-  // 循环结束时low一定等于high
-  while (low < high) {
-      int mid = low + (high - low) / 2;
-      if (.....) {
-          high = mid;
-      } else {
-          low = mid + 1;
+      ```java
+      // 循环结束时low一定等于high
+      while (low < high) {
+          int mid = low + (high - low) / 2;
+          if (.....) {
+              high = mid;
+          } else {
+              low = mid + 1;
+          }
       }
-  }
-  ```
+      ```
+
+  - 还有一些要求另类的，比如第一个大于target的数：
+
+      ```java
+      // res初始化为nums.length是因为可能数组中所有数字都比target小
+      int low = 0, high = nums.length - 1, res = nums.length;
+      while (left <= right) {
+          int mid = low + (high - low) / 2;
+          if (nums[mid] > target) {
+              right = mid - 1;
+              // 其实跟标准二分一样，只是在循环过程中记录结果
+              res = mid;
+          } else {
+              left = mid + 1;
+          }
+      }
+      ```
+
+      
 
 - 搜索条件，二分的搜索条件至关重要，不同的搜索条件决定了能不能确定搜索区，一些特殊的搜索条件如下：
 
-  - lc 162：条件为 nums[mid] > nums[mid + 1]。
-  - lc 153：条件为 nums[mid] < nums[high]，详细解释见：https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/solution/er-fen-cha-zhao-wei-shi-yao-zuo-you-bu-dui-cheng-z/
+  - lc 162，[寻找峰值](https://leetcode-cn.com/problems/find-peak-element/)：条件为 nums[mid] > nums[mid + 1]。
+  - lc 153，[寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)：条件为 nums[mid] < nums[high]。详细解释见：https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/solution/er-fen-cha-zhao-wei-shi-yao-zuo-you-bu-dui-cheng-z/
+
+###### 4.2.2 backtrack
+
+- backtrack本质上是一种dfs，不同之处在于**dfs通常解决可达性问题，到出口了直接返回；backtrack通常解决排列组合问题，需保存中间结果，之后继续递归。**
+
+  - 所以进入下一层递归时，需要将某元素标记为访问过，而返回上一层递归时，需要将访问标记删除
+
+  - 典型示例：lc 46，[全排列](https://leetcode-cn.com/problems/permutations/)
+
+    ```java
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(res, nums, 0);
+        return res;
+    }
+    
+    // backtrack需要一个pos变量表示当前位置，还需要一个队列来保存中间结果。本例中，nums是swap in place的，因此省略了这个队列
+    private void backtrack(List<List<Integer>> res, int[] nums, int pos) {
+        res.add(Arrays.stream(nums).boxed().collect(Collectors.toList()));
+        for (int i = pos; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                // 进入下一层递归前改变中间结果
+                swap(nums, i, j);
+                backtrack(res, nums, i + 1);
+                // 返回上一层递归前还原
+                swap(nums, i, j);
+            }
+        }
+    }
+    ```
+
+  - 典型示例2：lc 39，[组合总和](https://leetcode-cn.com/problems/combination-sum/)
+  
+    ```java
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(candidates, target, res, 0, new ArrayDeque<>());
+        return res;
+    }
+    
+    private void backtrack(int[] candidates, int target, List<List<Integer>> res, int pos, Deque<Integer> deque) {
+        if (target <= 0) {
+            if (target == 0) {
+                res.add(new ArrayList<>(deque));
+            }
+        } else {
+            for (int i = pos; i < candidates.length; i++) {
+                deque.addLast(candidates[i]);
+                backtrack(candidates, target - candidates[i], res, i, deque);
+                deque.removeLast();
+            }
+        }
+    }
+    ```
+  
+    
+

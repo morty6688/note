@@ -28,7 +28,7 @@
       memory=4GB   # Limits VM memory in WSL 2 up to 4GB
       processors=4 # Makes the WSL 2 VM use 4 virtual processors
       
-      # 然后
+      # 然后重启
       ```
   
   - 安装helm：
