@@ -257,18 +257,42 @@ http://www.cyc2018.xyz/
       swap(a, randomI, right);
   
       int pivot = a[right];
-      int i = left - 1;
-      for (int j = left; j < right; j++) {
+      int i = left - 1, j = left;
+      // all in [0, i] <= pivot
+      while (j < right) {
           if (a[j] <= pivot) {
-              i++;
-              // 保证i位置上一定是比pivot小的数
-              swap(a, i, j);
+              swap(a, ++i, j);
           }
+          j++;
       }
       swap(a, i + 1, right);
       return i + 1;
   }
   ```
+  
+  - partition函数的另一个典型用法是[荷兰国旗问题](https://leetcode-cn.com/problems/sort-colors/)，比快排中的partition多了一个指针，将数组分为三个区间，解法如下：
+  
+    ```java
+    public void sortColors(int[] nums) {
+        int p0 = 0, p2 = nums.length;
+        int i = 0;
+        
+        // all in [0, p0) = 0
+        // all in [p0, i) = 1
+        // all in [p2, len - 1] = 2
+        while (i < p2) {
+            if (nums[i] == 0) {
+                swap(nums, i++, p0++);
+            } else if (nums[i] == 1) {
+                i++;
+            } else {
+                swap(nums, i, --p2);
+            }
+        }
+    }
+    ```
+  
+    
 
 ###### 4.1.3 归并排序
 
@@ -414,6 +438,7 @@ http://www.cyc2018.xyz/
             for (int j = i + 1; j < nums.length; j++) {
                 // 进入下一层递归前改变中间结果
                 swap(nums, i, j);
+                // 注意backtrack进入下一层递归后pos一般为i+1,而不是pos+1
                 backtrack(res, nums, i + 1);
                 // 返回上一层递归前还原
                 swap(nums, i, j);
@@ -421,7 +446,7 @@ http://www.cyc2018.xyz/
         }
     }
     ```
-
+  
   - 典型示例2：lc 39，[组合总和](https://leetcode-cn.com/problems/combination-sum/)
   
     ```java
@@ -446,5 +471,95 @@ http://www.cyc2018.xyz/
     }
     ```
   
-    
+
+###### 4.2.3 dfs
+
+- 典型示例1：[单词搜索](https://leetcode-cn.com/problems/word-search/)，是二维网格的一种典型dfs题，模板十分固定，如下所示：
+
+  ```java
+  public boolean exist(char[][] board, String word) {
+      int[][] directions = new int[][]{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+      int m = board.length, n = board[0].length;
+      boolean[][] visited = new boolean[m][n];
+  
+      for (int i = 0; i < m; i++) {
+          for (int j = 0; j < n; j++) {
+              if (dfs(board, m, n, i, j, word, 0, visited, directions)) {
+                  return true;
+              }
+          }
+      }
+      return false;
+  }
+  
+  private boolean dfs(char[][] board, int m, int n, int i, int j, String word, int k, boolean[][] visited, int[][] directions) {
+      if (k == word.length()) {
+          return true;
+      }
+      if (i < 0 || i >= m || j < 0 || j >= n || visited[i][j] || board[i][j] != word.charAt(k)) {
+          return false;
+      }
+      visited[i][j] = true;
+      for (int[] direction : directions) {
+          if (dfs(board, m, n, i + direction[0], j + direction[1], word, k + 1, visited, directions)) {
+              return true;
+          }
+      }
+      visited[i][j] = false;
+      return false;
+  }
+  ```
+
+  
+
+##### 4.3 动态规划
+
+###### 4.3.0 简介
+
+- 动态规划问题需满足以下条件：
+
+  - 最优化原理：一个最优化策略的子策略总是最优的。例如假设从A->B->C的最短路径是m->o，则根据最优化策略，从B->C的最短路径一定是o。可以通过反证法得以证明。
+
+    <img src="image-20220215003447185.png" alt="image-20220215003447185" style="zoom: 50%;" />
+
+  - 无后效性：各个状态按照次序排好后，某个状态无法影响未来的状态，完全由之前的状态决定。由此可列出状态转移方程，进行动态规划求解。
+
+  - 消除子问题的重叠性：动态规划将指数复杂度降维到多项式复杂度，是因为消除了很多重复的求解的子问题。这些子问题的结果往往需要一个中间数组保存，相当于是以空间换时间。
+
+###### 4.3.1 数组
+
+- 经典问题1：[最大子数组和](https://leetcode-cn.com/problems/maximum-subarray/)
+
+  - 很容易想到使用一个数组保存各子问题结果的解法，如下：
+
+    ```java
+    public int maxSubArray(int[] nums) {
+        int[] dp = new int[nums.length + 1];
+        dp[0] = (int) -1e9;
+        for (int i = 1; i <= nums.length; i++) {
+            dp[i] = Math.max(nums[i - 1], dp[i - 1] + nums[i - 1]);
+        }
+        return Arrays.stream(dp).max().orElse(0);
+    }
+    ```
+
+  - 观察发现虽然最终结果需要遍历数组，但是循环中dp[i]只受dp[i - 1]影响，因此可以用两个变量简化如下：
+
+    ```java
+    public int maxSubArray(int[] nums) {
+        int res = Integer.MIN_VALUE;
+        int preSum = (int) -1e9;
+        for (int i = 0; i < nums.length; i++) {
+            preSum = Math.max(nums[i], preSum + nums[i]);
+            res = Math.max(res, preSum);
+        }
+        return res;
+    }
+    ```
+
+###### 4.3.2 矩阵
+
+- 矩阵部分的动态规划题往往是二维的。一些题目为二维网格只能向右或者向下移动，不难；更为典型的题目是[编辑距离](https://leetcode-cn.com/problems/edit-distance/)
+
+​		
 

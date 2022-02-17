@@ -254,12 +254,6 @@ delete /node
   ```
 
 - ```
-  scoop install bandizip
-  ```
-
-  - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
-
-- ```
   scoop install pdf-xchange-editor
   ```
 
@@ -350,6 +344,8 @@ delete /node
   - kodi
   - potplayer
   - docker-desktop
+  - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
+    - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
 
 - 付费：
 
