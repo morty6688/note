@@ -15,8 +15,8 @@ http://www.cyc2018.xyz/
     ```
     package leetcode.editor.cn;
     
-    ${question.content}
     // 题目编号：${question.frontendQuestionId}
+    ${question.content}
     public class $!velocityTool.camelCaseName(${question.titleSlug}){
         public static void main(String[] args) {
             Solution solution = new $!velocityTool.camelCaseName(${question.titleSlug})().new Solution();
@@ -31,18 +31,18 @@ http://www.cyc2018.xyz/
 1. 全部
 
    ```
-   1, 8, 9, 15, 17, 19, 20, 21, 24, 31, 34, 37, 39, 40, 43, 46, 47, 50, 51, 53, 55, 62, 64, 67, 69, 70, 72, 75, 77, 78, 79, 83, 84, 88, 90, 91, 93, 94, 95, 101, 104, 108, 109, 110, 111, 112, 113, 121, 122, 123, 127, 128, 130, 131, 136, 139, 141, 142, 144, 145, 147, 153, 155, 160, 162, 165, 167, 168, 169, 172, 179, 188, 189, 190, 198, 200, 204, 205, 206, 207, 208, 210, 213, 215, 216, 217, 224, 225, 226, 230, 231, 232, 234, 235, 236, 238, 240, 241, 242, 257, 260, 268, 278, 279, 283, 287, 292, 300, 303, 309, 316, 318, 322, 326, 328, 337, 338, 342, 343, 345, 347, 367, 371, 376, 377, 378, 392, 404, 405, 406, 409, 413, 415, 416, 417, 435, 437, 442, 451, 452, 455, 461, 462, 470, 474, 476, 485, 494, 496, 501, 503, 504, 513, 518, 524, 530, 538, 540, 543, 547, 560, 565, 566, 567, 572, 583, 594, 605, 617, 628, 633, 637, 645, 646, 647, 650, 662, 665, 667, 669, 671, 677, 680, 684, 687, 693, 695, 696, 697, 714, 725, 739, 743, 744, 763, 766, 769, 785, 1091, 1143
+   1, 3, 8, 9, 15, 17, 19, 20, 21, 24, 31, 34, 37, 39, 40, 42, 43, 46, 47, 50, 51, 53, 55, 62, 64, 67, 69, 70, 72, 75, 77, 78, 79, 83, 84, 88, 90, 91, 93, 94, 95, 101, 104, 108, 109, 110, 111, 112, 113, 121, 122, 123, 127, 128, 130, 131, 136, 139, 141, 142, 144, 145, 147, 153, 155, 160, 162, 165, 167, 168, 169, 172, 179, 188, 189, 190, 198, 200, 204, 205, 206, 207, 208, 210, 213, 215, 216, 217, 224, 225, 226, 230, 231, 232, 234, 235, 236, 238, 240, 241, 242, 257, 260, 268, 278, 279, 283, 287, 292, 300, 303, 309, 316, 318, 322, 326, 328, 337, 338, 342, 343, 345, 347, 367, 371, 376, 377, 378, 392, 404, 405, 406, 409, 413, 415, 416, 417, 435, 437, 442, 451, 452, 455, 461, 462, 470, 474, 476, 485, 494, 496, 501, 503, 504, 513, 518, 524, 530, 538, 540, 543, 547, 560, 565, 566, 567, 572, 583, 594, 605, 617, 628, 633, 637, 645, 646, 647, 650, 662, 665, 667, 669, 671, 677, 680, 684, 687, 693, 695, 696, 697, 714, 725, 739, 743, 744, 763, 766, 769, 785, 1091, 1143
    ```
 
 2. 依分类
 
    - 双指针：15, 88, 165, 167, 345, 524, 633, 680
    - 排序：75, 179, 215, 347, 451
-   - 贪心：55, 121, 122, 392, 406, 435, 452, 455, 605, 665, 763
+   - 贪心：55, 122, 392, 406, 435, 452, 455, 605, 665, 763
    - 二分：34, 69, 153, 162, 278, 540, 744
    - 分治：95, 241
    - 搜索：17, 31, 37, 39, 40, 46, 47, 51, 77, 78, 79, 90, 93, 127, 130, 131, 200, 216, 257, 279, 417, 547, 695, 1091
-   - 动态规划：53, 62, 64, 70, 72, 91, 123, 139, 188, 198, 213, 279, 300, 303, 309, 322, 343, 376, 377, 413, 416, 474, 494, 518, 583, 646, 650, 714, 1143
+   - 动态规划：42, 53, 62, 64, 70, 72, 91, 121, 123, 139, 188, 198, 213, 279, 300, 303, 309, 322, 343, 376, 377, 413, 416, 474, 494, 518, 583, 646, 650, 714, 1143
    - 数学：50, 67, 168, 169, 172, 204, 238, 292, 326, 367, 405, 415, 462, 470, 504, 628
    - 链表：19, 21, 24, 83, 141, 142, 147, 160, 206, 234, 328, 725
    - 树：94, 101, 104, 108, 109, 110, 111, 112, 113, 144, 145, 208, 226, 230, 235, 236, 337, 404, 501, 513, 530, 538, 543, 572, 617, 637, 653, 662, 669, 671, 677, 687
@@ -52,8 +52,8 @@ http://www.cyc2018.xyz/
    - 数组与矩阵：43, 189, 240, 283, 287, 378, 442, 485, 565, 566, 645, 667, 697, 766, 769
    - 图：207, 210, 684, 785
    - 位运算：136, 190, 231, 260, 268, 318, 338, 342, 371, 461, 476, 693
-   - 单调栈：316, 496, 739
-   - 滑动窗口：567
+   - 单调栈：84, 316, 496, 739
+   - 滑动窗口：3, 567
    - 前缀和：437, 560
 
 3. SQL
@@ -101,6 +101,12 @@ http://www.cyc2018.xyz/
        return result;
    }
    ```
+   
+   - 在应用单调栈时，有一些变种问题显得不是十分容易理解，如下：
+   
+     - [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)：本题关键在于找到第一个比当前柱子小的柱子时，可以确定两者之间以某个柱子对应的最大矩形；如果柱子等高，直接去掉等高的柱子即可，因为他们对应的最大矩形一样；同时我们可以添加两个哨兵（高度为0的柱子），这样不用去判断栈为空的情况。
+     
+     - [去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)：本题使用递增栈来保证栈内元素字典序最小，关键在于记录重复元素最后一次出现的位置和访问记录。元素已经在栈中直接跳过，如果遍历过程中某栈顶元素不是最后一次出现且不满足递增栈性质，就将其移除出栈。
 
 ##### 3.2 堆
 
@@ -211,6 +217,114 @@ http://www.cyc2018.xyz/
               root = null;
           }
       }
+  }
+  ```
+
+##### 3.4 并查集
+
+###### 3.4.1 定义
+
+- // TODO
+
+  ```java
+  class UnionFind {
+      private int count;
+      // (cur, leader)
+      private Map<Integer, Integer> parent;
+  
+      public UnionFind(int[] nums) {
+          count = nums.length;
+          parent = new HashMap<>();
+          for (int v : nums) {
+              // 初始时，各自为战，自己是自己的领队
+              parent.put(v, v);
+          }
+      }
+  
+      // 结盟
+      public void union(int p, int q) {
+          // 不只是 p 与 q 结盟，而是整个 p 所在队伍 与 q 所在队伍结盟
+          // 结盟需各领队出面，而不是小弟出面
+          Integer rootP = find(p), rootQ = find(q);
+          if (rootP == rootQ) {
+              return;
+          }
+          if (rootP == null || rootQ == null) {
+              return;
+          }
+  
+          // 结盟，谁大听谁
+          parent.put(rootP, rootQ);
+          // 应取 max，而本题已明确 p < q 才可这么写
+          // 当前写法有损封装性，算法题可不纠结
+  
+          count--;
+      }
+  
+      // 查找领队
+      public Integer find(int p) {
+          if (!parent.containsKey(p)) {
+              return null;
+          }
+  
+          // 递归向上找领队
+          int root = p;
+          while (root != parent.get(root)) {
+              root = parent.get(root);
+          }
+  
+          // 路径压缩：扁平化管理，避免日后找领队层级过深
+          while (p != parent.get(p)) {
+              int curr = p;
+              p = parent.get(p);
+              parent.put(curr, root);
+          }
+  
+          return root;
+      }
+  }
+  ```
+
+  - [最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)：本题除了hashmap，dp还可以用并查集。
+
+
+##### 3.5 哈希表
+
+###### 3.5.1 普通哈希表
+
+- 本身没啥好说的，空间换时间的哈希表
+
+###### 3.5.2 滑动窗口
+
+- 结构如下
+
+  ```java
+  // 窗口开始位置
+  int start = 0;
+  // key为元素值，字符串的话就是某字符；value为元素位置
+  Map<Character, Integer> window = new HashMap<>();
+  ```
+
+  - 在遍历字符串时，当前位置与开始位置的距离就是窗口大小，start可以被动态更新，更新语句如下：
+
+    ```java
+    start = Math.max(window.get(s.charAt(i)) + 1, start);
+    ```
+
+- 典型题1：[无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+
+  ```java
+  public int lengthOfLongestSubstring(String s) {
+      int start = 0, res = 0;
+      Map<Character, Integer> window = new HashMap<>();
+      for (int i = 0; i < s.length(); i++) {
+          if (window.containsKey(s.charAt(i))) {
+              start = Math.max(window.get(s.charAt(i)) + 1, start);
+          }
+          window.put(s.charAt(i), i);
+          res = Math.max(res, i - start + 1);
+      }
+      return res;
   }
   ```
 
@@ -510,6 +624,36 @@ http://www.cyc2018.xyz/
   }
   ```
 
+
+###### 4.2.4 bfs
+
+- 与dfs区别只是搜索方式不一样：[岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
+
+- 能解决的问题比较有限
+
+  ```java
+  private void bfs(char[][] grid, int m, int n, int i, int j, boolean[][] visited, int[][] directions) {
+      Deque<Node> queue = new ArrayDeque<>();
+      queue.add(new Node(i, j));
+      visited[i][j] = true;
+      while (!queue.isEmpty()) {
+          Node node = queue.remove();
+          // bfs这个visited无法回溯清除，只能解决某些问题，比如这个岛屿问题，无法应对单词搜索等问题，建议优先使用dfs
+          visited[i][j] = false;
+          for (int[] direction : directions) {
+              int x = node.x + direction[0], y = node.y + direction[1];
+              if (x < 0 || x >= m || y < 0 || y >= n || visited[x][y] || grid[x][y] != '1') {
+                  continue;
+              }
+              grid[x][y] = '2';
+              queue.add(new Node(x, y));
+              visited[x][y] = true;
+          }
+      }
+  }
+  
+  ```
+
   
 
 ##### 4.3 动态规划
@@ -557,9 +701,48 @@ http://www.cyc2018.xyz/
     }
     ```
 
+- 经典问题2：股票问题系列
+
+  - [买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)：只能买卖一次。跟最大子数组和差不多，区别是一个是preSum，这个是preMin。
+
+
 ###### 4.3.2 矩阵
 
 - 矩阵部分的动态规划题往往是二维的。一些题目为二维网格只能向右或者向下移动，不难；更为典型的题目是[编辑距离](https://leetcode-cn.com/problems/edit-distance/)
 
 ​		
+
+###### 4.3.3 HashMap
+
+​		使用数组或者矩阵的dp题目是比较容易理解的，然而还有一些题目使用HashMap来进行dp。
+
+- [最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)，本题的典型解法是使用HashMap不断更新右边界来压缩连续序列的路径，写法较容易。而使用HashMap进行dp的解法如下，较难理解：
+
+  ```java
+  public int longestConsecutive(int[] nums) {
+      // key表示num，value表示num所在连续区间的长度
+      Map<Integer, Integer> map = new HashMap<>();
+  
+      int res = 0;
+      for (int num : nums) {
+          // 当map中不包含num，也就是num第一次出现
+          if (!map.containsKey(num)) {
+              int left = map.getOrDefault(num - 1, 0);
+              int right = map.getOrDefault(num + 1, 0);
+              int curLen = left + right + 1;
+              res = Math.max(res, curLen);
+  
+              // 将num加入map中，表示已经遍历过该值。其对应的value可以为任意值。
+              map.put(num, -1);
+  
+              // 更新包含num在内的区间左右端点值的长度
+              map.put(num - left, curLen);
+              map.put(num + right, curLen);
+          }
+      }
+      return res;
+  }
+  ```
+
+  
 
