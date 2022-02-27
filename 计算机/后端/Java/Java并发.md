@@ -117,3 +117,82 @@
 
 #### 2.1 概念
 
+##### 2.1.1 简介
+
+- 堆区对象除了实例数据以外，还有几个区域。比如元数据指针指向方法区所属的类，Mark Word表示了对象的锁状态，所以每个堆区对象都可以作为锁使用。锁也分类锁和对象锁。
+- synchronized早期是重量级锁，需要向OS申请资源，设计用户态和内核态的切换，效率不高；因此有了自旋锁ReentrantLock，可以在发生锁竞争时使用CAS自旋，但是如果线程数过多，同时自旋也很耗费资源。
+
+##### 2.1.2 synchronized介绍及优化
+
+- JDK1.6以后对synchronized作了优化，有了“锁升级”的概念，也就是Mark Word中提到的无锁，偏向锁，轻量级锁（自旋锁），重量级锁
+  - 无锁：对象刚new出来
+  - 偏向锁：对象第一次被一个线程访问时，会把线程ID记到Mark Word里，此时没有多线程环境
+  - 轻量级锁（自旋锁）：发生锁竞争时，JDK使用一套机制来控制自旋
+  - 重量级锁：OS会维护一个队列来避免多个线程同时自旋等待耗费CPU性能
+
+- synchronized是可重入锁，同一个线程在已经持有该锁的情况下，可以再次获取锁，并且会在某个状态量上做+1操作（ReentrantLock也支持重入）
+- 只有竞争同一个对象锁时才会使某个线程wait，因此子类同步方法调用父类同步方法时，由于锁的都是this，指向的都是子类对象，而且可重入，因此可以调用
+- 底层：synchronized同步语句块使用的是 `monitorenter` 和 `monitorexit` 指令，分别指向开始和结束位置，修饰同步方法时是ACC_SYNCHRONIZED标识，指明这是一个同步方法。**两者的本质都是对对象监视器 monitor 的获取。**
+  - 执行`monitorenter`时，会尝试获取对象的锁，锁的计数器为 0表示可以获取，获取后将锁计数器设为 1 也就是加 1。
+  - 对象锁的的拥有者线程才可以执行 `monitorexit` 指令来释放锁，锁计数器减1。
+
+##### 2.1.3 synchronized和ReentrantLock 
+
+- synchronized是JVM实现的，ReentrantLock 是API
+- ReentrantLock多了一些功能：
+  - 中断等待锁的线程：lock.lockInterruptibly()，线程可以处理其他事情
+  - 可以指定是公平锁：先等待的线程先获得锁
+  - 可实现选择性通知（锁可以绑定多个条件）：实现多路通知功能，即在一个ReentrantLock中创建多个Condition，线程对象可以注册在指定的Condition中。synchronized关键字就相当于整个 Lock 对象中只有一个Condition实例，notifyAll()方法会唤醒全部相关线程；而condition.signalAll()只会唤醒该Condition下的线程
+
+##### 2.1.4 volatile 
+
+- 由于CPU存在L1，L2，L3级缓存，变量可以保存在寄存器里，和内存的变量可能存在同步间隙。而Java也可能会将变量保存在本地内存里而不是主内存里。因此可以使用volatile来确保使用某变量时都到主存中进行读取。同时volatile也可以禁用指令重排。
+
+##### 2.1.5 ThreadLocal
+
+- ```java
+  public class ThreadLocalExample implements Runnable {
+      // SimpleDateFormat 不是线程安全的，所以每个线程都要有自己独立的副本
+      private static final ThreadLocal<SimpleDateFormat> formatter = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyyMMdd HHmm"));
+  
+      public static void main(String[] args) throws InterruptedException {
+          ThreadLocalExample obj = new ThreadLocalExample();
+          for (int i = 0; i < 10; i++) {
+              Thread t = new Thread(obj, "" + i);
+              Thread.sleep(new Random().nextInt(1000));
+              t.start();
+          }
+      }
+  
+      @Override
+      public void run() {
+          System.out.println("Thread Name= " + Thread.currentThread().getName() + " default Formatter = " + formatter.get().toPattern());
+          try {
+              Thread.sleep(new Random().nextInt(1000));
+          } catch (InterruptedException e) {
+              e.printStackTrace();
+          }
+          //formatter pattern is changed here by thread, but it won't reflect to other threads
+          formatter.set(new SimpleDateFormat());
+  
+          System.out.println("Thread Name= " + Thread.currentThread().getName() + " formatter = " + formatter.get().toPattern());
+      }
+  }
+  ```
+
+- 每个线程内部维护了一个**ThreadLocalMap**，可以存储以ThreadLocal为key，其他对象为value的键值对。多个ThreadLocal都保存在这个ThreadLocalMap里，并对其他线程不可见。
+
+  - JVM强，弱，软，虚引用介绍：
+    - 强引用不受GC影响，只有引用全部切断时，才会在下一次GC时被回收
+    - 软引用对象会在内存不足触发GC时被回收（适用于高速缓存）
+    - 弱引用是每次GC时都回收，不论内存是否不足
+      - ThreadLocalMap的Entry extends WeakReference<ThreadLocal<?>>，并在构造器里调用了super(k)，相当于把key包装成了弱引用。这样在外界强引用切断的情况下，可以触发GC，不至于导致ThreadLocalMap中的对象无法回收导致内存泄漏。
+    - 虚引用（堆外内存，比如zerocopy）
+
+- 内存泄漏
+  - 书接上文，弱引用将key回收后，key变成了null，但是对应的value还在，导致无法移除。所以ThreadLocalMap在下一次get/set时会判断，key为null时将value置为null。
+  - 但是如果没有下一次get/set呢？所以最好是在用完后手动调用remove()，这也是Java开发手册中建议的做法。
+
+#### 2.2 线程池
+
+##### 2.2.1 
