@@ -109,7 +109,8 @@
 - WAITING和TIMED_WAITING：线程进入等待状态，需要来自其他线程的通知或终端。
   - Object的wait()，notify()和notifyAll()方法不多说了，此时将该Object当做一个锁。线程A调用wait()释放锁并使当前线程等待，持有同一个对象锁的线程B调用notifyAll()后可以唤醒线程A。
   - Thread.join()可以使当前线程等待其他线程执行完毕
-  - LockSupport类的park()和unpark()：//TODO，不是很懂
+  - LockSupport类的park()和unpark()：java1.6之后的许可机制，比wait/notifyAll灵活的多，AQS中用到了这种结构
+    - https://blog.csdn.net/hengyunabc/article/details/28126139
   - Thread.sleep(long)只是单纯等一段时间，没有任何对于锁的操作
 - Blocked：线程调用同步方法时没有获取到锁，便会被阻塞
 
@@ -195,4 +196,74 @@
 
 #### 2.2 线程池
 
-##### 2.2.1 
+##### 2.2.1 ThreadPoolExecutor
+
+- 继承体系：ThreadPoolExecutor -> AbstractExecutorService -> ExecutorService -> Executor
+
+  - Executor顶层接口：就一个execute方法
+  - ExecutorService接口：引入**线程池状态**，比如引入了shutDown等方法；同时还引入了**submit()方法**，返回一个Future对象
+    - ScheduledExecutorService：定时任务
+  - AbstractExecutorService抽象类：新增newTaskFor()方法，将Runnable和Callable两种任务**统一**为FutureTask类型；对submit()等方法做了**初步**实现
+  - ThreadPoolExecutor：终于是一个真实能用的线程池了
+
+- 参数分析：
+
+  - corePoolSize，maximumPoolSize：核心线程数和最大线程数
+  - keepAliveTime，unit：线程存活时间，超过进行销毁
+  - workQueue：阻塞队列
+    - ArrayBlockingQueue内部使用ReentrantLock实现，两个Condition为notEmpty和notFull，当队列满时，notFull进行await阻塞生产者线程；消费者同理
+
+  - threadFactory：一般用来加名字区分线程
+  - handler：拒绝策略，将size和queue容量设置为1，可以很容易看出区别
+    - AbortPolicy：直接抛异常
+    - CallerRunsPolicy：使用当前线程处理，比如main线程
+    - DiscardOldestPolicy：丢弃最老的未处理任务，把新的加进来
+    - DiscardPolicy：丢弃新的任务
+
+- 调用过程：核心线程处理任务 -> 任务进入任务队列等待 -> 非核心线程处理任务 -> 拒绝策略
+
+  - execute方法：
+
+    - 假设核心线程数未满，调用addWorker(command, true)，true表示核心线程；如果满了，尝试把任务加入到workQueue；如果队列也满了，调用addWorker(command, false)创建非核心线程；如果非核心线程也失败，调用拒绝策略。整个过程是非阻塞的
+    - addWorker方法：其中会异步开启Worker中的线程，线程会调用runWorker
+    - runWorker方法：核心/非核心线程处理完手头任务后，异步线程调用这个方法，其中会getTask获取任务，也就是说，addWorker最终会跑到这儿获取任务
+
+  - getTask简化逻辑如下：
+
+    ```java
+    private Runnable getTask() {
+        boolean timedOut = false; // Did the last poll() time out?
+    
+        // 尝试循环获取任务
+        for (;;) {
+    
+            // 是否需要检测超时：当前线程数超过核心线程
+            boolean timed = wc > corePoolSize;
+    
+            // 超时了，return null
+            if (timed && timedOut) {
+                return null;
+            }
+    
+            try {
+                // 是否需要检测超时
+                Runnable r = timed ?
+                    workQueue.poll(keepAliveTime, TimeUnit.NANOSECONDS) :
+                    workQueue.take();
+                if (r != null)
+                    return r;
+                timedOut = true;
+            } catch (InterruptedException retry) {
+                timedOut = false;
+            }
+        }
+    } 
+    ```
+
+    - 线程数小于核心线程数，timed永远为false。那么就会调用workQueue.take()一直阻塞下去，直到有新的任务提交进来。但是处理结束后，还是会进入循环，周而复始。由于线程永远处于阻塞等待任务、执行任务、继续阻塞等待任务的死循环中，也就永远不会销毁了。
+
+    - 销毁：task=null && 队列为空 && 当前线程数超过corePoolSize
+
+#### 2.3 AQS
+
+##### 2.3.1 

@@ -31,25 +31,34 @@ http://www.cyc2018.xyz/
 1. 全部
 
    ```
-   1, 3, 8, 9, 15, 17, 19, 20, 21, 24, 31, 34, 37, 39, 40, 42, 43, 46, 47, 50, 51, 53, 55, 62, 64, 67, 69, 70, 72, 75, 77, 78, 79, 83, 84, 88, 90, 91, 93, 94, 95, 101, 104, 108, 109, 110, 111, 112, 113, 121, 122, 123, 127, 128, 130, 131, 136, 139, 141, 142, 144, 145, 147, 153, 155, 160, 162, 165, 167, 168, 169, 172, 179, 188, 189, 190, 198, 200, 204, 205, 206, 207, 208, 210, 213, 215, 216, 217, 224, 225, 226, 230, 231, 232, 234, 235, 236, 238, 240, 241, 242, 257, 260, 268, 278, 279, 283, 287, 292, 300, 303, 309, 316, 318, 322, 326, 328, 337, 338, 342, 343, 345, 347, 367, 371, 376, 377, 378, 392, 404, 405, 406, 409, 413, 415, 416, 417, 435, 437, 442, 451, 452, 455, 461, 462, 470, 474, 476, 485, 494, 496, 501, 503, 504, 513, 518, 524, 530, 538, 540, 543, 547, 560, 565, 566, 567, 572, 583, 594, 605, 617, 628, 633, 637, 645, 646, 647, 650, 662, 665, 667, 669, 671, 677, 680, 684, 687, 693, 695, 696, 697, 714, 725, 739, 743, 744, 763, 766, 769, 785, 1091, 1143
+   leetcode：
+   1, 3, 5, 8, 9, 15, 17, 19, 20, 21, 22, 24, 31, 33, 34, 37, 39, 40, 42, 43, 46, 47, 48, 49, 50, 51, 53, 54, 55, 56, 62, 64, 67, 69, 70, 72, 75, 77, 78, 79, 83, 84, 88, 90, 91, 93, 94, 95, 101, 102, 104, 105, 108, 109, 110, 111, 112, 113, 121, 122, 123, 127, 128, 130, 131, 136, 139, 141, 142, 144, 145, 147, 151, 153, 154, 155, 160, 162, 165, 167, 168, 169, 172, 179, 188, 189, 190, 198, 200, 204, 205, 206, 207, 208, 210, 213, 215, 216, 217, 224, 225, 226, 230, 231, 232, 234, 235, 236, 238, 240, 241, 242, 257, 260, 268, 278, 279, 283, 287, 292, 300, 303, 309, 316, 318, 322, 326, 328, 337, 338, 342, 343, 345, 347, 367, 371, 376, 377, 378, 392, 404, 405, 406, 409, 413, 415, 416, 417, 435, 437, 442, 451, 452, 455, 461, 462, 470, 474, 476, 485, 494, 496, 501, 503, 504, 513, 518, 524, 530, 538, 540, 543, 547, 560, 565, 566, 567, 572, 583, 594, 605, 617, 628, 633, 637, 645, 646, 647, 650, 662, 665, 667, 669, 671, 677, 680, 684, 687, 693, 695, 696, 697, 714, 725, 739, 743, 744, 763, 766, 769, 785, 912, 946, 1091, 1143
+   
+   剑指offer：
+   9, 13, 32, 53
    ```
 
 2. 依分类
 
    - 双指针：15, 88, 165, 167, 345, 524, 633, 680
-   - 排序：75, 179, 215, 347, 451
+   - 排序：56, 75, 179, 215, 347, 451, 912
    - 贪心：55, 122, 392, 406, 435, 452, 455, 605, 665, 763
-   - 二分：34, 69, 153, 162, 278, 540, 744
+   - 二分：33, 34, 69, 153, 154, 162, 278, 540, 744
+     - 剑指offer：53
    - 分治：95, 241
-   - 搜索：17, 31, 37, 39, 40, 46, 47, 51, 77, 78, 79, 90, 93, 127, 130, 131, 200, 216, 257, 279, 417, 547, 695, 1091
-   - 动态规划：42, 53, 62, 64, 70, 72, 91, 121, 123, 139, 188, 198, 213, 279, 300, 303, 309, 322, 343, 376, 377, 413, 416, 474, 494, 518, 583, 646, 650, 714, 1143
-   - 数学：50, 67, 168, 169, 172, 204, 238, 292, 326, 367, 405, 415, 462, 470, 504, 628
+   - 搜索：17, 22, 31, 37, 39, 40, 46, 47, 51, 77, 78, 79, 90, 93, 127, 130, 131, 200, 216, 257, 279, 417, 547, 695, 1091
+     - 剑指offer：13
+   - 动态规划：5, 42, 53, 62, 64, 70, 72, 91, 121, 123, 139, 188, 198, 213, 279, 300, 303, 309, 322, 343, 376, 377, 413, 416, 474, 494, 518, 583, 646, 650, 714, 1143
+   - 数学：50, 67, 168, 169, 172, 204, 238, 292, 326, 343, 367, 405, 415, 462, 470, 504, 628
+     - 剑指offer：62
    - 链表：19, 21, 24, 83, 141, 142, 147, 160, 206, 234, 328, 725
-   - 树：94, 101, 104, 108, 109, 110, 111, 112, 113, 144, 145, 208, 226, 230, 235, 236, 337, 404, 501, 513, 530, 538, 543, 572, 617, 637, 653, 662, 669, 671, 677, 687
-   - 栈和队列：20, 155, 225, 232, 503
-   - 哈希表：1, 128, 217, 594
-   - 字符串：9, 205, 242, 409, 647, 696
-   - 数组与矩阵：43, 189, 240, 283, 287, 378, 442, 485, 565, 566, 645, 667, 697, 766, 769
+   - 树：94, 101, 102, 104, 105, 108, 109, 110, 111, 112, 113, 144, 145, 208, 226, 230, 235, 236, 337, 404, 501, 513, 530, 538, 543, 572, 617, 637, 653, 662, 669, 671, 677, 687
+     - 剑指offer：32（103）
+   - 栈和队列：20, 155, 225, 232, 503, 946
+     - 剑指offer：9
+   - 哈希表：1, 49, 128, 217, 594
+   - 字符串：9, 151, 205, 242, 409, 647, 696
+   - 数组与矩阵：43, 48, 54, 189, 240, 283, 287, 378, 442, 485, 565, 566, 645, 667, 697, 766, 769
    - 图：207, 210, 684, 785
    - 位运算：136, 190, 231, 260, 268, 318, 338, 342, 371, 461, 476, 693
    - 单调栈：84, 316, 496, 739
@@ -219,6 +228,50 @@ http://www.cyc2018.xyz/
       }
   }
   ```
+
+###### 3.3.2 层次遍历
+
+- 标准层次遍历非常简单，不再赘述。层次遍历中有几种特殊情况需要注意，如下：
+
+  - 记录每层节点：遍历每一层时通过当前队列节点数来确定遍历几次
+  - 记录节点编号：使用WrapNode将节点再包一层
+
+###### 3.3.3 其他问题
+
+- 反转二叉树，树的深度，是否对称二叉树，前序中序建树，等基本问题
+
+- 二叉树的公共祖先（LCA问题）：按是否二叉搜索树来区分难度，该题及其容易忘记，建议多做几遍
+
+  - 如果是搜索树，思路比较简单
+
+  - 如果不是搜索树，如下：
+
+    ```java
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+    	// 递归过程中可能找不到两者的公共祖先，而只能找到其中一个的祖先
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left == null) {
+            return right;
+        }
+        if (right == null) {
+            return left;
+        }
+        return root;
+    }
+    ```
+
+- 路径和问题：先看是不是从根节点到叶节点的路径
+
+  - [路径总和](https://leetcode-cn.com/problems/path-sum/)：判断是否存在路径和，简单递归就可以了
+  - [路径总和 II](https://leetcode-cn.com/problems/path-sum-ii/)：输出全部路径，backtrack思路
+
+  - [路径总和 III](https://leetcode-cn.com/problems/path-sum-iii/)：不要求从根节点到叶节点，问题复杂了很多，需要两次遍历，更好的思路是用前缀和
+
+- [树的子结构](https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/)：看起来不难，写起来很无语
 
 ##### 3.4 并查集
 
@@ -406,7 +459,6 @@ http://www.cyc2018.xyz/
     }
     ```
   
-    
 
 ###### 4.1.3 归并排序
 
@@ -471,23 +523,28 @@ http://www.cyc2018.xyz/
   }
   ```
 
+###### 4.1.4 特殊排序
+
+- [合并区间](https://leetcode-cn.com/problems/merge-intervals/)，按区间左端点排序可以使得要合并的区间连续，之后根据右端点merge即可。
+- 
+
 ##### 4.2 搜索
 
 ###### 4.2.1 二分
 
 - 选择搜索区：二分搜索关键在于通过mid值与low值或high值的比较，确定要搜索的目标值在list的哪边，如果没法确定则无法搜索。
 
-  - 标准二分如下，能准确找到target值，搜索条件为l <= h：
+  - 标准二分如下，能准确找到target值，搜索条件为low <= high：
 
     ```java
-    while (l <= h) {
-        int m = l + (h - l) / 2;
-        if (nums[m] == key) {
-            return m;
-        } else if (nums[m] > key) {
-            h = m - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (nums[mid] == key) {
+            return mid;
+        } else if (nums[mid] > key) {
+            high = mid - 1;
         } else {
-            l = m + 1;
+            low = mid + 1;
         }
     }
     ```
@@ -511,14 +568,14 @@ http://www.cyc2018.xyz/
       ```java
       // res初始化为nums.length是因为可能数组中所有数字都比target小
       int low = 0, high = nums.length - 1, res = nums.length;
-      while (left <= right) {
+      while (low <= high) {
           int mid = low + (high - low) / 2;
           if (nums[mid] > target) {
-              right = mid - 1;
-              // 其实跟标准二分一样，只是在循环过程中记录结果
+              high = mid - 1;
+              // 其实跟标准二分一样，只是在循环过程中记录结果，只是相等时也继续判断
               res = mid;
           } else {
-              left = mid + 1;
+              low = mid + 1;
           }
       }
       ```
@@ -527,8 +584,14 @@ http://www.cyc2018.xyz/
 
 - 搜索条件，二分的搜索条件至关重要，不同的搜索条件决定了能不能确定搜索区，一些特殊的搜索条件如下：
 
+  - [剑指 Offer 53 - II. 0～n-1中缺失的数字](https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/)：建议先想一想
   - lc 162，[寻找峰值](https://leetcode-cn.com/problems/find-peak-element/)：条件为 nums[mid] > nums[mid + 1]。
-  - lc 153，[寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)：条件为 nums[mid] < nums[high]。详细解释见：https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/solution/er-fen-cha-zhao-wei-shi-yao-zuo-you-bu-dui-cheng-z/
+  - 旋转数组：
+    - lc 153，[寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)：条件为 nums[mid] < nums[high]。详细解释见：https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/solution/er-fen-cha-zhao-wei-shi-yao-zuo-you-bu-dui-cheng-z/
+    - lc 154，跟lc 153几乎一样，区别是有重复值，处理方法也很简单粗暴，发现相等的时候直接right-1。
+    - lc 33，[搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)：第一个条件与lc 153一致，之后需要确定target是否在单调递增区间内，需要两步条件判断；本题还可以先用上一题思路找到最小值，然后通过取余还原旋转数组。
+      - 旋转数组问题，如果nums[mid]<nums[high]，则[mid, high]一定为右侧单调递增区间；如果nums[low]<nums[mid]，则[low, mid]一定为左侧单调递增区间。
+  
 
 ###### 4.2.2 backtrack
 
@@ -539,27 +602,37 @@ http://www.cyc2018.xyz/
   - 典型示例：lc 46，[全排列](https://leetcode-cn.com/problems/permutations/)
 
     ```java
-    public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(res, nums, 0);
-        return res;
+    // backtrack需要一个pos变量表示当前位置，还需要一个队列来保存中间结果。本例中，nums是swap in place的，因此省略了这个队列
+    private void backtrack(List<List<Integer>> res, int[] nums, int pos) {
+        if (pos == nums.length - 1) {
+            res.add(Arrays.stream(nums).boxed().collect(Collectors.toList()));
+            return;
+        }
+    
+        // 注意从pos开始，pos之前的位置元素均已固定
+        for (int i = pos; i < nums.length; i++) {
+            // 进入下一层递归前改变中间结果
+            swap(nums, i, pos);
+            backtrack(res, nums, pos + 1);
+            // 返回上一层递归前还原
+            swap(nums, i, pos);
+        }
     }
     
-    // backtrack需要一个pos变量表示当前位置，还需要一个队列来保存中间结果。本例中，nums是swap in place的，因此省略了这个队列
+    // 另外一种写法
     private void backtrack(List<List<Integer>> res, int[] nums, int pos) {
         res.add(Arrays.stream(nums).boxed().collect(Collectors.toList()));
         for (int i = pos; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
-                // 进入下一层递归前改变中间结果
                 swap(nums, i, j);
-                // 注意backtrack进入下一层递归后pos一般为i+1,而不是pos+1
                 backtrack(res, nums, i + 1);
-                // 返回上一层递归前还原
                 swap(nums, i, j);
             }
         }
     }
     ```
+  
+    - [字符串的排列](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/)：本题跟上题不一样的是，要对结果去重
   
   - 典型示例2：lc 39，[组合总和](https://leetcode-cn.com/problems/combination-sum/)
   
@@ -584,6 +657,12 @@ http://www.cyc2018.xyz/
         }
     }
     ```
+  
+  - 典型示例3：[括号生成](https://leetcode-cn.com/problems/generate-parentheses/)，本题的一个特殊之处在于有两个pos，左括号和右括号，因此解法略有不同
+  
+    
+  
+    
   
 
 ###### 4.2.3 dfs
@@ -623,6 +702,8 @@ http://www.cyc2018.xyz/
       return false;
   }
   ```
+  
+  - 这种问题需要注意的点在于visited数组的处理和控制return。比如：[剑指 Offer 13. 机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)，和上题细节不太一样
 
 
 ###### 4.2.4 bfs
@@ -708,7 +789,7 @@ http://www.cyc2018.xyz/
 
 ###### 4.3.2 矩阵
 
-- 矩阵部分的动态规划题往往是二维的。一些题目为二维网格只能向右或者向下移动，不难；更为典型的题目是[编辑距离](https://leetcode-cn.com/problems/edit-distance/)
+- 矩阵部分的动态规划题往往是二维的。一些题目为二维网格只能向右或者向下移动，不难；更为典型的题目是[编辑距离](https://leetcode-cn.com/problems/edit-distance/)或者[最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
 
 ​		
 

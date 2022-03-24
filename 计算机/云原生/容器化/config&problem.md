@@ -108,6 +108,56 @@
 1. ```
    docker run -id --restart=always --privileged=true --name=redis -p 6379:6379 redis:6.0 --requirepass "redis"
    ```
+   
+   - ```
+     scoop install another-redis-desktop-manager
+     ```
+   
+     
+
+##### 2.3 ES
+
+###### 2.3.1 docker部署
+
+1. ```
+   docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d elasticsearch:7.2.0
+   ```
+
+   - 解决跨域问题：进入容器
+
+     ```
+     cd /usr/share/elasticsearch/config/
+     vi elasticsearch.yml
+     
+     // 加入如下内容：
+     http.cors.enabled: true
+     http.cors.allow-origin: "*"
+     ```
+
+   - ik分词器安装：进入容器
+
+     ```
+     cd /usr/share/elasticsearch/plugins/
+     elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.2.0/elasticsearch-analysis-ik-7.2.0.zip
+     ```
+
+   - kibana部署（ui界面）：
+
+     ```
+     docker run --name kibana --link=elasticsearch:test  -p 5601:5601 -d kibana:7.2.0
+     ```
+
+   - 简单示例（在idea中打开）：[es-demo.http](./resources/es/es-demo.http)
+
+##### 2.4 zk
+
+###### 2.4.1 docker部署
+
+1. ```
+   docker run -d --name zookeeper -p 2181:2181 zookeeper:3.5.8
+   ```
+
+   
 
 
 ### 问题

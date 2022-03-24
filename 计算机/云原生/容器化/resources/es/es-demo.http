@@ -1,0 +1,129 @@
+# 7.0后的版本type默认为_doc，且8.0之后不允许修改
+### 新建index：accounts
+PUT localhost:9200/accounts
+Content-Type: application/json
+
+{
+  "mappings": {
+    "properties": {
+      "user": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_max_word"
+      },
+      "title": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_max_word"
+      },
+      "desc": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_max_word"
+      }
+    }
+  }
+}
+
+### 新增一条记录
+PUT localhost:9200/accounts/_doc/1
+Content-Type: application/json
+
+{
+  "user": "张三",
+  "title": "工程师",
+  "desc": "数据库管理"
+}
+
+### 新增另一条记录
+POST localhost:9200/accounts/_doc
+Content-Type: application/json
+
+{
+  "user": "李四",
+  "title": "工程师",
+  "desc": "系统管理"
+}
+
+### 查看id为1的记录
+GET localhost:9200/accounts/_doc/1?pretty=true
+
+### 查不到
+GET localhost:9200/accounts/_doc/2?pretty=true
+
+###
+DELETE localhost:9200/accounts/_doc/1
+
+### 更新一条记录
+PUT localhost:9200/accounts/_doc/1
+Content-Type: application/json
+
+{
+  "user": "张三",
+  "title": "工程师",
+  "desc": "数据库管理，软件开发"
+}
+
+### 查询所有记录
+GET localhost:9200/accounts/_doc/_search
+
+### 查询desc字段里面包含"软件"这个词的所有记录（Match 查询）
+GET localhost:9200/accounts/_doc/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "desc": "软件"
+    }
+  }
+}
+
+### 默认一次返回10条结果，更改size可以改变返回条数，更改from字段指定位移
+GET localhost:9200/accounts/_doc/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "desc": "管理"
+    }
+  },
+  "from": 1,
+  "size": 1
+}
+
+### 多个搜索关键字之间是or关系
+GET localhost:9200/accounts/_doc/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "desc": "软件 系统"
+    }
+  }
+}
+
+### 多个搜索关键字之间是and查询，需使用bool关键字
+GET localhost:9200/accounts/_doc/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "desc": "软件"
+          }
+        },
+        {
+          "match": {
+            "desc": "系统"
+          }
+        }
+      ]
+    }
+  }
+}
