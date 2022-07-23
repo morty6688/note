@@ -173,7 +173,7 @@ http://www.cyc2018.xyz/
               stack.push(root);
               root = root.left;
           }
-          //如果是null，出栈并处理右子树
+          //如果是null，出栈并处理右子树（注意这个地方不需要对right进行判空，否则无法跳出循环）
           root = stack.pop().right;
       }
   }
@@ -390,16 +390,14 @@ http://www.cyc2018.xyz/
 ​	堆定义见[3.2 堆](#3.2 堆)
 
 - ```java
-  // 从小到大排序，建最大堆
   public int[] heapSort(int[] nums) {
-      int heapSize = nums.length;
-      heapify(nums, heapSize);
+      // 从小到大排序，建最大堆
+      heapify(nums, nums.length);
       for (int i = nums.length - 1; i >= 0; i--) {
           // 将最大元素挪至结尾
           swap(nums, 0, i);
-          heapSize--;
           // 保证堆顶元素的最大
-          siftDown(nums, 0, heapSize);
+          siftDown(nums, 0, i);
       }
       return nums;
   }
@@ -424,6 +422,7 @@ http://www.cyc2018.xyz/
       swap(a, randomI, right);
   
       int pivot = a[right];
+      // 尤其注意这个i和j的设置，别写成-1和0
       int i = left - 1, j = left;
       // all in [0, i] <= pivot
       while (j < right) {
@@ -633,6 +632,8 @@ http://www.cyc2018.xyz/
     ```
   
     - [字符串的排列](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/)：本题跟上题不一样的是，要对结果去重
+  
+    - [下一个排列](https://leetcode-cn.com/problems/next-permutation/)：本题也是属于及其容易忘记套路的题，需要记得何时应该swap和reverse
   
   - 典型示例2：lc 39，[组合总和](https://leetcode-cn.com/problems/combination-sum/)
   

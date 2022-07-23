@@ -154,9 +154,13 @@
 ###### 2.4.1 docker部署
 
 1. ```
-   docker run -d --name zookeeper -p 2181:2181 zookeeper:3.5.8
+   docker run -d --name zk -p 2181:2181 zookeeper:3.5.8
    ```
 
+   ```
+   ./bin/zkCli.sh
+   ```
+   
    
 
 

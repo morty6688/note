@@ -1,8 +1,8 @@
-### 介绍与启动
+## 介绍与使用
 
 介绍：https://sspai.com/post/52710
 
-启动：
+安装：
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -scope CurrentUser
@@ -60,7 +60,7 @@ scoop update
 # 列出全部可更新软件
 scoop status
 # 全部更新
-scoop update '*'
+scoop update -a
 
 # 禁止某个软件更新
 scoop hold git
@@ -71,15 +71,15 @@ scoop unhold git
 #### 5. 清除缓存（安装失败时清除残留）
 
 ```
-scoop cache show
+scoop cache
 scoop cache rm qbittorrent
-scoop cache rm '*'
+scoop cache rm -a
 ```
 
 #### 6. 删除旧版本
 
 ```
-scoop cleanup '*'
+scoop cleanup -a
 ```
 
 #### 7. 软件信息
@@ -98,9 +98,9 @@ scoop install git
 
 - Git Bash设置如下：
 
-​		[Git Bash设置](git_bash.md)
+​		[Git Bash设置](../../general%20tools/git/git_bash.md)
 
-​		其他关于git的问题参考该文件：[git配置与问题记录](../../../系统/通用工具/git/config&problem.md)
+​		其他关于git的问题参考该文件：[git配置与问题记录](../../general%20tools/git/config&problem.md)
 
 ```
 scoop install openjdk17
@@ -281,6 +281,25 @@ delete /node
   scoop install screentogif
   ```
 
+- ```
+  scoop install neteasemusic
+  ```
+
+- mpv：
+  
+   ```
+  scoop install mpv
+  scoop install yt-dlp
+  ```
+  
+  - 后续设置：https://bbs.acgrip.com/thread-7443-1-1.html
+  
+  icaros：使用管理员模式启动
+  
+  ```
+  scoop install icaros-np
+  ```
+
 #### 3. 编程相关
 
 - ```
@@ -320,21 +339,12 @@ delete /node
 #### 6. 国内软件
 
 - ```
-  scoop install neteaseuu
-  ```
-
-- ```
   scoop install wechat
-  ```
-
-- ```
-  scoop install neteasemusic
   ```
 
 ### 其他
 
-- 暂不方便用 scoop
-
+- 暂未用 scoop
   - steam
   - mouseinc
   - v2rayn
@@ -346,19 +356,32 @@ delete /node
   - docker-desktop
   - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
     - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
-
 - 付费：
 
   - displayfusion
   - directory opus
   - quicker
-
 - 国内：
-
   - 火绒
-
   - pico 串流助手
-
   - 115
-
   - pdf 补丁丁
+  - uu加速器，一开始可以
+
+## 问题
+
+### Git相关
+
+- error: Your local changes to the following files would be overwritten by merge:
+
+  - 解决办法
+
+    ```
+    scoop bucket rm main
+    scoop bucket add main
+    scoop update
+    ```
+
+- 
+
+  
