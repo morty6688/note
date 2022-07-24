@@ -12,8 +12,21 @@
 
 - bash主题
 
-  - 亚克力半透明
+  - profile
 
+    ```
+    "defaults": 
+    {
+        "font": 
+        {
+            "face": "MesloLGS NF",
+            "size": 12
+        }
+    },
+    ```
+  
+  - 亚克力半透明
+  
     ```json
     // WSL2
     {
@@ -22,10 +35,6 @@
       "colorScheme": "Campbell",
       "cursorColor": "#FFFFFF",
       "cursorShape": "bar",
-      "font": {
-        "face": "Consolas",
-        "size": 12
-      },
       "hidden": false,
       "historySize": 9001,
       "padding": "0, 0, 0, 0",
@@ -37,7 +46,7 @@
       "startingDirectory": "\\\\wsl$\\Ubuntu\\home\\lijian"
     }
     ```
-
+  
     ```json
     // Git Bash
     {
@@ -50,10 +59,7 @@
       "colorScheme": "Campbell",
       "cursorColor": "#FFFFFF",
       "cursorShape": "bar",
-      "font": {
-        "face": "Consolas",
-        "size": 12
-      },
+     
       "hidden": false,
       "historySize": 9001,
       "padding": "0, 0, 0, 0",
@@ -61,5 +67,6 @@
       "useAcrylic": true
     }
     ```
-
+  
     
+  
