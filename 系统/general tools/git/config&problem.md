@@ -1,6 +1,6 @@
 ### 配置
 
-#### 1. git配置
+#### git配置
 
 1. config命令
 
@@ -42,7 +42,7 @@ git config --global core.quotepath false
 git update-index --assume-unchanged ***
 git update-index --no-assume-unchanged ***
 ```
-#### 2. zsh配置
+#### zsh配置
 
 - 历史记录（.zshrc）
 
@@ -51,6 +51,12 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=1000
 setopt SHARE_HISTORY
+```
+
+- 文件夹显示颜色
+
+```
+alias ls='ls --color=auto'
 ```
 
 - powerlevel10k

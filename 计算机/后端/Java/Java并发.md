@@ -1,12 +1,12 @@
 ## Java并发
 
-### 1. 基础
+### 基础
 
-#### 1.1 线程
+#### 线程
 
-##### 1.1.1 基本概念区分
+##### 基本概念区分
 
-###### 1.1.1.1 进程和线程
+###### 进程和线程
 
 - 每当启动一个main方法时，OS会创建一个JVM进程，而main方法是其中的一个主线程。所有线程共享进程的**堆区**和**方法区**资源，但每个线程有自己的**程序计数器**、**虚拟机栈**和**本地方法栈**。用户空间的java线程和OS内核空间的线程是一一对应的关系。
 
@@ -29,7 +29,7 @@
 
 - 其他区别都是操作系统基础
 
-###### 1.1.1.2 Thread、Runnable和Callable
+###### Thread、Runnable和Callable
 
 - **有且仅有Thread类能通过start0()本地方法向操作系统申请线程资源**，线程池只是对Thread的复用
 
@@ -101,7 +101,7 @@
   }
   ```
 
-##### 1.1.2 线程状态
+##### 线程状态
 
 - New：线程被实例化，但还没有调用start；TERMINATED：线程执行完毕
 - Runnable：调用Thread.start()之后，包括Running和Ready两个状态，由OS进行调度。现代OS通常都是时间片轮转调度的，时间片都是ms级的，时间片用完就要被放入多级反馈队列的末尾进入Ready状态。因此Java不区分这两者。
@@ -114,16 +114,16 @@
   - Thread.sleep(long)只是单纯等一段时间，没有任何对于锁的操作
 - Blocked：线程调用同步方法时没有获取到锁，便会被阻塞
 
-### 2 锁
+### 锁
 
-#### 2.1 概念
+#### 概念
 
-##### 2.1.1 简介
+##### 简介
 
 - 堆区对象除了实例数据以外，还有几个区域。比如元数据指针指向方法区所属的类，Mark Word表示了对象的锁状态，所以每个堆区对象都可以作为锁使用。锁也分类锁和对象锁。
 - synchronized早期是重量级锁，需要向OS申请资源，设计用户态和内核态的切换，效率不高；因此有了自旋锁ReentrantLock，可以在发生锁竞争时使用CAS自旋，但是如果线程数过多，同时自旋也很耗费资源。
 
-##### 2.1.2 synchronized介绍及优化
+##### synchronized介绍及优化
 
 - JDK1.6以后对synchronized作了优化，有了“锁升级”的概念，也就是Mark Word中提到的无锁，偏向锁，轻量级锁（自旋锁），重量级锁
   - 无锁：对象刚new出来
@@ -137,7 +137,7 @@
   - 执行`monitorenter`时，会尝试获取对象的锁，锁的计数器为 0表示可以获取，获取后将锁计数器设为 1 也就是加 1。
   - 对象锁的的拥有者线程才可以执行 `monitorexit` 指令来释放锁，锁计数器减1。
 
-##### 2.1.3 synchronized和ReentrantLock 
+##### synchronized和ReentrantLock 
 
 - synchronized是JVM实现的，ReentrantLock 是API
 - ReentrantLock多了一些功能：
@@ -145,11 +145,11 @@
   - 可以指定是公平锁：先等待的线程先获得锁
   - 可实现选择性通知（锁可以绑定多个条件）：实现多路通知功能，即在一个ReentrantLock中创建多个Condition，线程对象可以注册在指定的Condition中。synchronized关键字就相当于整个 Lock 对象中只有一个Condition实例，notifyAll()方法会唤醒全部相关线程；而condition.signalAll()只会唤醒该Condition下的线程
 
-##### 2.1.4 volatile 
+##### volatile 
 
 - 由于CPU存在L1，L2，L3级缓存，变量可以保存在寄存器里，和内存的变量可能存在同步间隙。而Java也可能会将变量保存在本地内存里而不是主内存里。因此可以使用volatile来确保使用某变量时都到主存中进行读取。同时volatile也可以禁用指令重排。
 
-##### 2.1.5 ThreadLocal
+##### ThreadLocal
 
 - ```java
   public class ThreadLocalExample implements Runnable {
@@ -194,9 +194,9 @@
   - 书接上文，弱引用将key回收后，key变成了null，但是对应的value还在，导致无法移除。所以ThreadLocalMap在下一次get/set时会判断，key为null时将value置为null。
   - 但是如果没有下一次get/set呢？所以最好是在用完后手动调用remove()，这也是Java开发手册中建议的做法。
 
-#### 2.2 线程池
+#### 线程池
 
-##### 2.2.1 ThreadPoolExecutor
+##### ThreadPoolExecutor
 
 - 继承体系：ThreadPoolExecutor -> AbstractExecutorService -> ExecutorService -> Executor
 
@@ -264,6 +264,6 @@
 
     - 销毁：task=null && 队列为空 && 当前线程数超过corePoolSize
 
-#### 2.3 AQS
+#### AQS
 
-##### 2.3.1 
+##### 

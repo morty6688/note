@@ -11,9 +11,14 @@ iwr -useb get.scoop.sh | iex
 
 ### 使用方法
 
-#### 0. 添加仓库
+#### 添加仓库+设置别名
 
 ```
+# .zshrc里添加scoop别名
+alias s='scoop'
+alias sup='scoop update'
+alias ss='scoop status'
+
 scoop bucket add java
 scoop bucket add main
 scoop bucket add extras
@@ -21,7 +26,7 @@ scoop bucket add dorado
 scoop bucket add ash258.ash258
 ```
 
-#### 1. 安装 aria2
+#### 安装 aria2
 
 ```
 scoop install aria2
@@ -30,7 +35,7 @@ scoop config aria2-max-connection-per-server 16
 scoop config aria2-min-split-size 1M
 ```
 
-#### 2. 代理
+#### 代理
 
 ```
 scoop config proxy 127.0.0.1:10809
@@ -44,7 +49,7 @@ scoop config rm proxy
 scoop update
 ```
 
-#### 3. 换源（不生效，待完善）
+#### 换源（不生效，待完善）
 
 ```
 scoop config SCOOP_REPO https://gitee.com/squallliu/scoop
@@ -52,7 +57,7 @@ scoop config rm SCOOP_REPO
 scoop update
 ```
 
-#### 4. 更新
+#### 更新
 
 ```
 scoop list
@@ -68,7 +73,7 @@ scoop hold git
 scoop unhold git
 ```
 
-#### 5. 清除缓存（安装失败时清除残留）
+#### 清除缓存（安装失败时清除残留）
 
 ```
 scoop cache
@@ -76,13 +81,13 @@ scoop cache rm qbittorrent
 scoop cache rm -a
 ```
 
-#### 6. 删除旧版本
+#### 删除旧版本
 
 ```
 scoop cleanup -a
 ```
 
-#### 7. 软件信息
+#### 软件信息
 
 ```
 scoop info openjdk
@@ -90,7 +95,7 @@ scoop info openjdk
 
 ### 开发工具安装
 
-#### 1. java
+#### java
 
 ```
 scoop install git
@@ -126,7 +131,7 @@ scoop install maven
   </mirror>
   ```
 
-#### 2. python
+#### python
 
 ```
 scoop install python
@@ -155,7 +160,7 @@ python -m pip config set global.index-url http://pypi.douban.com/simple/
 
 安装后请运行install-pep-514.reg
 
-#### 3. go
+#### go
 
 ```
 scoop install go
@@ -173,7 +178,7 @@ go env -w GOPROXY=https://goproxy.io,direct
 go env | grep GOPROXY
 ```
 
-#### 4. mysql
+#### mysql（建议用docker）
 
 ```
 scoop install mysql
@@ -200,7 +205,7 @@ mysqladmin -uroot -p password
 控制面板-搜索计划任务-MySQL-Installer-先导出后删除
 ```
 
-#### 5. zookeeper
+#### zookeeper（建议用docker）
 
 ```
  scoop install zookeeper
@@ -225,7 +230,7 @@ delete /node
 
 ### 常用软件安装
 
-#### 1. 日常使用
+#### 日常使用
 
 - everything
 
@@ -233,16 +238,16 @@ delete /node
   scoop install everything
   ```
 
-  - 设置开机自启动和显示窗口快捷键（Alt+F），并集成到资源管理器右键菜单
+  - 设置中选中开机自启动，everything服务，去掉以管理员模式运行；设置显示窗口快捷键（Alt+F），并集成到资源管理器右键菜单
 
 - ```
   scoop install trafficmonitor
   ```
 
-- autohotkey：使用管理员模式运行
+- autohotkey2（需要手动安装）：
 
   ```
-  scoop install autohotkey-installer
+  scoop install autohotkey2
   ```
 
   - 使用如下设置，并将快捷方式放到Windows启动目录：
@@ -250,16 +255,19 @@ delete /node
     [AHK启动脚本](ahk.md)
 
 - ```
-  scoop install qbittorrent
+  scoop install qbittorrent-enhanced
   ```
 
+  - 行为：设置开机自启动，启动时最小化，最小化到系统托盘
+  - Bittorrent：设置做种限制
+  
 - ```
   scoop install pdf-xchange-editor
   ```
 
   - 勾选打开上次的文件，设置 Esc 键为选择文本快捷键
 
-#### 2. 图像影音
+#### 图像影音
 
 - ```
   scoop install sharex
@@ -300,7 +308,7 @@ delete /node
   scoop install icaros-np
   ```
 
-#### 3. 编程相关
+#### 编程相关
 
 - ```
   scoop install mobaxterm
@@ -320,7 +328,7 @@ delete /node
   scoop install switchhosts
   ```
 
-#### 4. 系统相关
+#### 系统相关
 
 - ```
   scoop install rufus
@@ -330,13 +338,13 @@ delete /node
   scoop install dismplusplus
   ```
 
-#### 5. 游戏相关
+#### 游戏相关
 
 - ```
   scoop install steampp
   ```
 
-#### 6. 国内软件
+#### 国内软件
 
 - ```
   scoop install wechat
@@ -384,4 +392,3 @@ delete /node
 
 - 
 
-  

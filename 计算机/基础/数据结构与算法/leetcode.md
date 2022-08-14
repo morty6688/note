@@ -1,5 +1,5 @@
 ### leetcode必刷题
-#### 1. 参考
+#### 参考
 http://www.cyc2018.xyz/
 
 - idea leetcode插件：
@@ -26,7 +26,7 @@ http://www.cyc2018.xyz/
     }
     ```
 
-#### 2. 题号
+#### 题号
 
 1. 全部
 
@@ -72,17 +72,17 @@ http://www.cyc2018.xyz/
    ```
 
 
-#### 3. 常用数据结构及写法
+#### 常用数据结构及写法
 
-##### 3.1 栈/队列
+##### 栈/队列
 
-###### 3.1.1 普通栈/队列
+###### 普通栈/队列
 
 - java推荐使用Deque来实现栈和队列，Deque拥有两套API。其一为add/remove/element，会抛出异常，其二为offer/poll/peek，会返回特殊值，常用的为第一套。
 - add相当于addLast，push相当于addFirst，remove和pop均相当于removeFirst，element相当于getFirst。因此当做栈来使用时，用push/pop/element或者addLast/removeLast/getLast；当做队列来使用时用add/remove/element。
 - addLast/removeLast/getLast可以保证一个栈内的元素用new ArrayList<>(deque)转换后是正向打印出来的。适合backtrack或者dfs等场合要保存路径时应用。
 
-###### 3.1.2 单调栈
+###### 单调栈
 
 - 递减栈用于寻找下一个更大元素，或上一个更大元素（逆序扫描）；
 
@@ -117,9 +117,9 @@ http://www.cyc2018.xyz/
      
      - [去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)：本题使用递增栈来保证栈内元素字典序最小，关键在于记录重复元素最后一次出现的位置和访问记录。元素已经在栈中直接跳过，如果遍历过程中某栈顶元素不是最后一次出现且不满足递增栈性质，就将其移除出栈。
 
-##### 3.2 堆
+##### 堆
 
-###### 3.2.1 堆本质
+###### 堆本质
 
 - 堆本质上讲就是一个完全二叉树，一般用数组来实现，可以方便的通过数组序号来定位堆节点。满足任意节点小于（或大于）它的所有后裔，最小元（或最大元）在堆的根上。
 
@@ -156,9 +156,9 @@ http://www.cyc2018.xyz/
   }
   ```
 
-##### 3.3 二叉树
+##### 二叉树
 
-###### 3.3.1 各种遍历的非递归写法
+###### 各种遍历的非递归写法
 
 - 先序遍历
 
@@ -229,14 +229,14 @@ http://www.cyc2018.xyz/
   }
   ```
 
-###### 3.3.2 层次遍历
+###### 层次遍历
 
 - 标准层次遍历非常简单，不再赘述。层次遍历中有几种特殊情况需要注意，如下：
 
   - 记录每层节点：遍历每一层时通过当前队列节点数来确定遍历几次
   - 记录节点编号：使用WrapNode将节点再包一层
 
-###### 3.3.3 其他问题
+###### 其他问题
 
 - 反转二叉树，树的深度，是否对称二叉树，前序中序建树，等基本问题
 
@@ -273,9 +273,9 @@ http://www.cyc2018.xyz/
 
 - [树的子结构](https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/)：看起来不难，写起来很无语
 
-##### 3.4 并查集
+##### 并查集
 
-###### 3.4.1 定义
+###### 定义
 
 - // TODO
 
@@ -341,13 +341,13 @@ http://www.cyc2018.xyz/
   - [最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)：本题除了hashmap，dp还可以用并查集。
 
 
-##### 3.5 哈希表
+##### 哈希表
 
-###### 3.5.1 普通哈希表
+###### 普通哈希表
 
 - 本身没啥好说的，空间换时间的哈希表
 
-###### 3.5.2 滑动窗口
+###### 滑动窗口
 
 - 结构如下
 
@@ -381,11 +381,11 @@ http://www.cyc2018.xyz/
   }
   ```
 
-#### 4. 常用算法模板
+#### 常用算法模板
 
-##### 4.1 排序
+##### 排序
 
-###### 4.1.1 堆排序
+###### 堆排序
 
 ​	堆定义见[3.2 堆](#3.2 堆)
 
@@ -403,7 +403,7 @@ http://www.cyc2018.xyz/
   }
   ```
 
-###### 4.1.2 快速排序
+###### 快速排序
 
 ​		快速排序采用分治的思想，每一次partition将一个pivot的放到其正确的位置上，随后递归的处理左右两半。partition函数使用双指针处理pivot并最终返回其正确序号。
 
@@ -459,7 +459,7 @@ http://www.cyc2018.xyz/
     ```
   
 
-###### 4.1.3 归并排序
+###### 归并排序
 
 ​		归并排序同样为分治的思想，只是每次将左右两边的subList排序好，最后通过merge两个有序的subList得到最终结果。
 
@@ -522,14 +522,14 @@ http://www.cyc2018.xyz/
   }
   ```
 
-###### 4.1.4 特殊排序
+###### 特殊排序
 
 - [合并区间](https://leetcode-cn.com/problems/merge-intervals/)，按区间左端点排序可以使得要合并的区间连续，之后根据右端点merge即可。
 - 
 
-##### 4.2 搜索
+##### 搜索
 
-###### 4.2.1 二分
+###### 二分
 
 - 选择搜索区：二分搜索关键在于通过mid值与low值或high值的比较，确定要搜索的目标值在list的哪边，如果没法确定则无法搜索。
 
@@ -592,7 +592,7 @@ http://www.cyc2018.xyz/
       - 旋转数组问题，如果nums[mid]<nums[high]，则[mid, high]一定为右侧单调递增区间；如果nums[low]<nums[mid]，则[low, mid]一定为左侧单调递增区间。
   
 
-###### 4.2.2 backtrack
+###### backtrack
 
 - backtrack本质上是一种dfs，不同之处在于**dfs通常解决可达性问题，到出口了直接返回；backtrack通常解决排列组合问题，需保存中间结果，之后继续递归。**
 
@@ -666,7 +666,7 @@ http://www.cyc2018.xyz/
     
   
 
-###### 4.2.3 dfs
+###### dfs
 
 - 典型示例1：[单词搜索](https://leetcode-cn.com/problems/word-search/)，是二维网格的一种典型dfs题，模板十分固定，如下所示：
 
@@ -707,7 +707,7 @@ http://www.cyc2018.xyz/
   - 这种问题需要注意的点在于visited数组的处理和控制return。比如：[剑指 Offer 13. 机器人的运动范围](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/)，和上题细节不太一样
 
 
-###### 4.2.4 bfs
+###### bfs
 
 - 与dfs区别只是搜索方式不一样：[岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
 
@@ -738,9 +738,9 @@ http://www.cyc2018.xyz/
 
   
 
-##### 4.3 动态规划
+##### 动态规划
 
-###### 4.3.0 简介
+###### 简介
 
 - 动态规划问题需满足以下条件：
 
@@ -752,7 +752,7 @@ http://www.cyc2018.xyz/
 
   - 消除子问题的重叠性：动态规划将指数复杂度降维到多项式复杂度，是因为消除了很多重复的求解的子问题。这些子问题的结果往往需要一个中间数组保存，相当于是以空间换时间。
 
-###### 4.3.1 数组
+###### 数组
 
 - 经典问题1：[最大子数组和](https://leetcode-cn.com/problems/maximum-subarray/)
 
@@ -788,13 +788,13 @@ http://www.cyc2018.xyz/
   - [买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)：只能买卖一次。跟最大子数组和差不多，区别是一个是preSum，这个是preMin。
 
 
-###### 4.3.2 矩阵
+###### 矩阵
 
 - 矩阵部分的动态规划题往往是二维的。一些题目为二维网格只能向右或者向下移动，不难；更为典型的题目是[编辑距离](https://leetcode-cn.com/problems/edit-distance/)或者[最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
 
 ​		
 
-###### 4.3.3 HashMap
+###### HashMap
 
 ​		使用数组或者矩阵的dp题目是比较容易理解的，然而还有一些题目使用HashMap来进行dp。
 

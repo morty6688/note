@@ -1,6 +1,6 @@
 ### 配置
 
-#### 1. 基本配置
+#### 基本配置
 
 1. 设置默认用户
 
@@ -43,7 +43,7 @@ lsb_release -a
 uname -a
 ```
 
-#### 2. 安装genie以使用systemd
+#### 安装genie以使用systemd
 
 1. ##### 安装：https://github.com/arkane-systems/genie
 
@@ -87,7 +87,7 @@ uname -a
      
      
 
-#### 3. 中间件安装
+#### 中间件安装
 
 1. ##### ~~kafka安装及启动~~（建议使用docker）
 

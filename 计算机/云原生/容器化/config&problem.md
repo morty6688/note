@@ -1,6 +1,6 @@
 ### 配置
 
-#### 1. docker，k8s，helm 安装
+#### docker，k8s，helm 安装
 
 - win10安装步骤：
 
@@ -46,11 +46,11 @@
       echo 'complete -F __start_kubectl k' >>~/.zshrc
       ```
 
-#### 2. 中间件
+#### 中间件
 
-##### 2.1 kafka
+##### kafka
 
-###### 2.1.1 docker部署
+###### docker部署
 
 1. [docker-compose.yml](./resources/kafka/docker-compose.yml)
 
@@ -101,9 +101,9 @@
      docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic quickstart --from-beginning
      ```
 
-##### 2.2 redis
+##### redis
 
-###### 2.2.1 docker部署
+###### docker部署
 
 1. ```
    docker run -id --restart=always --privileged=true --name=redis -p 6379:6379 redis:6.0 --requirepass "redis"
@@ -115,9 +115,9 @@
    
      
 
-##### 2.3 ES
+##### ES
 
-###### 2.3.1 docker部署
+###### docker部署
 
 1. ```
    docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d elasticsearch:7.2.0
@@ -149,9 +149,9 @@
 
    - 简单示例（在idea中打开）：[es-demo.http](./resources/es/es-demo.http)
 
-##### 2.4 zk
+##### zk
 
-###### 2.4.1 docker部署
+###### docker部署
 
 1. ```
    docker run -d --name zk -p 2181:2181 zookeeper:3.5.8
@@ -166,9 +166,9 @@
 
 ### 问题
 
-#### 1. docker
+#### docker
 
-##### 1.1 安装docker desktop里的k8s无限starting问题：
+##### 安装docker desktop里的k8s无限starting问题：
 
 - - 按照k8s-for-docker-desktop里的解决，删除pki文件夹
   - 如果hosts无法写入，只能重启
