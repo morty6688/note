@@ -24,7 +24,7 @@
     PROMPT_COMMAND='history -a'
     ```
 
-  
+- 双账号配置：https://zhuanlan.zhihu.com/p/423007454
 
-  
+- 
 

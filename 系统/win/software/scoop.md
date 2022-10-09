@@ -17,13 +17,19 @@ iwr -useb get.scoop.sh | iex
 # .zshrc里添加scoop别名
 alias s='scoop'
 alias sup='scoop update'
-alias ss='scoop status'
+alias ss='scoop update && scoop status'
+alias sl='scoop list'
+alias se='scoop serach'
+alias si='scoop install'
+alias sui='scoop uninstall'
+alias scu='scoop cleanup'
 
 scoop bucket add java
 scoop bucket add main
 scoop bucket add extras
 scoop bucket add dorado
 scoop bucket add ash258.ash258
+scoop bucket add sushi https://github.com/kidonng/sushi
 ```
 
 #### 安装 aria2
@@ -95,7 +101,9 @@ scoop info openjdk
 
 ### 开发工具安装
 
-#### java
+#### 语言
+
+##### java
 
 ```
 scoop install git
@@ -108,14 +116,14 @@ scoop install git
 ​		其他关于git的问题参考该文件：[git配置与问题记录](../../general%20tools/git/config&problem.md)
 
 ```
-scoop install openjdk17
+scoop install openjdk
 ```
 
 ```
 scoop install maven
 ```
 
-- 换源：
+- 换源（~/.m2）：
 
 ​	https://maven.aliyun.com/
 
@@ -131,13 +139,56 @@ scoop install maven
   </mirror>
   ```
 
-#### python
-
 ```
-scoop install python
+si gradle
 ```
 
-使用如下命令代替 pip 命令，以解决 Fatal error in launcher: Unable to create process using '"'的问题：
+- 换源（~/.gradle）：
+
+​	[init.gradle](resources/init.gradle)
+
+##### python
+
+- 使用管理员权限安装anaconda（配合git bash还是有点问题）：
+
+```
+scoop install extras/anaconda3
+```
+
+然后打开anaconda prompt（使用zsh问题还是有点多）：
+
+```
+conda init zsh
+```
+
+然后改一下.zshrc，注掉自动生成的eval语句：
+
+```
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# eval "$('/C/Users/lijian/scoop/apps/anaconda3/2022.05/Scripts/conda.exe' 'shell.zsh' 'hook')"
+. /C/Users/lijian/scoop/apps/anaconda3/2022.05/etc/profile.d/conda.sh
+# <<< conda initialize <<<
+```
+
+添加一个系统环境变量：
+
+```
+PYTHONIOENCODING -> utf_8_sig
+```
+
+修改conda.sh如下：
+
+
+
+然后运行
+
+```
+conda config --set auto_activate_base false
+```
+
+- 使用如下命令代替 pip 命令，以解决 Fatal error in launcher: Unable to create process using '"'的问题：
+
 
 ```
 python -m pip
@@ -160,7 +211,7 @@ python -m pip config set global.index-url http://pypi.douban.com/simple/
 
 安装后请运行install-pep-514.reg
 
-#### go
+##### go
 
 ```
 scoop install go
@@ -178,55 +229,15 @@ go env -w GOPROXY=https://goproxy.io,direct
 go env | grep GOPROXY
 ```
 
-#### mysql（建议用docker）
+##### js
 
 ```
-scoop install mysql
+ si nodejs
 ```
 
-```powershell(管理员)
-# 注册为服务
-mysqld --install MySQL
-# 删除服务
-mysqld -remove MySQL
-# 启动服务
-net start MySQL
-# 停止服务
-net stop MySQL
-```
+#### 环境
 
-```
-# 修改密码
-mysqladmin -uroot -p password
-```
-
-```
-# 关闭计划任务
-控制面板-搜索计划任务-MySQL-Installer-先导出后删除
-```
-
-#### zookeeper（建议用docker）
-
-```
- scoop install zookeeper
-```
-
-启动：
-
-```
-# 启动zookeeper，无需start，直接运行
-zkserver
-# 启动客户端
-zkcli
-# 创建节点
-create /node value
-# 获取节点的值
-get /node
-# 设置节点的值
-set /node newValue
-# 删除节点
-delete /node
-```
+数据库及中间件见[docker_env](../../general%20tools/docker_desktop/docker_env.md)
 
 ### 常用软件安装
 
@@ -266,6 +277,12 @@ delete /node
   ```
 
   - 勾选打开上次的文件，设置 Esc 键为选择文本快捷键
+  
+- ```
+  si clash-for-windows
+  ```
+  
+  - 一些uwp应用比如微软商店可能会打不开，需要添加`UWP Loopback`。
 
 #### 图像影音
 
@@ -294,19 +311,30 @@ delete /node
   ```
 
 - mpv：
-  
-   ```
+
+  ```
   scoop install mpv
   scoop install yt-dlp
   ```
-  
+
   - 后续设置：https://bbs.acgrip.com/thread-7443-1-1.html
-  
+
   icaros：使用管理员模式启动
-  
+
   ```
   scoop install icaros-np
   ```
+
+- potplayer：（参考：https://zhuanlan.zhihu.com/p/33615747，配置真是麻烦，最后画质提升了一丢丢）
+
+   ```
+   si potplayer
+   si lavfilters
+   si madvr
+   si xysubfilter
+   ```
+
+   
 
 #### 编程相关
 
@@ -318,7 +346,7 @@ delete /node
   scoop install typora
   ```
 
-  - [typora配置](typora.md)
+  - [typora配置](../../general%20tools/typora.md)
   
 - ```
   scoop install filezilla
@@ -355,12 +383,11 @@ delete /node
 - 暂未用 scoop
   - steam
   - mouseinc
-  - v2rayn
   - chrome
   - vscode
   - idea
   - kodi
-  - potplayer
+  - Logi Options+
   - docker-desktop
   - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
     - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
@@ -374,7 +401,6 @@ delete /node
   - pico 串流助手
   - 115
   - pdf 补丁丁
-  - uu加速器，一开始可以
 
 ## 问题
 

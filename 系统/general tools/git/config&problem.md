@@ -75,6 +75,13 @@ cat /etc/shells
 chsh -s /bin/zsh
 ```
 
+- git alias
+
+```
+alias g='git'
+alias gc='git clone'
+```
+
 
 
 

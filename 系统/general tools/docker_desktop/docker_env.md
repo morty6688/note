@@ -46,13 +46,55 @@
       echo 'complete -F __start_kubectl k' >>~/.zshrc
       ```
 
+#### 数据库
+
+##### mysql
+
+1. ```
+   docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysql mysql
+   ```
+
+   - ```
+     mysql -h localhost -u root -p
+     ```
+
+     ```
+     create database test
+     ```
+
+     使用`show databases`查看全部数据库，`use test`切换到test数据库，`show tables`查看全部表
+
+##### pg
+
+1. ```
+   docker run --name pg -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
+   ```
+
+   - ```
+     psql -h localhost -U postgres -W
+     ```
+
+     ```
+     CREATE DATABASE test;
+     ```
+
+     使用`\l`查看全部数据库，`\c test`切换到test数据库，`\dt`查看全部表
+
+##### redis
+
+1. ```
+   docker run -id --restart=always --privileged=true --name=redis -p 6379:6379 redis --requirepass "redis"
+   ```
+
+   - ```
+     scoop install another-redis-desktop-manager
+     ```
+
 #### 中间件
 
 ##### kafka
 
-###### docker部署
-
-1. [docker-compose.yml](./resources/kafka/docker-compose.yml)
+1. [docker-compose.yml](../resources/kafka/docker-compose.yml)
 
    - 在该文件目录运行如下第一条命令即可完成部署，可以通过java或其他客户端直接访问localhost:9092；运行第二条命令即可停止kafka
 
@@ -101,23 +143,7 @@
      docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic quickstart --from-beginning
      ```
 
-##### redis
-
-###### docker部署
-
-1. ```
-   docker run -id --restart=always --privileged=true --name=redis -p 6379:6379 redis:6.0 --requirepass "redis"
-   ```
-   
-   - ```
-     scoop install another-redis-desktop-manager
-     ```
-   
-     
-
 ##### ES
-
-###### docker部署
 
 1. ```
    docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d elasticsearch:7.2.0
@@ -147,11 +173,9 @@
      docker run --name kibana --link=elasticsearch:test  -p 5601:5601 -d kibana:7.2.0
      ```
 
-   - 简单示例（在idea中打开）：[es-demo.http](./resources/es/es-demo.http)
+   - 简单示例（在idea中打开）：[es-demo.http](../resources/es/es-demo.http)
 
 ##### zk
-
-###### docker部署
 
 1. ```
    docker run -d --name zk -p 2181:2181 zookeeper:3.5.8
