@@ -145,7 +145,7 @@ si gradle
 
 - 换源（~/.gradle）：
 
-​	[init.gradle](resources/init.gradle)
+​	[gradle.properties](resources/gradle.properties)
 
 ##### python
 
