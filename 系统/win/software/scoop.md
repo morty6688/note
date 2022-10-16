@@ -55,14 +55,6 @@ scoop config rm proxy
 scoop update
 ```
 
-#### 换源（不生效，待完善）
-
-```
-scoop config SCOOP_REPO https://gitee.com/squallliu/scoop
-scoop config rm SCOOP_REPO
-scoop update
-```
-
 #### 更新
 
 ```
@@ -149,43 +141,32 @@ si gradle
 
 ##### python
 
-- 使用管理员权限安装anaconda（配合git bash还是有点问题）：
+- 使用管理员权限安装anaconda：
 
 ```
 scoop install extras/anaconda3
 ```
 
-然后打开anaconda prompt（使用zsh问题还是有点多）：
+然后初始化（win上git_bash+zsh使用conda命令行有很多bug，建议使用powershell）：
 
 ```
-conda init zsh
+conda init
 ```
 
-然后改一下.zshrc，注掉自动生成的eval语句：
+conda换源（~/.condarc)：
 
 ```
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# eval "$('/C/Users/lijian/scoop/apps/anaconda3/2022.05/Scripts/conda.exe' 'shell.zsh' 'hook')"
-. /C/Users/lijian/scoop/apps/anaconda3/2022.05/etc/profile.d/conda.sh
-# <<< conda initialize <<<
+channels:
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+show_channel_urls: true
+auto_activate_base: false
+report_errors: true
 ```
-
-添加一个系统环境变量：
-
-```
-PYTHONIOENCODING -> utf_8_sig
-```
-
-修改conda.sh如下：
-
-
-
-然后运行
-
-```
-conda config --set auto_activate_base false
-```
+然后可以用idea创建conda环境
 
 - 使用如下命令代替 pip 命令，以解决 Fatal error in launcher: Unable to create process using '"'的问题：
 
@@ -194,22 +175,27 @@ conda config --set auto_activate_base false
 python -m pip
 ```
 
-换源：
+pip代理（win在用户目录下新建pip/pip.ini文件）：
 
 ```
-# 清华源
-python -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-
-# 或：
-# 阿里源
-python -m pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
-# 腾讯源
-python -m pip config set global.index-url http://mirrors.cloud.tencent.com/pypi/simple
-# 豆瓣源
-python -m pip config set global.index-url http://pypi.douban.com/simple/
+[global]
+proxy     = 127.0.0.1:10809 
+[install]
 ```
 
-安装后请运行install-pep-514.reg
+- cuda和cuDNN（版本要匹配）
+
+```
+si cuda
+```
+
+```
+scoop bucket add cudnn-versions https://github.com/shmishtopher/cudnn-versions
+si cuDNNv8.6.0-CUDAv11.8-windows
+# 如果安装不成功，将cuDNN压缩包中的bin、include、lib目录下的文件解压到cuda文件夹下的对应目录
+# 然后执行下面命令删掉压缩包
+sui cuDNNv8.6.0-CUDAv11.8-windows
+```
 
 ##### go
 
