@@ -52,15 +52,15 @@
 
 ## 软件安装与设置
 
-- 不建议使用brew
+- 以下为不建议使用brew的软件：
 
   - 搜狗输入法
 
-  - Logitech options
+  - Logitech options+
 
   - idea
 
-- app store:
+- app store里安装的软件：
 
   - iRightMouse（付费。。。说实话功能有点少）
 
@@ -68,109 +68,128 @@
 
   - MyZip，右键菜单压缩和解压（感觉还是有些bug，没办法mac上bandizip收费）
 
-- ```
-  brew install --cask 1password
-  ```
+- 使用brew安装的软件：
 
-- ```
-  brew install --cask scroll-reverser
-  ```
-
-  - Scrolling Axes：勾选Reverse Vertical和Reverse Horizontal
-  - Scrolling Devices：勾选Reverse Trackpad
-  
-- ```
-  brew install --cask typora
-  ```
-
-- ```
-  brew install --cask clipy
-  ```
-
-  - 多重剪贴板，可以导入导出
-
-- ```
-  brew install --cask macgesture
-  ```
-
-  - 鼠标手势(触摸板也可以识别)，下为导入导出语句
-
-    ```
-    defaults import com.codefalling.MacGesture backup.list
-    defaults export com.codefalling.MacGesture backup.plist
+  - ```
+    brew install --cask 1password
     ```
 
-  - 手势示例：[backup](resources/backup.plist)
-  
-- ```
-  brew install deepl
-  ```
+  - ```
+    brew install --cask scroll-reverser
+    ```
+
+    - Scrolling Axes：勾选Reverse Vertical和Reverse Horizontal
+    - Scrolling Devices：勾选Reverse Trackpad
+
+  - ```
+    brew install --cask typora
+    ```
+
+  - ```
+    brew install --cask clipy
+    ```
+
+    - 多重剪贴板，可以导入导出
+
+  - ```
+    brew install --cask macgesture
+    ```
+
+    - 鼠标手势(触摸板也可以识别)，下为导入导出语句
+
+      ```
+      defaults import com.codefalling.MacGesture backup.list
+      defaults export com.codefalling.MacGesture backup.plist
+      ```
+
+    - 手势示例：[backup](resources/backup.plist)
+
+  - ```
+    brew install deepl
+    ```
 
 
-- ```
-  brew install --cask xnviewmp
-  ```
+  - ```
+    brew install --cask xnviewmp
+    ```
 
-  - Tools > Settings > General -- General tab -- Mode when starting with a file -- Normal.
-
-- ```
-  brew install --cask rectangle
-  ```
-  
-  - move to last/next monitor: ctrl+option+left/right
-  
-- ```
-  brew install --cask hiddenbar
-  ```
-  
-  - sudo xattr -r -d com.apple.quarantine /Applications/Hidden\ Bar.app
-
-- ```
-  brew install java11
-  ```
-  
-  - sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
-
-- ```
-  brew install git
-  ```
-  
-- ```
-  brew install libpq
-  ```
-
-  - 用于pg_dump，位置在/usr/local/opt/libpq/bin下面
+    - Tools > Settings > General -- General tab -- Mode when starting with a file -- Normal.
 
 
-- ```
-  brew install --cask iterm2
-  ```
 
-  - Mac自带zsh，安装powerlevel10k
+  - ```
+    brew install --cask rectangle
+    ```
+    
+    - move to last/next monitor: ctrl+option+left/right
+    
 
-  - Font size: 15，window: 100*25，光标：竖线
 
-- ```
-  brew install --cask docker
-  ```
+  - ```
+    brew install --cask hiddenbar
+    ```
+    
+    - sudo xattr -r -d com.apple.quarantine /Applications/Hidden\ Bar.app
 
-  - Enable k8s
 
-- ```
-  brew install --cask visual-studio-code
-  ```
 
-  - 开启同步
+  - ```
+    brew install java11
+    ```
+    
+    - sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
 
-- ```
-  brew install --cask redisinsight
-  ```
 
-- ```
-  brew install wget
-  ```
 
-  
+  - ```
+    brew install git
+    ```
+    
+
+
+  - ```
+    brew install libpq
+    ```
+
+    - 用于pg_dump，位置在/usr/local/opt/libpq/bin下面
+
+
+  - ```
+    brew install --cask iterm2
+    ```
+
+    - Mac自带zsh，安装powerlevel10k
+
+    - Font size: 15，window: 100*25，光标：竖线
+
+
+
+  - ```
+    brew install --cask docker
+    ```
+
+    - Enable k8s
+
+
+
+  - ```
+    brew install --cask visual-studio-code
+    ```
+
+    - 开启同步
+
+
+
+  - ```
+    brew install --cask redisinsight
+    ```
+
+
+
+  - ```
+    brew install wget
+    ```
+
 
 
 - 暂时未用

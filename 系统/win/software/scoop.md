@@ -320,7 +320,6 @@ go env | grep GOPROXY
    si xysubfilter
    ```
 
-   
 
 #### 编程相关
 
@@ -350,6 +349,10 @@ go env | grep GOPROXY
 
 - ```
   scoop install dismplusplus
+  ```
+
+- ```
+  si hasher
   ```
 
 #### 游戏相关
