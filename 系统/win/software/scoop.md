@@ -235,7 +235,9 @@ go env | grep GOPROXY
   scoop install everything
   ```
 
-  - 设置中选中开机自启动，everything服务，去掉以管理员模式运行；设置显示窗口快捷键（Alt+F），并集成到资源管理器右键菜单
+  - 设置中选中开机自启动，everything服务，去掉以管理员模式运行；
+  - 设置显示窗口快捷键（Alt+F），并集成到资源管理器右键菜单
+  - 勾选Tools | Options | Indexes -> Index folder size
 
 - ```
   scoop install trafficmonitor
@@ -269,6 +271,7 @@ go env | grep GOPROXY
   ```
   
   - 一些uwp应用比如微软商店可能会打不开，需要添加`UWP Loopback`。
+  - `allow LAN`功能开启后，使用`ipconfig`命令可以查看192.168开头的局域网地址，可以让局域网内其他设备使用代理。比如给switch添加代理，修改其网络设置将上述局域网地址和代理端口加上即可。
 
 #### 图像影音
 
@@ -354,6 +357,12 @@ go env | grep GOPROXY
 - ```
   si hasher
   ```
+
+- ```
+  si translucenttb
+  ```
+
+  - 可以用来跟wallpaper engine一起用
 
 #### 游戏相关
 

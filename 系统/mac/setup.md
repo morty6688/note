@@ -23,7 +23,7 @@
 
     - Shortcuts
 
-      - Input Sources: select the previous input source快捷键改为option+space
+      - Input Sources: 取消勾选Select the previous input source和Select next source in Input menu，用搜狗输入法就够了
 
       - Mission Control: Show Desktop(取消勾选f11显示桌面)
 
@@ -49,6 +49,13 @@
 - 其他设置
 
   - trash添加data added一列表示删除日期
+  
+  - 使用touch id代替命令行输入密码：https://dev.to/equiman/how-to-use-macos-s-touch-id-on-terminal-5fhg
+  
+    - ```
+      code /etc/pam.d/sudo
+      auth sufficient pam_tid.so
+      ```
 
 ## 软件安装与设置
 
@@ -71,89 +78,86 @@
 - 使用brew安装的软件：
 
   - ```
+    alias ls='ls --color=auto'
+    alias b='brew'
+    alias bi='brew install'
+    alias bui='brew uninstall'
+    alias bs='brew search'
+    alias bl='brew list'
+    ```
+  
+  - ```
     brew install --cask 1password
     ```
-
+  
   - ```
     brew install --cask scroll-reverser
     ```
-
+  
     - Scrolling Axes：勾选Reverse Vertical和Reverse Horizontal
     - Scrolling Devices：勾选Reverse Trackpad
-
+    - start at login
+    
   - ```
     brew install --cask typora
     ```
-
+  
   - ```
     brew install --cask clipy
     ```
-
+  
     - 多重剪贴板，可以导入导出
-
+  
   - ```
     brew install --cask macgesture
     ```
-
+  
     - 鼠标手势(触摸板也可以识别)，下为导入导出语句
-
+  
       ```
       defaults import com.codefalling.MacGesture backup.list
       defaults export com.codefalling.MacGesture backup.plist
       ```
-
+  
     - 手势示例：[backup](resources/backup.plist)
-
+  
   - ```
     brew install deepl
     ```
-
-
+  
   - ```
     brew install --cask xnviewmp
     ```
-
+  
     - Tools > Settings > General -- General tab -- Mode when starting with a file -- Normal.
-
-
-
+  
   - ```
-    brew install --cask rectangle
+    brew install --cask tiles
     ```
-    
-    - move to last/next monitor: ctrl+option+left/right
-    
-
-
+  
   - ```
     brew install --cask hiddenbar
     ```
-    
+      
     - sudo xattr -r -d com.apple.quarantine /Applications/Hidden\ Bar.app
-
-
-
+    - 取消勾选show prefrences on launch
+  
   - ```
     brew install java11
     ```
     
     - sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
-
-
-
+  
   - ```
     brew install git
     ```
-    
-
-
+  
   - ```
     brew install libpq
     ```
 
     - 用于pg_dump，位置在/usr/local/opt/libpq/bin下面
-
-
+  
   - ```
     brew install --cask iterm2
     ```
@@ -162,34 +166,26 @@
 
     - Font size: 15，window: 100*25，光标：竖线
 
-
-
   - ```
     brew install --cask docker
     ```
-
+  
     - Enable k8s
-
-
-
+  
   - ```
     brew install --cask visual-studio-code
     ```
-
+  
     - 开启同步
-
-
-
+  
   - ```
     brew install --cask redisinsight
     ```
-
-
-
+  
   - ```
     brew install wget
     ```
-
+  
 
 
 - 暂时未用
