@@ -218,8 +218,14 @@ go env | grep GOPROXY
 ##### js
 
 ```
- si nodejs
+si nodejs
+si pnpm
+pnpm setup
+# 换源
+pnpm config set registry https://registry.npmmirror.com/
 ```
+
+- 注：7.0版本pnpm有环境变量bug（https://github.com/pnpm/pnpm/issues/4658#issuecomment-1304421148）
 
 #### 环境
 
@@ -343,6 +349,11 @@ go env | grep GOPROXY
 - ```
   scoop install switchhosts
   ```
+  
+- ```
+  si rapidee
+  ```
+
 
 #### 系统相关
 

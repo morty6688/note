@@ -48,7 +48,26 @@
 
 - 其他设置
 
+  
+  - 输入法问题：
+  
+  
+      - 开启英文输入法长按连续输入，需要重启（参考https://zihengcat.github.io/2018/08/02/simple-ways-to-set-macos-consecutive-input/）：
+  
+        ```
+        defaults write -g ApplePressAndHoldEnabled -bool false
+        ```
+  
+  
+  
+      - keyboardholder可以固定输入法：
+  
+        ```
+        bi keyboardholder
+        ```
+  
   - trash添加data added一列表示删除日期
+  
   
   - 使用touch id代替命令行输入密码：https://dev.to/equiman/how-to-use-macos-s-touch-id-on-terminal-5fhg
   
@@ -138,7 +157,7 @@
   - ```
     brew install --cask hiddenbar
     ```
-      
+    
     - sudo xattr -r -d com.apple.quarantine /Applications/Hidden\ Bar.app
     - 取消勾选show prefrences on launch
   
