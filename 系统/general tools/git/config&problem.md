@@ -16,12 +16,14 @@ git config --local user.name lijian12345
 git config --local user.email 
 git config --local --unset user.name
 git config --local --unset user.email
+# 使用vscode作为默认编辑器
+git config --global core.editor "code --wait"
 ```
 
 2. 代理
 
 ```bash
-git config --global http.proxy 127.0.0.1:10809
+git config --global http.proxy 127.0.0.1:1130
 ```
 
 3. 配置ssh-key，将生成的.pub公钥添加到目标仓库

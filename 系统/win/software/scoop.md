@@ -44,7 +44,7 @@ scoop config aria2-min-split-size 1M
 #### 代理
 
 ```
-scoop config proxy 127.0.0.1:10809
+scoop config proxy 127.0.0.1:1130
 ```
 
 ```
@@ -179,7 +179,7 @@ pip代理（win在用户目录下新建pip/pip.ini文件）：
 
 ```
 [global]
-proxy     = 127.0.0.1:10809 
+proxy     = 127.0.0.1:1130 
 [install]
 ```
 
@@ -225,8 +225,6 @@ pnpm setup
 pnpm config set registry https://registry.npmmirror.com/
 ```
 
-- 注：7.0版本pnpm有环境变量bug（https://github.com/pnpm/pnpm/issues/4658#issuecomment-1304421148）
-
 #### 环境
 
 数据库及中间件见[docker_env](../../general%20tools/docker_desktop/docker_env.md)
@@ -249,10 +247,10 @@ pnpm config set registry https://registry.npmmirror.com/
   scoop install trafficmonitor
   ```
 
-- autohotkey2（需要手动安装）：
+- autohotkey：
 
   ```
-  scoop install autohotkey2
+  scoop install autohotkey
   ```
 
   - 使用如下设置，并将快捷方式放到Windows启动目录：
@@ -276,8 +274,8 @@ pnpm config set registry https://registry.npmmirror.com/
   si clash-for-windows
   ```
   
-  - 一些uwp应用比如微软商店可能会打不开，需要添加`UWP Loopback`。
-  - `allow LAN`功能开启后，使用`ipconfig`命令可以查看192.168开头的局域网地址，可以让局域网内其他设备使用代理。比如给switch添加代理，修改其网络设置将上述局域网地址和代理端口加上即可。
+  - 一些uwp应用比如微软商店可能会打不开，需要添加`UWP Loopback`，例如`你的账户`这个程序，不添加到loopback可能会造成登录异常。
+  - `allow LAN`功能开启后，点击旁边的图标查看192.168开头的局域网地址，可以让局域网内其他设备使用代理。比如给switch添加代理，修改其网络设置将上述局域网地址和代理端口加上即可。
 
 #### 图像影音
 
@@ -369,12 +367,6 @@ pnpm config set registry https://registry.npmmirror.com/
   si hasher
   ```
 
-- ```
-  si translucenttb
-  ```
-
-  - 可以用来跟wallpaper engine一起用
-
 #### 游戏相关
 
 - ```
@@ -400,6 +392,8 @@ pnpm config set registry https://registry.npmmirror.com/
   - docker-desktop
   - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
     - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
+  - translucenttb：可以用来跟wallpaper engine一起用
+  - AnyTXT
 - 付费：
 
   - displayfusion

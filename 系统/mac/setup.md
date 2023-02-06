@@ -50,15 +50,12 @@
 
   
   - 输入法问题：
-  
-  
+
       - 开启英文输入法长按连续输入，需要重启（参考https://zihengcat.github.io/2018/08/02/simple-ways-to-set-macos-consecutive-input/）：
   
         ```
         defaults write -g ApplePressAndHoldEnabled -bool false
         ```
-  
-  
   
       - keyboardholder可以固定输入法：
   
@@ -89,11 +86,8 @@
 - app store里安装的软件：
 
   - iRightMouse（付费。。。说实话功能有点少）
-
   - Text Scanner（ocr)
-
-  - MyZip，右键菜单压缩和解压（感觉还是有些bug，没办法mac上bandizip收费）
-
+  
 - 使用brew安装的软件：
 
   - ```
@@ -116,7 +110,7 @@
     - Scrolling Axes：勾选Reverse Vertical和Reverse Horizontal
     - Scrolling Devices：勾选Reverse Trackpad
     - start at login
-    
+  
   - ```
     brew install --cask typora
     ```
@@ -157,14 +151,14 @@
   - ```
     brew install --cask hiddenbar
     ```
-    
+  
     - sudo xattr -r -d com.apple.quarantine /Applications/Hidden\ Bar.app
     - 取消勾选show prefrences on launch
   
   - ```
     brew install java11
     ```
-    
+  
     - sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
   
   - ```
@@ -203,6 +197,12 @@
   
   - ```
     brew install wget
+    ```
+  
+  - 解压缩：
+  
+    ```
+    bi keka
     ```
   
 
