@@ -57,7 +57,7 @@
         defaults write -g ApplePressAndHoldEnabled -bool false
         ```
   
-      - keyboardholder可以固定输入法：
+      - keyboardholder可以为不同的应用固定输入法：
   
         ```
         bi keyboardholder

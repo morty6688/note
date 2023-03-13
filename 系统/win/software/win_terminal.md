@@ -1,72 +1,54 @@
-- 添加右键菜单（**已经自带，不需要自己再次设置**）
+1. 设置git bash为默认
 
-  将以下ico文件放到C:\icons\terminal.ico目录，运行如下脚本，
-  
-  [Add open Windows terminal here into right-click context menu.bat](resources/win-terminal-here.bat)
-  
-  [terminal.ico](resources/terminal.ico)
-  
-- 设置git bash为默认
-  - 先打开Terminal，添加新配置文件，选择Git Bash安装目录下的bin目录中的bash.exe。
-  - 添加主题，然后选为默认
+  - 先打开Terminal，随便复制一个配置文件，命名为bash
 
-- bash主题
+  - 然后将下面的配置复制过去，覆盖除了guid和name的部分
 
-  - profile
 
-    ```
-    "defaults": 
+  ```
+  // Git Bash亚克力半透明主题，font项为了支持powershell10k的字体
+  {
+    "commandline": "C:\\Users\\lijian\\scoop\\apps\\git\\current\\bin\\bash.exe -i -l",
+    "startingDirectory": "D:\\projs",
+    "font": 
     {
-        "font": 
-        {
-            "face": "MesloLGS NF",
-            "size": 12
-        }
+      "face": "MesloLGS NF",
+      "size": 12.0
     },
-    ```
-  
+    "acrylicOpacity": 0.75,
+    "closeOnExit": "graceful",
+    "colorScheme": "Campbell",
+    "cursorColor": "#FFFFFF",
+    "cursorShape": "bar",
+    "hidden": false,
+    "historySize": 9001,
+    "padding": "0, 0, 0, 0",
+    "snapOnInput": true,
+    "useAcrylic": true
+  }
+  ```
+
+  - 然后把bash配置文件改成默认
+  - 将窗口大小改成100*25
+  - 把cmd这种没什么用的配置文件隐藏掉
+
+2. 添加右键菜单
+
+  https://github.com/grimux/windowsterminal-shell-scoop
+
+3. wsl设置
+
   - 亚克力半透明
-  
+
     ```json
     // WSL2
     {
-      "acrylicOpacity": 0.75,
-      "closeOnExit": "graceful",
-      "colorScheme": "Campbell",
-      "cursorColor": "#FFFFFF",
-      "cursorShape": "bar",
-      "hidden": false,
-      "historySize": 9001,
-      "padding": "0, 0, 0, 0",
-      "snapOnInput": true,
-      "useAcrylic": true,
-      "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-      "name": "Ubuntu",
       "source": "Windows.Terminal.Wsl",
       "startingDirectory": "\\\\wsl$\\Ubuntu\\home\\lijian"
+      // 后面的跟bash一样
     }
     ```
-  
-    ```json
-    // Git Bash
-    {
-      "commandline": "C:\\Users\\lijian\\scoop\\apps\\git\\current\\bin\\bash.exe -i -l",
-      "guid": "{399574cd-94a3-4fe2-bb49-4d6e2b3ec624}",
-      "name": "Git Bash",
-      "startingDirectory": "D:\\projs",
-      "acrylicOpacity": 0.75,
-      "closeOnExit": "graceful",
-      "colorScheme": "Campbell",
-      "cursorColor": "#FFFFFF",
-      "cursorShape": "bar",
-     
-      "hidden": false,
-      "historySize": 9001,
-      "padding": "0, 0, 0, 0",
-      "snapOnInput": true,
-      "useAcrylic": true
-    }
-    ```
-  
+
     
-  
+
+    
