@@ -8,7 +8,15 @@
 
   - 安装powerlevel10k，并在bash.bashrc中设置zsh默认
 
-  - 所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scoop cleanup清理旧版本时，需要备份[bash.bashrc](resources/bash.bashrc)文件到/etc目录，并重新安装[zsh](resources/zsh-5.8-5-x86_64.pkg.tar.zst)，即解压zsh到Git目录。
+  - 所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scoop cleanup清理旧版本时，需要备份[bash.bashrc](resources/bash.bashrc)文件到/etc目录，并重新安装[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)，即解压zsh到Git目录。
+
+  - .zshrc中设置别名
+
+    ```
+    alias g='git'
+    alias gc='git clone'
+    alias gp='git pull'
+    ```
 
 - 删除右键菜单，建议用win terminal
 

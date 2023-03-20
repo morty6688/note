@@ -28,8 +28,9 @@ scoop install git windows-terminal powershell typora clash-for-windows
 
 #### 添加仓库+设置别名
 
+- ~/.zshrc里添加scoop别名
+
 ```
-# .zshrc里添加scoop别名
 alias s='scoop'
 alias sup='scoop update'
 alias ss='scoop update && scoop status'
@@ -38,7 +39,11 @@ alias se='scoop search'
 alias si='scoop install'
 alias sui='scoop uninstall'
 alias scu='scoop cleanup'
+```
 
+- 添加仓库
+
+```
 s bucket add java
 s bucket add main
 s bucket add versions
@@ -224,14 +229,17 @@ pnpm config set registry https://registry.npmmirror.com/
 #### 日常使用
 
 ```
-si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord
+si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord extras/wechat
 ```
 
-- everything：
+- everything->工具->选项：
 
-  - 设置中选中开机自启动，everything服务，去掉以管理员模式运行；
-  - 设置显示窗口快捷键（Alt+F），并集成到资源管理器右键菜单
-  - 勾选Tools | Options | Indexes -> Index folder size
+  - 常规->选中随系统自启动，everything服务，集成到右键菜单；去掉以管理员模式运行；
+  - 界面->选中单击托盘图标打开搜索窗口，自动聚焦于输入框
+  - 结果->选中搜索关键词为空时不显示搜索结果，双击路径列打开目录
+  - 视图->选中高亮光标经过行，显示大小等等
+  - 快捷键->显示窗口快捷键（Alt+F）
+  - 索引->选中索引文件夹大小
 
 - autohotkey：
 
@@ -251,7 +259,7 @@ si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discor
 #### 图像影音
 
 ```
-si sharex imageglass screenoff ffmpeg screentogif neteasemusic mpv yt-dlp icaros-np potplayer
+si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dlp icaros-np potplayer extras/kodi
 ```
 
 - mpv：
@@ -260,7 +268,7 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic mpv yt-dlp icaros
 
   icaros：使用管理员模式启动
 
-- potplayer提高画质：（参考：https://zhuanlan.zhihu.com/p/33615747，配置真是麻烦，最后画质提升了一丢丢，**不如不配**，而且最后的xysubfilter的manifest已经被移除）
+- ~~potplayer提高画质~~：（参考：https://zhuanlan.zhihu.com/p/33615747，配置真是麻烦，最后画质提升了一丢丢，**不如不配**，而且最后的xysubfilter的manifest已经被移除）
 
    ```
    si lavfilters madvr xysubfilter
@@ -270,7 +278,7 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic mpv yt-dlp icaros
 #### 编程相关
 
 ```
-si mobaxterm filezilla switchhosts rapidee
+si mobaxterm filezilla switchhosts rapidee jetbrains-toolbox
 ```
 
 
@@ -283,7 +291,7 @@ si rufus dismplusplus hasher trafficmonitor
 #### 游戏相关
 
 ```
-si steampp
+si steampp neteaseuu
 ```
 
 #### 国内软件
@@ -292,13 +300,11 @@ si steampp
 
 ### 暂未用 scoop
 
-- 用起来不方便或无法使用的
+- 带自动更新或无法使用的
   - steam
-  - mouseinc
   - chrome
   - vscode
-  - idea
-  - kodi
+  - idea：用jetbrains-toolbox管理
   - Logi Options+
   - docker-desktop
   - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
@@ -317,7 +323,7 @@ si steampp
   - pico 串流助手
   - 115
   - pdf 补丁丁
-  - 微信
+  - mouseinc
 
 ## 问题
 

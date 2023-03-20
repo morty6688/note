@@ -4,12 +4,14 @@
 
 - win10安装步骤：
 
-  - 安装docker desktop后参照下面repo安装k8s，使用wsl2后端
+  - (**下面内容deprecated**，现在直接使用代理启动k8s，默认wsl2后端) 
+
+    ~~安装docker desktop后参照下面repo安装k8s，使用wsl2后端~~
 
     https://github.com/AliyunContainerService/k8s-for-docker-desktop
 
     - 换源：settings -> docker engine
-
+  
       ```
       "registry-mirrors": [
           "https://docker.mirrors.ustc.edu.cn",
@@ -17,25 +19,24 @@
       ]
       ```
 
-    - 限制内存使用：
-
-      ```
-      # powershell
-      code "$env:USERPROFILE/.wslconfig"
-      
-      # 添加如下内容
-      [wsl2]
-      memory=4GB   # Limits VM memory in WSL 2 up to 4GB
-      processors=4 # Makes the WSL 2 VM use 4 virtual processors
-      
-      # 然后重启
-      ```
+  - 限制内存使用：
+  
+    ```
+    # powershell
+    code ~/.wslconfig
+    
+    # 添加如下内容
+    [wsl2]
+    memory=4GB   # Limits VM memory in WSL 2 up to 4GB
+    processors=4 # Makes the WSL 2 VM use 4 virtual processors
+    
+    # 然后重启
+    ```
   
   - 安装helm：
   
     ```
-    scoop install helm
-    scoop install lens
+    si helm lens
     ```
   
     - 开启kubectl自动补全（可能有性能问题）
