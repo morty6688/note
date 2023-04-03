@@ -211,13 +211,21 @@ go env -w GOPROXY=https://goproxy.io,direct
 go env | grep GOPROXY
 ```
 
-##### js
+##### js/ts
 
 ```
-si nodejs pnpm
+si nodejs pnpm yarn
 pnpm setup
-# 换源
-pnpm config set registry https://registry.npmmirror.com/
+
+# 代理
+npm config set proxy http://127.0.0.1:1130
+npm config set https-proxy http://127.0.0.1:1130
+
+yarn config set proxy http://127.0.0.1:1130
+yarn config set https-proxy http://127.0.0.1:1130
+
+pnpm config set proxy http://127.0.0.1:1130
+pnpm config set https-proxy http://127.0.0.1:1130
 ```
 
 #### 环境
@@ -278,7 +286,7 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 #### 编程相关
 
 ```
-si mobaxterm filezilla switchhosts rapidee jetbrains-toolbox
+si mobaxterm filezilla switchhosts rapidee jetbrains-toolbox chatgpt
 ```
 
 
@@ -306,7 +314,7 @@ si steampp neteaseuu
   - vscode
   - idea：用jetbrains-toolbox管理
   - Logi Options+
-  - docker-desktop
+  - docker-desktop：用作开发环境配置，[docker_env](../../general%20tools/docker_desktop/docker_env.md)
   - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
     - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
   - translucenttb：可以用来跟wallpaper engine一起用
@@ -319,11 +327,13 @@ si steampp neteaseuu
   - directory opus
   - quicker
 - 国内：
+  - 搜狗输入法
   - 火绒
   - pico 串流助手
   - 115
   - pdf 补丁丁
   - mouseinc
+
 
 ## 问题
 

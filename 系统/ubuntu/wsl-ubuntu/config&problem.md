@@ -1,91 +1,59 @@
 ### 配置
 
+https://github.com/microsoft/wslg
+
 #### 基本配置
 
-1. 设置默认用户
+- 设置默认用户
 
-```
-ubuntu2004 config --default-user lijian
-```
+  ```
+  ubuntu2004 config --default-user lijian
+  ```
 
-2. 添加用户并赋权：
+- 添加用户并赋权：
 
-```bash
-sudo passwd root
-adduser lijian
-su 
-passwd lijian
-adduser lijian sudo
-```
+  ```
+  sudo passwd root
+  adduser lijian
+  su 
+  passwd lijian
+  adduser lijian sudo
+  ```
 
-3. 换源（更新失败时将https换为http）：
+- 开启wslg的systemd
 
-```bash
-sudo chmod 777 /etc/apt/sources.list
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.copy
-```
+  - ```
+    sudo chmod 777 /etc
+    code /etc/wsl.conf
+    ```
 
-​	https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/
+  - 然后添加下面内容到wsl.conf
 
-4. Java:
+    ```
+    [boot]
+    systemd=true
+    ```
 
-```bash
-sudo apt install openjdk-11-jdk maven
-```
+- 换源（更新失败时将https换为http）：
 
-​	https://zhuanlan.zhihu.com/p/369912485
+  ```
+  sudo cp /etc/apt/sources.list /etc/apt/sources.list.copy
+  ```
 
-5. 端口：netstat -ap
-6. 系统：
+​		https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/
 
-```bash
-lsb_release -a
-uname -a
-```
+- 端口：
 
-#### 安装genie以使用systemd
+  ```
+  netstat -ap
+  ```
 
-1. ##### 安装：https://github.com/arkane-systems/genie
+- 系统：
 
-   - 根据微软官方文档，安装.Net Runtime & SDK
-
-   - add wsl-translinux repository
-   - 安装genie
-
-2. ##### 使用：https://github.com/arkane-systems/genie/wiki
-
-   - ```bash
-     # 启动systemd进程
-     genie -i
-     # 启动systemd进程，并进入该环境终端
-     genie -s
-     # 启动systemd进程，并执行相应的指令
-     genie -c <command>
-     ```
-
-   - 启动遇到的失败unit处理（genie -i 之后，n多叹号的处理办法）
-
-     ```bash
-     # systemd-remount-fs.service
-     sudo chown -R lijian /etc/fstab
-     # 然后删除/etc/fstab中的内容
-     
-     # multipathd.service
-     genie -s
-     systemctl mask multipathd.service
-     ```
-
-   - vscode找不到code命令：
-   
-     ```
-     code ~/.zprofile
-     # 然后在打开的文件中添加如下代码
-     code() {
-       /mnt/c/Users/lijian/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code "$@"
-     }
-     ```
-     
-     
+  ```
+  lsb_release -a
+  uname -a
+  ```
 
 #### 中间件安装
 
@@ -174,4 +142,3 @@ bin/kafka-console-consumer.sh --bootstrap-server ::1:9092 --from-beginning --top
    ```
 
    
-

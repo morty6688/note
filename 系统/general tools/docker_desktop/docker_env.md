@@ -10,14 +10,14 @@
 
     https://github.com/AliyunContainerService/k8s-for-docker-desktop
 
-    - 换源：settings -> docker engine
+  - 换源：settings -> docker engine
   
-      ```
-      "registry-mirrors": [
-          "https://docker.mirrors.ustc.edu.cn",
-          "https://registry.docker-cn.com"
-      ]
-      ```
+    ```
+    "registry-mirrors": [
+        "https://docker.mirrors.ustc.edu.cn",
+        "https://registry.docker-cn.com"
+    ]
+    ```
 
   - 限制内存使用：
   
@@ -193,8 +193,17 @@
 
 #### docker
 
-##### 安装docker desktop里的k8s无限starting问题：
+- ##### 安装docker desktop里的k8s无限starting问题：
 
-- - 按照k8s-for-docker-desktop里的解决，删除pki文件夹
+  - 按照k8s-for-docker-desktop里的解决，删除pki文件夹
+
+  - hosts文件中添加
+
+    ```
+    # Kubernetes
+    127.0.0.1 kubernetes.docker.internal
+    ```
+
   - 如果hosts无法写入，只能重启
+
 
