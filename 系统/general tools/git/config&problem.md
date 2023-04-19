@@ -1,44 +1,6 @@
 ### 配置
 
-#### 前置配置
-
-- win10安装zsh：
-
-  https://gist.github.com/fworks/af4c896c9de47d827d4caa6fd7154b6b
-
-  - 安装powerlevel10k，并在bash.bashrc中设置zsh默认
-
-  - 所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scoop cleanup清理旧版本时，需要备份[bash.bashrc](resources/bash.bashrc)文件到/etc目录，并重新安装[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)，即解压zsh到Git目录。
-
-  - .zshrc中设置别名
-
-    ```
-    alias g='git'
-    alias gc='git clone'
-    alias gp='git pull'
-    ```
-
-- 删除右键菜单，建议用win terminal
-
-  - https://blog.csdn.net/yelllowcong/article/details/77663442
-
-- bash.bashrc文件
-
-  - 别名
-
-    ```bash
-    alias python3=python
-    ```
-
-  - 历史记录 
-
-    ```bash
-    PROMPT_COMMAND='history -a'
-    ```
-
-- 双账号配置：https://zhuanlan.zhihu.com/p/423007454
-
-#### git配置
+#### 基本配置
 
 1. config命令
 
@@ -47,13 +9,9 @@ git config --list
 
 git config --global user.name lijian12345
 git config --global user.email 
-git config --global --unset user.name
-git config --global --unset user.email
 
 git config --local user.name lijian12345
 git config --local user.email 
-git config --local --unset user.name
-git config --local --unset user.email
 # 使用vscode作为默认编辑器
 git config --global core.editor "code --wait"
 ```
@@ -67,7 +25,7 @@ git config --global http.proxy 127.0.0.1:1130
 3. 配置ssh-key，将生成的.pub公钥添加到目标仓库
 
 ```
-ssh-keygen -t ed25519 -C ""
+ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
 4. 命令行显示中文
@@ -76,53 +34,64 @@ ssh-keygen -t ed25519 -C ""
 git config --global core.quotepath false
 ```
 
-5. 强制忽略和取消忽略某些文件
+#### 进阶配置
 
-```bash
-git update-index --assume-unchanged ***
-git update-index --no-assume-unchanged ***
-```
+- win10安装zsh：
+
+  https://gist.github.com/fworks/af4c896c9de47d827d4caa6fd7154b6b
+
+  - 安装powerlevel10k，在用户目录下创建[.bashrc](resources/.bashrc)文件，并设置zsh默认（目前的版本创建完这个文件之后，第一次启动会报错并生成一个.bash_profile，再次启动就一切正常
+  - **更新时注意事项**：所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scu命令清理旧版本时，需要重新安装[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)，即解压zsh到Git目录。
+  
+- 双账号配置：https://zhuanlan.zhihu.com/p/423007454
+
 #### zsh配置
 
-- 历史记录（.zshrc）
+- ~/.zshrc
 
-```bash
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=1000
-setopt SHARE_HISTORY
-```
+  ```
+  # git alias
+  alias g='git'
+  alias gc='git clone'
+  alias gp='git pull'
+  
+  # history
+  HISTFILE=~/.zsh_history
+  HISTSIZE=10000
+  SAVEHIST=1000
+  setopt SHARE_HISTORY
+  
+  # show color
+  alias ls='ls --color=auto'
+  ```
 
-- 文件夹显示颜色
+- ubuntu配置
 
-```
-alias ls='ls --color=auto'
-```
+  - powerlevel10k
 
-- powerlevel10k
+    ```
+    sudo apt install zsh
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/tools/theme/powerlevel10k
+    echo 'source ~/tools/theme/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+    zsh
+    ```
 
-```bash
-sudo apt install zsh
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/tools/theme/powerlevel10k
-echo 'source ~/tools/theme/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-zsh
-```
+  - ubuntu设置为默认
 
-- ubuntu设置为默认
-
-```bash
-cat /etc/shells
-chsh -s /bin/zsh
-```
-
-- git alias
-
-```
-alias g='git'
-alias gc='git clone'
-```
+    ```
+    cat /etc/shells
+    chsh -s /bin/zsh
+    ```
 
 
+#### 其他用法
+
+- 强制忽略和取消忽略某些文件
+
+  ```
+  git update-index --assume-unchanged ***
+  git update-index --no-assume-unchanged ***
+  ```
 
 
 ### 问题

@@ -2,16 +2,14 @@
 
 #### docker，k8s，helm 安装
 
-- win10安装步骤：
+- win10安装步骤(**下面内容deprecated**，现在直接使用代理启动k8s，默认wsl2后端) ：
 
-  - (**下面内容deprecated**，现在直接使用代理启动k8s，默认wsl2后端) 
-
-    ~~安装docker desktop后参照下面repo安装k8s，使用wsl2后端~~
+  - ~~安装docker desktop后参照下面repo安装k8s，使用wsl2后端~~
 
     https://github.com/AliyunContainerService/k8s-for-docker-desktop
 
-  - 换源：settings -> docker engine
-  
+  - ~~换源：settings -> docker engine~~
+
     ```
     "registry-mirrors": [
         "https://docker.mirrors.ustc.edu.cn",
@@ -19,8 +17,8 @@
     ]
     ```
 
-  - 限制内存使用：
-  
+  - ~~限制内存使用~~（之前16G内存一直跑不起来k8s，建议上32G）：
+
     ```
     # powershell
     code ~/.wslconfig
@@ -32,20 +30,20 @@
     
     # 然后重启
     ```
-  
-  - 安装helm：
-  
+
+- 安装helm：
+
+  ```
+  si helm lens
+  ```
+
+  - 开启kubectl自动补全（可能有性能问题）
+
     ```
-    si helm lens
+    source <(kubectl completion zsh)
+    echo 'alias k=kubectl' >>~/.zshrc
+    echo 'complete -F __start_kubectl k' >>~/.zshrc
     ```
-  
-    - 开启kubectl自动补全（可能有性能问题）
-  
-      ```
-      source <(kubectl completion zsh)
-      echo 'alias k=kubectl' >>~/.zshrc
-      echo 'complete -F __start_kubectl k' >>~/.zshrc
-      ```
 
 #### 数据库
 
@@ -188,22 +186,5 @@
    
    
 
-
 ### 问题
-
-#### docker
-
-- ##### 安装docker desktop里的k8s无限starting问题：
-
-  - 按照k8s-for-docker-desktop里的解决，删除pki文件夹
-
-  - hosts文件中添加
-
-    ```
-    # Kubernetes
-    127.0.0.1 kubernetes.docker.internal
-    ```
-
-  - 如果hosts无法写入，只能重启
-
 

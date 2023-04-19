@@ -1,3 +1,5 @@
+### 基本配置
+
 1. 配置文件（conf.user.json）：
 
    - win: 
@@ -28,7 +30,7 @@
          "打开文件夹": "Ctrl+Shift+O"
          // "删除...": "Delete"
        },
-       "autoSaveTimer": 0.01, // Double, default is 5. The unit is "minute"
+       // "autoSaveTimer": 0.01, // Double, default is 5. The unit is "minute"
        "monocolorEmoji": false, //default false. Only work for Windows
        "maxFetchCountOnFileList": 500,
        "flags": [] // default [], append Chrome launch flags, e.g: [["disable-gpu"], ["host-rules", "MAP * 127.0.0.1"]]
@@ -42,5 +44,10 @@
 3. 图像设置项：复制图片到文件夹；优先相对路径
 4. markdown设置项：代码块显示行号
 
-5. 使用技巧
+5. 配置完成后重启
+
+### 其他配置
+
+
+- 使用技巧
    - 中途取消列表：先向后缩进再取消，否则会取消整个列表

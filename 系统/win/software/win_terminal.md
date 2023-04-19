@@ -9,7 +9,7 @@
   // Git Bash亚克力半透明主题，font项为了支持powershell10k的字体
   {
     "commandline": "C:\\Users\\lijian\\scoop\\apps\\git\\current\\bin\\bash.exe -i -l",
-    "startingDirectory": "D:\\projs",
+    "startingDirectory": "~",
     "font": 
     {
       "face": "MesloLGS NF",
