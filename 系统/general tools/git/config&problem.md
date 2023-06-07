@@ -53,7 +53,14 @@ git config --global core.quotepath false
   # git alias
   alias g='git'
   alias gc='git clone'
+  alias gi='git init'
+  alias ga='git add'
   alias gp='git pull'
+  alias gu='git push'
+  alias gs='git status'
+  alias gr='git rebase'
+  alias gm='git merge'
+  alias gcm='git commit'
   
   # history
   HISTFILE=~/.zsh_history
@@ -63,6 +70,10 @@ git config --global core.quotepath false
   
   # show color
   alias ls='ls --color=auto'
+  
+  # completion
+  autoload -Uz compinit && compinit
+  autoload -Uz bashcompinit && bashcompinit
   ```
 
 - ubuntu配置
@@ -92,6 +103,23 @@ git config --global core.quotepath false
   git update-index --assume-unchanged ***
   git update-index --no-assume-unchanged ***
   ```
+
+- 远程仓库关联
+
+  ```
+  # 删除关联
+  git remote remove origin
+  # 添加关联
+  git remote add origin git@github.com:git_username/repository_name.git
+  ```
+
+- gr修改历史
+
+  - 用vscode打开项目（是为了用vscode实现的一个git rebase的UI），运行`gr -i head~3`，表示修改最近的3个提交
+  - 针对每个提交可以进行edit，drop等等操作，edit时使用`git commit --amend`修改，之后用`git rebase --continue`完成rebase操作
+  - 使用`gu -f`强制push可以覆盖掉remote仓库的历史
+
+  
 
 
 ### 问题

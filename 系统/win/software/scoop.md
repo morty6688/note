@@ -9,7 +9,7 @@
 #### 前置工作
 
 0. 搜狗输入法
-   - 使用ahk禁用搜狗输入法的全部快捷键：ctrl+句号等等；只开启系统功能快捷键-英文输入法(ctrl+shift+i)；调整字号适应高分屏
+   - 使用ahk禁用搜狗输入法的全部快捷键：ctrl+句号等等；只开启系统功能快捷键-英文输入法(ctrl+shift+i)和语音输入(ctrl+shift+a)；调整字号适应高分屏
 
 1. ```
    scoop install git
@@ -125,12 +125,16 @@ s info openjdk
 
 ### 开发工具安装
 
-#### 语言
+#### 注意事项
+
+- 可以用类似`scoop reset openjdk`来切换像java一样的开发工具版本
+
+#### 按语言
 
 ##### java
 
 ```
-si openjdk maven gradle
+si openjdk ojdkbuild8 maven gradle
 ```
 
 - maven换源（~/.m2）：
@@ -213,7 +217,7 @@ si openjdk maven gradle
 ##### js/ts
 
 ```
-si nodejs pnpm yarn
+si nodejs-lts pnpm yarn
 pnpm setup
 
 # 代理
@@ -279,12 +283,12 @@ si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discor
   
 - pdf-xchange-editor：
   
-  - 勾选文档 - 打开上次的文档，设置 Esc 键为选择文本快捷键（右键工具栏 - 命令 - 搜索），页面显示 - 默认缩放 - 适合宽度
+  - 勾选文档 - 打开上次的文档，设置 Esc 键为选择文本快捷键（右键工具栏 - 命令 - 搜索），页面显示 - 默认缩放 - 适合可见，页面显示 - 默认页面设置 - 连续
 
 #### 图像影音
 
 ```
-si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dlp icaros-np potplayer extras/kodi twinkle-tray obs-studio
+si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dlp icaros-np extras/kodi twinkle-tray obs-studio mkvtoolnix
 ```
 
 - mpv：
@@ -296,24 +300,20 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 
 - sharex：启动时会跟onedrive冲突快捷键。此时先关闭sharex，然后按截图键，在onedrive弹出的窗口中选择`no, thx!`，再启动sharex即可
 
-- ~~potplayer提高画质~~：（参考：https://zhuanlan.zhihu.com/p/33615747，配置真是麻烦，最后画质提升了一丢丢，**不如不配**，而且最后的xysubfilter的manifest已经被移除）
 
-   ```
-   si sushi/lavfilters madvr xysubfilter
-   ```
 
 
 #### 编程相关
 
 ```
-si mobaxterm filezilla switchhosts rapidee chatgpt
+si mobaxterm filezilla switchhosts rapidee chatgpt dee
 ```
 
 
 #### 系统相关
 
 ```
-si rufus dismplusplus hasher
+si rufus dismplusplus hasher renamer locale-emulator
 ```
 
 #### 游戏相关
@@ -330,6 +330,7 @@ si steampp neteaseuu
   - steam
   - chrome
   - vscode
+    - tabnine：全局搜索tabnine_config.json，修改一项设置`"inline_suggestions_mode": false`
   - idea
   - Logi Options+/G Hub
   - docker-desktop：用作开发环境配置，[docker_env](../../general%20tools/docker_desktop/docker_env.md)。这年头安装完还要重启系统的软件不多了。。。
@@ -344,9 +345,23 @@ si steampp neteaseuu
   - feem：局域网全速传输文件。因为免费版默认目标文件夹是下载，建议把windows下载目录移动到D盘
   
   
-  
-  
   - AnyTXT
+  
+  - potplayer：scoop下载的没有解码器，而且多了直播这个奇怪的功能
+  
+  
+    - 开启电平控制
+  
+    - ~~potplayer提高画质~~：（参考：https://zhuanlan.zhihu.com/p/33615747，配置真是麻烦，最后画质提升了一丢丢，**不如不配**，而且最后的xysubfilter的manifest已经被移除）
+  
+      ```
+      si sushi/lavfilters madvr xysubfilter
+      ```
+  
+  
+  
+  
+  
   - [KBLAutoSwitch](https://github.com/flyinclouds/KBLAutoSwitch)：根据程序自动切换输入法，还有一些bug存在
   
 - 付费：
@@ -366,7 +381,6 @@ si steampp neteaseuu
   - 图吧工具箱
   - pico 串流助手
   - pdf 补丁丁
-
 
 ## 问题
 

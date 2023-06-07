@@ -37,12 +37,29 @@
   si helm lens
   ```
 
-  - 开启kubectl自动补全（可能有性能问题）
+- zsh自动补全（可能有性能问题）
+
+  - 在.zshrc文件中添加如下命令：
+
+    ```
+    # k8s
+    alias k=kubectl
+    complete -F __start_kubectl k
+    ```
+
+  - 然后需要自动补全的shell里执行
 
     ```
     source <(kubectl completion zsh)
-    echo 'alias k=kubectl' >>~/.zshrc
-    echo 'complete -F __start_kubectl k' >>~/.zshrc
+    ```
+
+
+#### 使用
+
+- 容器重启策略：https://docs.docker.com/config/containers/start-containers-automatically/
+
+  - ```
+    docker update --restart always mysql
     ```
 
 #### 数据库
@@ -50,7 +67,7 @@
 ##### mysql
 
 1. ```
-   docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysql mysql
+   docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysql --restart always mysql
    ```
 
    - ```
@@ -86,7 +103,7 @@
    ```
 
    - ```
-     scoop install another-redis-desktop-manager
+     si another-redis-desktop-manager
      ```
 
 #### 中间件
@@ -101,8 +118,6 @@
      docker-compose up -d
      docker-compose down
      ```
-
-   - 部署一次后，可以直接在docker desktop里重启，关闭电脑也不会丢失镜像信息
 
 2. 使用：
 

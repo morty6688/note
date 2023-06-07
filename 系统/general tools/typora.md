@@ -27,7 +27,8 @@
          "有序列表": "Ctrl+/",
          "无序列表": "Ctrl+.",
          "源代码模式": "Ctrl+`",
-         "打开文件夹": "Ctrl+Shift+O"
+         "打开文件夹": "Ctrl+Shift+O",
+         "删除线": "alt+shift+d",
          // "删除...": "Delete"
        },
        // "autoSaveTimer": 0.01, // Double, default is 5. The unit is "minute"
@@ -36,7 +37,7 @@
        "flags": [] // default [], append Chrome launch flags, e.g: [["disable-gpu"], ["host-rules", "MAP * 127.0.0.1"]]
      }
      ```
-
+   
    - mac: 见[mac_setup](../mac/setup.md)
 
 

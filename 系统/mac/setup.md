@@ -87,92 +87,94 @@
 
   - iRightMouse（付费。。。说实话功能有点少）
   - Text Scanner（ocr)
-  
-- 使用brew安装的软件：
+
+- .zshrc配置
 
   - ```
-    alias ls='ls --color=auto'
+    # brew alias
     alias b='brew'
     alias bi='brew install'
     alias bui='brew uninstall'
     alias bs='brew search'
     alias bl='brew list'
     ```
-  
+
+- 使用brew安装的软件：
+
   - ```
-    brew install --cask 1password
+    bi --cask 1password
     ```
-  
+
   - ```
-    brew install --cask scroll-reverser
+    bi --cask scroll-reverser
     ```
-  
+
     - Scrolling Axes：勾选Reverse Vertical和Reverse Horizontal
     - Scrolling Devices：勾选Reverse Trackpad
     - start at login
-  
+
   - ```
-    brew install --cask typora
+    bi --cask typora
     ```
-  
+
   - ```
-    brew install --cask clipy
+    bi --cask clipy
     ```
-  
+
     - 多重剪贴板，可以导入导出
-  
+
   - ```
-    brew install --cask macgesture
+    bi --cask macgesture
     ```
-  
+
     - 鼠标手势(触摸板也可以识别)，下为导入导出语句
-  
+
       ```
       defaults import com.codefalling.MacGesture backup.list
       defaults export com.codefalling.MacGesture backup.plist
       ```
-  
+
     - 手势示例：[backup](resources/backup.plist)
-  
+
   - ```
-    brew install deepl
+    bi deepl
     ```
-  
+
   - ```
-    brew install --cask xnviewmp
+    bi --cask xnviewmp
     ```
-  
+
     - Tools > Settings > General -- General tab -- Mode when starting with a file -- Normal.
-  
+
   - ```
-    brew install --cask tiles
+    bi --cask tiles
     ```
-  
+
   - ```
-    brew install --cask hiddenbar
+    bi --cask hiddenbar
     ```
-  
+
     - sudo xattr -r -d com.apple.quarantine /Applications/Hidden\ Bar.app
     - 取消勾选show prefrences on launch
-  
+
   - ```
-    brew install java11
+    bi java11
     ```
-  
+
     - sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
-  
+
   - ```
-    brew install git
+    bi git
     ```
-  
+
   - ```
-    brew install libpq
+    bi libpq
     ```
 
     - 用于pg_dump，位置在/usr/local/opt/libpq/bin下面
-  
+
   - ```
-    brew install --cask iterm2
+    bi --cask iterm2
     ```
 
     - Mac自带zsh，安装powerlevel10k
@@ -180,38 +182,37 @@
     - Font size: 15，window: 100*25，光标：竖线
 
   - ```
-    brew install --cask docker
+    bi --cask docker
     ```
-  
+
     - Enable k8s
-  
+
   - ```
-    brew install --cask visual-studio-code
+    bi --cask visual-studio-code
     ```
-  
+
     - 开启同步
-  
+
   - ```
-    brew install --cask redisinsight
+    bi --cask redisinsight
     ```
-  
+
   - ```
-    brew install wget
+    bi wget
     ```
-  
+
   - 解压缩：
-  
+
     ```
     bi keka
     ```
-  
 
 
 - 暂时未用
 
-  - brew install --cask popclip
+  - bi --cask popclip
 
-  - brew install --cask bettertouchtool
+  - bi --cask bettertouchtool
 
 
 

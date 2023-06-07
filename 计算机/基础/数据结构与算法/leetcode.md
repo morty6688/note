@@ -4,19 +4,22 @@ http://www.cyc2018.xyz/
 
 - idea leetcode插件：
 
-  - CodeFileName：
+  - 选中Custom Template
 
+  - CodeFileName：
+  
     ```
     $!velocityTool.camelCaseName(${question.titleSlug})
     ```
 
   - CodeTemplate：
-
+  
     ```
     package leetcode.editor.cn;
     
-    // 题目编号：${question.frontendQuestionId}
     ${question.content}
+    
+    // [${question.frontendQuestionId}]${question.title}
     public class $!velocityTool.camelCaseName(${question.titleSlug}){
         public static void main(String[] args) {
             Solution solution = new $!velocityTool.camelCaseName(${question.titleSlug})().new Solution();
@@ -25,6 +28,7 @@ http://www.cyc2018.xyz/
         ${question.code}
     }
     ```
+  
 
 #### 题号
 
@@ -790,7 +794,7 @@ http://www.cyc2018.xyz/
 
 ###### 矩阵
 
-- 矩阵部分的动态规划题往往是二维的。一些题目为二维网格只能向右或者向下移动，不难；更为典型的题目是[编辑距离](https://leetcode-cn.com/problems/edit-distance/)或者[最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
+- 矩阵部分的动态规划题往往是二维的。一些题目为二维网格只能向右或者向下移动，不难；更为典型的题目是[编辑距离](https://leetcode-cn.com/problems/edit-distance/)或者[[5]最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
 
 ​		
 
