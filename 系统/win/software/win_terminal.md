@@ -3,7 +3,7 @@
      - 先打开Terminal，随便复制一个配置文件，命名为bash
 
      - 然后将下面的配置复制过去，覆盖除了guid和name的部分
-      
+     
        ```
        // Git Bash亚克力半透明主题，font项为了支持powershell10k的字体
        {
@@ -26,13 +26,13 @@
          "useAcrylic": true
        }
        ```
-      
+     
      - 然后把bash配置文件改成默认
-      
+     
      - 将窗口大小改成100*25
-      
+     
      - 把cmd这种没什么用的配置文件隐藏掉
-      
+     
      - 打开自动将所选内容复制到剪贴板
 
 
@@ -54,5 +54,11 @@
        ```
 
 
-4. **更新注意事项**
-   - 备份settings.json
+4. bash临时添加代理
+
+   - ```
+     export http_proxy='http://127.0.0.1:1130'    
+     export https_proxy='http://127.0.0.1:1130'
+     ```
+
+     

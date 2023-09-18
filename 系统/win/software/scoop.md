@@ -134,7 +134,7 @@ s info openjdk
 ##### java
 
 ```
-si openjdk ojdkbuild8 maven gradle
+si oraclejdk-lts ojdkbuild8 maven gradle
 ```
 
 - maven换源（~/.m2）：
@@ -152,7 +152,7 @@ si openjdk ojdkbuild8 maven gradle
   - 阿里云仓库：[链接](https://maven.aliyun.com/)
   - 配置文件：[settings.xml](resources/settings.xml)
 
-- gradle换源（~/.gradle）：
+- gradle换源（放到gradle user home/.gradle）：
 
 ​		[gradle.properties](resources/gradle.properties)
 
@@ -220,7 +220,7 @@ si openjdk ojdkbuild8 maven gradle
 si nodejs-lts pnpm yarn
 pnpm setup
 
-# 代理
+# 代理和镜像
 npm config set proxy http://127.0.0.1:1130
 npm config set https-proxy http://127.0.0.1:1130
 
@@ -229,6 +229,12 @@ yarn config set https-proxy http://127.0.0.1:1130
 
 pnpm config set proxy http://127.0.0.1:1130
 pnpm config set https-proxy http://127.0.0.1:1130
+
+# pnpm alias
+alias p='pnpm'
+alias pi='pnpm install'
+alias pl='pnpm list'
+alias pui='pnpm uninstall'
 ```
 
 ##### go
@@ -249,6 +255,12 @@ go env -w GOPROXY=https://goproxy.io,direct
 go env | grep GOPROXY
 ```
 
+##### solidity
+
+```
+si solidity
+```
+
 #### 环境
 
 数据库及中间件见[docker_env](../../general%20tools/docker_desktop/docker_env.md)
@@ -258,7 +270,7 @@ go env | grep GOPROXY
 #### 日常使用
 
 ```
-si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord wechat trafficmonitor
+si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor
 ```
 
 - everything->工具->选项：
@@ -283,7 +295,8 @@ si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discor
   
 - pdf-xchange-editor：
   
-  - 勾选文档 - 打开上次的文档，设置 Esc 键为选择文本快捷键（右键工具栏 - 命令 - 搜索），页面显示 - 默认缩放 - 适合可见，页面显示 - 默认页面设置 - 连续
+  - 勾选文档 - 打开上次的文档；页面显示 - 默认缩放 - 适合可见；页面显示 - 默认页面设置 - 连续；
+  - 设置 Esc 键为选择文本快捷键（右键工具栏 - 命令 - 搜索”选择文本“）；设置`键为打字机工具
 
 #### 图像影音
 
@@ -319,7 +332,7 @@ si rufus dismplusplus hasher renamer locale-emulator
 #### 游戏相关
 
 ```
-si steampp neteaseuu
+si steampp
 ```
 
 
@@ -332,6 +345,22 @@ si steampp neteaseuu
   - vscode
     - tabnine：全局搜索tabnine_config.json，修改一项设置`"inline_suggestions_mode": false`
   - idea
+  
+    - 常见问题：
+  
+      - IDEA有时会卡在开始界面无法启动，查idea.log发现是
+  
+        java.net.BindException: *Address already in use*: *bind*
+  
+        说明IDEA启动需要的端口被占用，使用以下两行重启（使用管理员模式）：
+  
+        ```
+        net stop winnat
+        net start winnat
+        ```
+  
+      - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked.
+  
   - Logi Options+/G Hub
   - docker-desktop：用作开发环境配置，[docker_env](../../general%20tools/docker_desktop/docker_env.md)。这年头安装完还要重启系统的软件不多了。。。
   - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
@@ -345,21 +374,9 @@ si steampp neteaseuu
   - feem：局域网全速传输文件。因为免费版默认目标文件夹是下载，建议把windows下载目录移动到D盘
   
   
-  - AnyTXT
-  
   - potplayer：scoop下载的没有解码器，而且多了直播这个奇怪的功能
   
-  
-    - 开启电平控制
-  
-    - ~~potplayer提高画质~~：（参考：https://zhuanlan.zhihu.com/p/33615747，配置真是麻烦，最后画质提升了一丢丢，**不如不配**，而且最后的xysubfilter的manifest已经被移除）
-  
-      ```
-      si sushi/lavfilters madvr xysubfilter
-      ```
-  
-  
-  
+      - 开启电平控制
   
   
   - [KBLAutoSwitch](https://github.com/flyinclouds/KBLAutoSwitch)：根据程序自动切换输入法，还有一些bug存在
@@ -373,6 +390,8 @@ si steampp neteaseuu
   - quicker
   
 - 国内：
+  
+  - wechat
   - 搜狗输入法
   - mouseinc
   - 火绒
@@ -381,6 +400,7 @@ si steampp neteaseuu
   - 图吧工具箱
   - pico 串流助手
   - pdf 补丁丁
+  
 
 ## 问题
 

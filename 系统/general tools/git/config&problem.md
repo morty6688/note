@@ -36,14 +36,38 @@ git config --global core.quotepath false
 
 #### 进阶配置
 
-- win10安装zsh：
+- win安装zsh：
 
   https://gist.github.com/fworks/af4c896c9de47d827d4caa6fd7154b6b
 
   - 安装powerlevel10k，在用户目录下创建[.bashrc](resources/.bashrc)文件，并设置zsh默认（目前的版本创建完这个文件之后，第一次启动会报错并生成一个.bash_profile，再次启动就一切正常
   - **更新时注意事项**：所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scu命令清理旧版本时，需要重新安装[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)，即解压zsh到Git目录。
   
-- 双账号配置：https://zhuanlan.zhihu.com/p/423007454
+- 双账号配置，在自己的主账号配置好之后，执行以下操作：
+
+  - `ssh-keygen -t ed25519 -C "your_sub_email@sub.com"`，当出现提示时输入正确的路径，如`Enter file in which to save the key (/Users/you/.ssh/id_ed25519): /c/Users/username/.ssh/sub_ed25519`，注意路径要输全路径，不能输入`~/.ssh/sub_ed25519`，有时候识别不出来，然后把生成的公钥传到副账号github中
+
+  - `code ~/.ssh/config`，输入如下内容：
+
+    ```
+    Host github.com
+      User 主账号的用户名
+      AddKeysToAgent yes
+      IgnoreUnknown UseKeychain
+      IdentityFile ~/.ssh/id_ed25519
+    
+    Host sub.com
+      HostName github.com
+      User 副账号的用户名
+      AddKeysToAgent yes
+      IgnoreUnknown UseKeychain
+      IdentityFile ~/.ssh/sub_ed25519
+    ```
+
+  - 克隆副账号项目时用`git clone git@sub.com:副账号/项目名.git`
+
+  - 副账号项目设置：`git config --local user.email your_sub_email@sub.com`
+
 
 #### zsh配置
 
@@ -119,7 +143,6 @@ git config --global core.quotepath false
   - 针对每个提交可以进行edit，drop等等操作，edit时使用`git commit --amend`修改，之后用`git rebase --continue`完成rebase操作
   - 使用`gu -f`强制push可以覆盖掉remote仓库的历史
 
-  
 
 
 ### 问题
