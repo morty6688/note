@@ -139,11 +139,9 @@ git config --global core.quotepath false
 
 - gr修改历史
 
-  - 用vscode打开项目（是为了用vscode实现的一个git rebase的UI），运行`gr -i head~3`，表示修改最近的3个提交
-  - 针对每个提交可以进行edit，drop等等操作，edit时使用`git commit --amend`修改，之后用`git rebase --continue`完成rebase操作
+  - 用vscode打开项目（是为了用vscode实现的一个git rebase的UI），运行`gr -i --root` ，表示修改全部提交；或者`gr -i head~3`，表示修改最近的3个提交
+  - 针对每个提交可以进行edit，drop等等操作，edit时使用`git commit --amend`修改，修改完毕后需要返回idea解决冲突，之后用`git rebase --continue`完成rebase操作
   - 使用`gu -f`强制push可以覆盖掉remote仓库的历史
-
-
 
 ### 问题
 

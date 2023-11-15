@@ -1,6 +1,6 @@
 ## 介绍与使用
 
-首先下载一个绿色版clash-for-windows，同步一下系统时间，卸载掉系统自带的终端，安装vscode
+首先下载一个绿色版clash-verge，同步一下系统时间，卸载掉系统自带的终端，安装vscode
 
 然后安装：https://github.com/ScoopInstaller/Install
 
@@ -40,13 +40,10 @@
 
    - powershell：更新时切换成windows自带的那个powershell去更新
 
-   - 用scoop来管理clash：
+   - clash设置：
    
-     - ```
-       scoop install clash-for-windows
-       ```
-     - 一些uwp应用比如微软商店可能会打不开，需要添加`UWP Loopback`，例如`你的账户`这个程序，不添加到loopback可能会造成登录异常。
-     - `allow LAN`功能开启后，点击旁边的图标查看192.168开头的局域网地址，可以让局域网内其他设备使用代理。比如给switch添加代理，修改其网络设置将上述局域网地址和代理端口加上即可。
+     - 一些uwp应用比如微软商店可能会打不开，需要添加`UWP Loopback`，例如`你的账户`这个程序，不添加到loopback可能会造成登录异常。cv需要下载网络回环管理器来应对这个，cfw不需要
+     - cfw：`allow LAN`功能开启后，点击旁边的图标查看192.168开头的局域网地址，可以让局域网内其他设备使用代理。比如给switch添加代理，修改其网络设置将上述局域网地址和代理端口加上即可。
 
 
 #### 设置别名
@@ -134,7 +131,7 @@ s info openjdk
 ##### java
 
 ```
-si oraclejdk-lts ojdkbuild8 maven gradle
+si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
 ```
 
 - maven换源（~/.m2）：
@@ -155,6 +152,14 @@ si oraclejdk-lts ojdkbuild8 maven gradle
 - gradle换源（放到gradle user home/.gradle）：
 
 ​		[gradle.properties](resources/gradle.properties)
+
+- visualvm启动：
+
+  ```
+  visualvm --jdkhome "C:\Users\lijian\scoop\apps\ojdkbuild8\current"
+  ```
+
+  然后安装插件
 
 ##### python
 
@@ -216,49 +221,85 @@ si oraclejdk-lts ojdkbuild8 maven gradle
 
 ##### js/ts
 
-```
-si nodejs-lts pnpm yarn
-pnpm setup
+- 用nvm来管理node版本（首先安装一个最新的lts版本）
 
-# 代理和镜像
-npm config set proxy http://127.0.0.1:1130
-npm config set https-proxy http://127.0.0.1:1130
+  ```
+  si nvm
+  nvm install v18.18.0
+  nvm use 18.18.0
+  ```
 
-yarn config set proxy http://127.0.0.1:1130
-yarn config set https-proxy http://127.0.0.1:1130
+- 然后安装pnpm或yarn，或者直接使用npm
 
-pnpm config set proxy http://127.0.0.1:1130
-pnpm config set https-proxy http://127.0.0.1:1130
-
-# pnpm alias
-alias p='pnpm'
-alias pi='pnpm install'
-alias pl='pnpm list'
-alias pui='pnpm uninstall'
-```
+  ```
+  # 代理和镜像
+  npm config set proxy http://127.0.0.1:1130
+  npm config set https-proxy http://127.0.0.1:1130
+  
+  yarn config set proxy http://127.0.0.1:1130
+  yarn config set https-proxy http://127.0.0.1:1130
+  
+  pnpm config set proxy http://127.0.0.1:1130
+  pnpm config set https-proxy http://127.0.0.1:1130
+  
+  # pnpm alias
+  alias p='pnpm'
+  alias pi='pnpm install'
+  alias pl='pnpm list'
+  alias pui='pnpm uninstall'
+  ```
 
 ##### go
 
-```
-si go
-```
+- ```
+  si go
+  ```
 
-换源（三选一）：
+- 换源（三选一）：
 
-```
-go env -w GOPROXY=https://goproxy.cn,direct
-go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
-go env -w GOPROXY=https://goproxy.io,direct
-```
+  ```
+  go env -w GOPROXY=https://goproxy.cn,direct
+  ```
 
-```
-go env | grep GOPROXY
-```
+  ```
+  go env | grep GOPROXY
+  ```
+
+- 下载依赖
+
+  ```
+  go mod download
+  ```
+
+- win上兼容syscall，最好不要用这些信号量
+
+  在types_windows.go里添加如下内容
+
+  ```
+  /* compatible with windows */
+  	SIGUSR1 = Signal(16)
+  	SIGUSR2 = Signal(17)
+  	SIGTSTP = Signal(18)
+  ```
+
+- 安装protobuf的go生成工具
+
+  ```
+  go install github.com/golang/protobuf/protoc-gen-go@latest
+  go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+  ```
+
 
 ##### solidity
 
 ```
 si solidity
+```
+
+##### rust
+
+```
+si rustup
 ```
 
 #### 环境
@@ -319,14 +360,14 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 #### 编程相关
 
 ```
-si mobaxterm filezilla switchhosts rapidee chatgpt dee
+si tabby filezilla switchhosts rapidee chatgpt telnet protobuf
 ```
 
 
 #### 系统相关
 
 ```
-si rufus dismplusplus hasher renamer locale-emulator
+si rufus dismplusplus hasher renamer locale-emulator recuva
 ```
 
 #### 游戏相关
@@ -334,8 +375,6 @@ si rufus dismplusplus hasher renamer locale-emulator
 ```
 si steampp
 ```
-
-
 
 ### 暂未用 scoop
 
@@ -348,18 +387,20 @@ si steampp
   
     - 常见问题：
   
-      - IDEA有时会卡在开始界面无法启动，查idea.log发现是
-  
-        java.net.BindException: *Address already in use*: *bind*
-  
-        说明IDEA启动需要的端口被占用，使用以下两行重启（使用管理员模式）：
+      - winnat问题，重启网络（使用管理员模式）：
   
         ```
         net stop winnat
         net start winnat
         ```
+      
+        - IDEA有时会卡在开始界面无法启动，查idea.log发现是`java.net.BindException: *Address already in use*: *bind*`，这说明IDEA启动需要的端口被占用，使用该命令重启
+      
+        - 有时idea启动应用说端口被占用，但是使用`netstat -ano|findstr 8080 `结果为空，可能是端口处于tcp排除范围，使用`netsh interface ipv4 show excludedportrange protocol=tcp`可以看到排除范围，这时也可以用上述命令重启
   
       - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked.
+      
+      - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
   
   - Logi Options+/G Hub
   - docker-desktop：用作开发环境配置，[docker_env](../../general%20tools/docker_desktop/docker_env.md)。这年头安装完还要重启系统的软件不多了。。。

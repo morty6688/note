@@ -1,40 +1,4 @@
-### 入门
-
-​	以下为一个java应用的简单实例：
-
-- Dockerfile示例：
-
-  ```dockerfile
-  FROM openjdk:16-alpine3.13
-  
-  RUN apk update
-  RUN apk add maven
-  
-  # maven换源
-  ADD settings.xml /root/.m2/settings.xml
-  
-  WORKDIR /app
-  
-  COPY pom.xml ./
-  RUN mvn dependency:go-offline
-  
-  COPY src ./src
-  CMD ["mvn", "spring-boot:run"]
-  ```
-
-- 构建命令
-
-  ```
-  docker build -t java-docker .
-  ```
-
-- 运行命令
-
-  ```
-  docker run -dp 8080:8080 java-docker
-  ```
-
-  - -d表示以守护态运行，-p表示发布到端口
+- 
 
 ### 概念
 
