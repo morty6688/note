@@ -37,10 +37,10 @@
 
    ```
    leetcode：
-   1 3 5 8 9 11 15 17 19 20 21 22 23 24 31 33 34 37 39 40 42 43 46 47 48 49 50 51 53 54 55 56 62 64 67 69 70 72 75 76 77 78 79 83 84 88 90 91 93 94 95 96 98 101 102 104 105 108 109 110 111 112 113 121 122 123 127 128 130 131 136 139 141 142 144 145 146 147 151 152 153 154 155 160 162 165 167 168 169 172 179 188 189 190 198 200 204 205 206 207 208 210 213 215 216 217 221 224 225 226 230 231 232 234 235 236 238 240 241 242 257 260 268 278 279 283 287 292 300 303 309 316 318 322 326 328 337 338 342 343 345 347 367 371 376 377 378 392 394 404 405 406 409 413 415 416 417 435 437 438 442 448 451 452 455 461 462 470 474 476 485 494 496 501 503 504 513 518 524 530 538 540 543 547 560 565 566 567 572 581 583 594 605 617 621 628 633 637 645 646 647 650 662 665 667 669 671 677 680 684 687 693 695 696 697 714 725 739 743 744 763 766 769 785 912 946 1091 1143
+   1 3 5 8 9 11 15 17 19 20 21 22 23 24 31 33 34 37 39 40 42 43 46 47 48 49 50 51 53 54 55 56 62 64 67 69 70 72 75 76 77 78 79 83 84 88 90 91 93 94 95 96 98 101 102 104 105 108 109 110 111 112 113 121 122 123 127 128 130 131 135 136 139 141 142 144 145 146 147 151 152 153 154 155 160 162 165 167 168 169 172 179 188 189 190 198 200 204 205 206 207 208 210 213 215 216 217 221 224 225 226 230 231 232 234 235 236 238 240 241 242 257 260 268 278 279 283 287 292 300 303 309 316 318 322 326 328 337 338 342 343 345 347 367 371 376 377 378 392 394 404 405 406 409 413 415 416 417 435 437 438 442 448 451 452 455 461 462 470 474 476 485 494 496 501 503 504 513 518 524 530 538 540 543 547 560 565 566 567 572 581 583 594 605 617 621 628 633 637 645 646 647 650 662 665 667 669 671 677 680 684 687 693 695 696 697 714 725 739 743 744 763 766 769 785 912 946 1091 1143
    
    剑指offer：
-   9 13 32 53
+   9 13 32 53 59 62
    ```
 
 2. 依分类
@@ -49,15 +49,15 @@
 
    - 排序：56 75 179 215 347 451 912
 
-   - 贪心：11 55 122 300 392 406 435 452 455 605 621 665 763
+   - 贪心：11 55 135 122 300 392 406 435 452 455 605 621 665 763
 
    - 分治：95 241
 
-   - 搜索：37 40 47 51 78 90 93 127 130 131 200 216 257 417 547 695 1091 剑-13
+   - 搜索：37 40 47 51 78 90 127 130 131 200 216 257 417 547 695 1091 剑-13
 
       - 二分：33 34 69 153 154 162 278 540 744 剑-53 
 
-     - backtrack：17 22 39 46 77 
+     - backtrack：17 22 39 46 77 93
      
      - dfs：79 
      
@@ -69,25 +69,26 @@
 
    - 链表：19 21 23 24 83 141 142 147 160 206 234 328 725
 
-   - 树：94 98 101 102 104 105 108 109 110 111 112 113 144 145 226 230 235 236 337 404 501 513 530 538 543 572 617 637 653 662 669 671 677 687 剑-32（103）
+   - 树：94 98 101 102 104 105 108 109 110 111 112 113 144 145 226 230 235 236 337 404 501 513 530 538 543 572 617 637 653 662 669 671 677 687 剑-32(103) 剑-59
+      - 层序遍历：
       - 特殊的树：208 
-
+      
    - 栈和队列：20 146 155 224 225 232 503 946 剑-9
-
+   
       - 单调栈：42 84 316 496 739
-
+   
    - 哈希表：1 49 128 217 448 594
-
+   
    - 字符串：8 9 151 205 242 394 409 696
-
+   
    - 数组与矩阵：31 43 48 54 189 240 287 378 442 485 565 566 645 667 697 766 769
-
+   
    - 图：207 210 684 785
-
+   
    - 位运算：136 190 231 260 268 318 338 342 371 461 476 693
-
+   
    - 滑动窗口：3 76 438 567
-
+   
    - 前缀和：303 437 560
 
 #### 常用数据结构及写法
@@ -96,7 +97,7 @@
 
 - 一些奇怪套路的典型题：
   - [[31]Next Permutation](https://leetcode-cn.com/problems/next-permutation/)：有很奇怪的套路，需要先从后向前找一个升序相邻数对(i, j)，然后向后找第一个比i大的数记为k，交换i和k，然后reverse从i+1到结尾的元素。
-  - 如果数组里只包括数组索引，则可以将数组看成链表，如果出现重复索引，则可以看成**环形链表**
+  - **数组环形链表**：如果数组里只包括数组索引，则可以将数组看成链表，如果出现重复索引，则可以看成环形链表
     - [[287]Find the Duplicate Number](https://leetcode.cn/problems/find-the-duplicate-number/)：本题即可将数组看成环形链表，使用快慢指针解决
 
 ##### 矩阵
@@ -155,8 +156,6 @@
 - java推荐使用Deque来实现栈和队列，Deque拥有两套API。其一为add/remove/element，会抛出异常，其二为offer/poll/peek，会返回特殊值，常用的为第一套。
 - add相当于addLast，push相当于addFirst，remove和pop均相当于removeFirst，element相当于getFirst。因此当做栈来使用时，用push/pop/element或者addLast/removeLast/getLast；当做队列来使用时用add/remove/element。
 - **addLast/removeLast/getLast可以保证一个栈内的元素用new ArrayList<>(deque)转换后是正向打印出来的。适合backtrack或者dfs等场合要保存路径时应用。**
-- 典型题：
-  - 
 
 ###### 单调栈
 
@@ -182,7 +181,7 @@
    
      - [[84]Largest Rectangle in Histogram](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)：本题关键在于利用递增栈可以同时找到左右两边第一个比当前元素小的柱子，可以构成矩形；同时我们可以添加两个哨兵（高度为0的柱子），这样不用去判断栈为空的情况。
    
-     - [去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)：本题使用递增栈来保证栈内元素字典序最小，关键在于记录重复元素最后一次出现的位置和访问记录。元素已经在栈中直接跳过，如果遍历过程中某栈顶元素不是最后一次出现且不满足递增栈性质，就将其移除出栈。
+     - [[316]Remove Duplicate Letters](https://leetcode.cn/problems/remove-duplicate-letters/)：本题使用递增栈来保证栈内元素字典序最小，关键在于记录重复元素最后一次出现的位置和访问记录。元素已经在栈中直接跳过，如果遍历过程中某栈顶元素不是最后一次出现且不满足递增栈性质，就将其移除出栈。
 
 ##### 堆
 
@@ -300,12 +299,14 @@
 
 - 标准层次遍历非常简单，不再赘述。层次遍历中有几种特殊情况需要注意，如下：
 
-  - 记录每层节点：遍历每一层时通过`queue.size()`来确定遍历几次，此处需要用一个局部变量来保存这个size，不然size会变
+  - 记录每层节点：遍历每一层时通过`queue.size()`来确定遍历几次，此处需要用一个**局部变量**来保存这个size，不然size会变
   - 记录节点编号：使用WrapNode将节点再包一层
 
 ###### 其他问题
 
-- 反转二叉树，树的深度，是否对称二叉树，前序中序建树，等基本问题
+- 基本问题：反转二叉树，树的深度，是否对称二叉树，前序中序建树
+
+  - [[108]Convert Sorted Array to Binary Search Tree](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/)：本题要把有序数组组成二叉搜索平衡树，因为其中序遍历一定有序，所以可以考虑二分，mid一定是根
 
 - 二叉树的公共祖先（LCA问题）：按是否二叉搜索树来区分难度，该题及其容易忘记，建议多做几遍
 
@@ -347,60 +348,30 @@
 - // TODO
 
   ```java
-  class UnionFind {
-      private int count;
-      // (cur, leader)
-      private Map<Integer, Integer> parent;
+  class UnionFindSet {
+      int[] parents;
   
-      public UnionFind(int[] nums) {
-          count = nums.length;
-          parent = new HashMap<>();
-          for (int v : nums) {
-              // 初始时，各自为战，自己是自己的领队
-              parent.put(v, v);
+      public UnionFindSet(int n) {
+          parents = new int[n];
+          for (int i = 0; i < n; i++) {
+              // each element is its own parent
+              parents[i] = i;
           }
       }
   
-      // 结盟
-      public void union(int p, int q) {
-          // 不只是 p 与 q 结盟，而是整个 p 所在队伍 与 q 所在队伍结盟
-          // 结盟需各领队出面，而不是小弟出面
-          Integer rootP = find(p), rootQ = find(q);
-          if (rootP == rootQ) {
-              return;
+      public int find(int x) {
+          if (parents[x] == x) {
+              return x;
           }
-          if (rootP == null || rootQ == null) {
-              return;
-          }
-  
-          // 结盟，谁大听谁
-          parent.put(rootP, rootQ);
-          // 应取 max，而本题已明确 p < q 才可这么写
-          // 当前写法有损封装性，算法题可不纠结
-  
-          count--;
+          return parents[x] = find(parents[x]);
       }
   
-      // 查找领队
-      public Integer find(int p) {
-          if (!parent.containsKey(p)) {
-              return null;
+      public void union(int x, int y) {
+          int px = find(x);
+          int py = find(y);
+          if (px != py) {
+              parents[px] = py;
           }
-  
-          // 递归向上找领队
-          int root = p;
-          while (root != parent.get(root)) {
-              root = parent.get(root);
-          }
-  
-          // 路径压缩：扁平化管理，避免日后找领队层级过深
-          while (p != parent.get(p)) {
-              int curr = p;
-              p = parent.get(p);
-              parent.put(curr, root);
-          }
-  
-          return root;
       }
   }
   ```
@@ -415,7 +386,13 @@
   
   ```
 
-  
+
+##### 前缀和
+
+###### 定义
+
+- 这个定义很简单，就是对于nums数组来说建立一个prefixSum数组。然后有`prefixSum[i+1]=prefixSum[i]+nums[i]`
+- 然后前缀和数组建立之后，可以通过`i == 0 ? dp[j] : dp[j] - dp[i - 1]`直接求出区间`(i, j)`的和，就像[[303]Range Sum Query - Immutable](https://leetcode.cn/problems/range-sum-query-immutable/)中实现的API
 
 #### 常用算法模板
 
@@ -618,8 +595,10 @@
 
   - 典型题：
   
-    - [[46]Permutations](https://leetcode-cn.com/problems/permutations/)
+    - [[17]Letter Combinations of a Phone Number](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)：比较简单
   
+    - [[46]Permutations](https://leetcode-cn.com/problems/permutations/)
+    
       ```java
       // backtrack需要一个pos变量表示当前位置，还需要一个栈来保存中间结果。本例中，nums是swap in place的，因此省略了这个队列
       private void backtrack(List<List<Integer>> res, int[] nums, int pos) {
@@ -652,10 +631,11 @@
       ```
   
     - [[39]Combination Sum](https://leetcode-cn.com/problems/combination-sum/)：比较典型的题，可以重复利用元素，要注意进入下一层pos的值
-  
+    
     
       - [[22]Generate Parentheses](https://leetcode-cn.com/problems/generate-parentheses/)：本题的一个特殊之处在于有两个pos，左括号和右括号，因此解法略有不同
       - [[剑-38]字符串的排列](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/)：本题跟上题不一样的是，要对结果去重
+    
   
 
 ###### dfs
@@ -860,13 +840,16 @@
   }
   ```
 
-
 ##### 贪心
 
+贪心算法没有统一的步骤，对于不同的题目，解法通常符合直觉
+
 - 典型题：
-  - [[300]Longest Increasing Subsequence](https://leetcode.cn/problems/longest-increasing-subsequence/)：本题要构造最长递增序列，采用贪心算法的思路为使序列增长的尽可能慢，这样序列就会尽可能的长。比如一个序列是[0, 4, 8]，此时遇到一个2，就需要把序列更新为[0, 2, 8]。由于这个序列是递增的，所以在查找更新位置时可以用二分降低复杂度。
+  - [[11]Container With Most Water](https://leetcode.cn/problems/container-with-most-water/)：这个题思路在于当我们向内移动板时，面积一定是减小的。但是向内移动短板时，面积有可能增大。所以为了这种可能性，要不断向内移动短板
+  - [[135]Candy](https://leetcode.cn/problems/candy/)：这个题其实很好想，就是如果把序列看成一个柱形图，那么这个图就像股票走势，有上升有下降序列。那么可以新建两个数组，先全部初始化为1，分别从左到右更新上升趋势，然后从右到左更新下降趋势。最后组合一下
+  - [[300]Longest Increasing Subsequence](https://leetcode.cn/problems/longest-increasing-subsequence/)：本题要构造最长递增序列，采用贪心算法的思路为使序列增长的尽可能慢，这样序列就会尽可能的长。比如一个序列是[0, 4, 8]，此时遇到一个2，就需要把序列更新为[0, 2, 8]。由于这个序列是递增的，所以在查找更新位置时可以用二分降低复杂度
   - [[406]Queue Reconstruction by Height](https://leetcode.cn/problems/queue-reconstruction-by-height/)：本题的贪心思路为先让高个站好，然后遇到一个矮个就往k序号上插，这样前面正好有k个比他高的
-  - [[621]Task Scheduler](https://leetcode.cn/problems/task-scheduler/)：贪心思路为先安排出现次数最多的任务，让这个任务两次执行的时间间隔正好为n。再在这个时间间隔内填充其他的任务。
+  - [[621]Task Scheduler](https://leetcode.cn/problems/task-scheduler/)：贪心思路为先安排出现次数最多的任务，让这个任务两次执行的时间间隔正好为n。再在这个时间间隔内填充其他的任务
 
 ##### 位运算
 
@@ -878,13 +861,16 @@
 
 - 典型题：
 
-  - [[96]Unique Binary Search Trees](https://leetcode.cn/problems/unique-binary-search-trees/description/)：Catalan number，很经典。计算公式和递推公式如下：
+  - 卡特兰数(Catalan number)。计算公式和递推公式如下：
     $$
     f(n)= \sum_{i=1}^{n} f(i-1) \cdot f(n-i)
     $$
 
     $$
-    C_{n+1}=\frac{2(2n+1)}{n+2}C_n \qquad C_0=1
+    CTL_{n}=\frac{1}{n+1}C_{2n}^{n}
     $$
-
     
+    - [[96]Unique Binary Search Trees](https://leetcode.cn/problems/unique-binary-search-trees/description/)
+  
+  - 约瑟夫环(Josephus problem)。
+    - [LCR 187. 破冰游戏](https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/)，原来的剑指offer第62题

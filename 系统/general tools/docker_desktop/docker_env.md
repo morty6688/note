@@ -333,12 +333,18 @@ docker-compose -f docker-compose-env.yml -p mall up -d
 ##### zk
 
 - ```
-  docker run -d --name zk -p 2181:2181 zookeeper:latest
+  docker run -d --name zookeeper -p 2181:2181 -v /d/shared/mono/zookeeper/conf/zoo.cfg:/conf/zoo.cfg zookeeper:latest
   ```
 
-  ```
-  ./bin/zkCli.sh
-  ```
+  - 单个容器挂载用win terminal，win bash会有奇怪的bug
+  
+  - 启动zk容器中的客户端：
+  
+    ```
+    ./bin/zkCli.sh
+    ```
+  
+  - 下载可视化GUI：https://github.com/vran-dev/PrettyZoo/releases
 
 ##### nacos
 
@@ -396,11 +402,11 @@ docker-compose -f docker-compose-env.yml -p mall up -d
   - 或者将resources文件夹复制出来，再挂载启动（用win terminal，win bash会有奇怪的bug）
 
     ```
-    docker cp seata-server:/seata-server/resources /d/shared/seata
+    docker cp seata-server:/seata-server/resources /d/shared/mono/seata
     ```
 
     ```
-    docker run -d --name seata-server -p 8091:8091 -p 7091:7091 -v /d/shared/seata/resources:/seata-server/resources seataio/seata-server:1.7.1
+    docker run -d --name seata-server -p 8091:8091 -p 7091:7091 -v /d/shared/mono/seata/resources:/seata-server/resources seataio/seata-server:1.7.1
     ```
 
 

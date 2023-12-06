@@ -1,6 +1,6 @@
 ## 介绍与使用
 
-首先下载一个绿色版clash-verge，同步一下系统时间，卸载掉系统自带的终端，安装vscode
+首先下载一个绿色版clash-verge或其他代理软件，同步一下系统时间，卸载掉系统自带的终端，安装vscode
 
 然后安装：https://github.com/ScoopInstaller/Install
 
@@ -255,7 +255,7 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   si go
   ```
 
-- 换源（三选一）：
+- 换源：
 
   ```
   go env -w GOPROXY=https://goproxy.cn,direct
