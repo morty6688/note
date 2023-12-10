@@ -1,5 +1,7 @@
 ## 非典型面试题
 
+- 面试一般会问leetcode算法题，考察重点在算法。这里记录一些非典型面试题，跟算法关系不大，但是问的也比较多。
+
 #### 手写单例
 
 - Runtime类实现方式
@@ -133,53 +135,220 @@
 
   - 当然也可以加锁，比如`synchronized`，`wait()`和`notifyAll()`配合使用
 
+#### 实现栈和队列
 
-#### 实现一个栈
+- 栈和队列首先要先抓住三个API的实现（isEmpty，isFull，size）
 
-- 简单实现如下
+##### 栈
+
+- 简单实现如下。这个还是很简单直观的，没啥特殊注意的地方
 
   ```java
-  class Stack {
-      private int[] arr;
-      private int top;
+  public class Stack {
+      private final int[] array;
+      private int top = -1;
   
-      public Stack(int capacity) {
-          arr = new int[capacity];
-          top = -1;
-      }
-  
-      public void push(int element) {
-          if (top == arr.length - 1) {
-              throw new IllegalStateException("栈已满！");
-          }
-          arr[top++] = element;
-      }
-  
-      public int pop() {
-          if (isEmpty()) {
-              throw new IllegalStateException("栈为空！");
-          }
-          return arr[top--];
-      }
-  
-      public int top() {
-          if (isEmpty()) {
-              throw new IllegalStateException("栈为空！");
-          }
-          return arr[top];
+      public Stack(int size) {
+          array = new int[size];
       }
   
       public boolean isEmpty() {
           return top == -1;
       }
   
+      public boolean isFull() {
+          return top == array.length - 1;
+      }
+  
       public int size() {
           return top + 1;
+      }
+  
+      public void push(int num) {
+          if (isFull()) {
+              throw new RuntimeException("stack is full!");
+          }
+          array[++top] = num;
+      }
+  
+      public int pop() {
+          if (isEmpty()) {
+              throw new RuntimeException("stack is empty!");
+          }
+          return array[top--];
+      }
+  
+      public int top() {
+          if (isEmpty()) {
+              throw new RuntimeException("stack is empty!");
+          }
+          return array[top];
       }
   }
   ```
 
-#### LRU Cache
+##### 队列
+
+- 栈的实现很简单，因为栈只有一个指针指向top，添加删除只改变这一个指针。但是队列不同，是队尾添加，队头删除，需要两个指针。以下是顺序队列的实现，记住`head = tail = -1`，然后按这个写就行了
+
+  ```java
+  public class Queue {
+      private int maxSize;
+      private int head, tail;
+      private int[] array;
+  
+      public Queue(int maxSize) {
+          this.maxSize = maxSize;
+          array = new int[maxSize];
+          head = tail = -1;
+      }
+  
+      public boolean isEmpty() {
+          return head == tail;
+      }
+  
+      public boolean isFull() {
+          return (tail + 1) == maxSize;
+      }
+  
+      public int size() {
+          return tail - head;
+      }
+  
+      public void add(int num) {
+          if (isFull()) {
+              throw new RuntimeException("Queue is full");
+          }
+          array[++tail] = num;
+      }
+  
+      public int remove() {
+          if (isEmpty()) {
+              throw new RuntimeException("Queue is empty");
+          }
+          return array[++head];
+      }
+  
+      public int getHead() {
+          if (isEmpty()) {
+              throw new RuntimeException("Queue is empty");
+          }
+          return array[head + 1];
+      }
+  }
+  ```
+
+- 顺序队列有个问题，就是浪费内存。head和tail只能向右移动，这样数组的左边会越来越空。因此更好的实现是循环队列，就是数组右边满了，可以继续放到左边。
+
+  - 假如此时还是使用上面的思路会导致判空和判满都是`head==tail`，所以需要额外的size来保存队列容量
+
+    ```java
+    public class Queue {
+        private int maxSize;
+        private int head, tail, size;
+        private int[] array;
+    
+        public Queue(int maxSize) {
+            this.maxSize = maxSize;
+            array = new int[maxSize];
+            head = tail = size = 0;
+        }
+    
+        public boolean isEmpty() {
+            return size == 0;
+        }
+    
+        public boolean isFull() {
+            return size == maxSize;
+        }
+    
+        public int size() {
+            return size;
+        }
+    
+        public void add(int num) {
+            if (isFull()) {
+                throw new RuntimeException("Queue is full");
+            }
+            array[tail] = num;
+            tail = (tail + 1) % maxSize;
+            size++;
+        }
+    
+        public int remove() {
+            if (isEmpty()) {
+                throw new RuntimeException("Queue is empty");
+            }
+            int res = array[head];
+            head = (head + 1) % maxSize;
+            size--;
+            return res;
+        }
+    
+        public int getHead() {
+            if (isEmpty()) {
+                throw new RuntimeException("Queue is empty");
+            }
+            return array[head];
+        }
+    }
+    ```
+
+  - 如果不使用额外size，只能牺牲一个数组元素位置来保证不会出现判空和判满条件相同的冲突问题，所以初始化要初始化为`maxSize+1`的容量
+
+    ```java
+    public class Queue {
+        private int maxSize;
+        private int head, tail;
+        private int[] array;
+    
+        public Queue(int maxSize) {
+            this.maxSize = maxSize + 1;
+            array = new int[maxSize + 1];
+            head = tail = 0;
+        }
+    
+        public boolean isEmpty() {
+            return head == tail;
+        }
+    
+        public boolean isFull() {
+            return (tail + 1) % maxSize == head;
+        }
+    
+        public int size() {
+            return (tail - head + maxSize) % maxSize;
+        }
+    
+        public void add(int num) {
+            if (isFull()) {
+                throw new RuntimeException("Queue is full");
+            }
+            array[tail] = num;
+            tail = (tail + 1) % maxSize;
+        }
+    
+        public int remove() {
+            if (isEmpty()) {
+                throw new RuntimeException("Queue is empty");
+            }
+            int res = array[head];
+            head = (head + 1) % maxSize;
+            return res;
+        }
+    
+        public int getHead() {
+            if (isEmpty()) {
+                throw new RuntimeException("Queue is empty");
+            }
+            return array[head];
+        }
+    }
+    ```
+
+#### 缓存淘汰策略
+
+##### LRU Cache
 
 - [[146]LRU Cache](https://leetcode.cn/problems/lru-cache/)，`leetcode`上有这个题。下面这个是有泛型的版本，简单的做法是用`LinkedHashMap`，构造函数加上true可以使元素按访问顺序排序
 
@@ -208,7 +377,68 @@
   }
   ```
   
-  如果要手动实现双向链表，应该是下面的写法，面试还真有面试官出这玩意儿，服气
+  如果要手动实现双向链表，应该是下面的写法，这东西写起来是很烦，建议先定义API和基本结构，如下。基本思想就是`get`时需要同时调用`moveToHead`。`put`时如果key已存在，更新值并`moveToHead`；如果key不存在，`addToHead`同时`size+1`，当然`size > capacity`时需要淘汰缓存，删除key并调用`removeTail`。
+  
+  ```java
+  public class LRUCache<K, V> {
+      private Map<K, DLinkedNode> cache = new HashMap<>();
+      private int size;
+      private int capacity;
+      private DLinkedNode head, tail;
+  
+      public LRUCache(int capacity) {
+          this.capacity = capacity;
+  
+          // dummy head and tail
+          head = new DLinkedNode();
+          tail = new DLinkedNode();
+          head.next = tail;
+          tail.prev = head;
+      }
+  
+      public V get(K key) {
+          DLinkedNode node = cache.get(key);
+          if (node == null) {
+              return null;
+          }
+          moveToHead(node);
+          return node.value;
+      }
+  
+      public void put(K key, V value) {
+          DLinkedNode node = cache.get(key);
+          if (node == null) {
+              // create a new node
+              DLinkedNode newNode = new DLinkedNode(key, value);
+              // add to cache
+              cache.put(key, newNode);
+              // add to head
+              addToHead(newNode);
+              size++;
+              if (size > capacity) {
+                  // remove the tail
+                  DLinkedNode tail = removeTail();
+                  cache.remove(tail.key);
+                  size--;
+              }
+          } else {
+              // update the value
+              node.value = value;
+              // move to head
+              moveToHead(node);
+          }
+      }
+  
+      class DLinkedNode {
+          K key;
+          V value;
+          DLinkedNode prev;
+          DLinkedNode next;
+      }
+  }
+  ```
+  
+  完整版如下。这里其实有四个链表操作，`addToHead`，`removeNode`，`moveToHead`，`removeTail`。需要先实现前两个，后两个依赖前两个的实现。
   
   ```java
   public class LRUCache<K, V> {

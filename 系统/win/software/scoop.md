@@ -311,7 +311,7 @@ si rustup
 #### 日常使用
 
 ```
-si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor
+si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox
 ```
 
 - everything->工具->选项：
@@ -353,8 +353,6 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 - icaros：使用管理员模式启动
 
 - sharex：启动时会跟onedrive冲突快捷键。此时先关闭sharex，然后按截图键，在onedrive弹出的窗口中选择`no, thx!`，再启动sharex即可
-
-
 
 
 #### 编程相关

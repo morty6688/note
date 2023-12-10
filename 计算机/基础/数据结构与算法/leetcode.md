@@ -391,7 +391,7 @@
 
 ###### 定义
 
-- 这个定义很简单，就是对于nums数组来说建立一个prefixSum数组。然后有`prefixSum[i+1]=prefixSum[i]+nums[i]`
+- 这个定义很简单，就是对于nums数组来说建立一个prefixSum数组。然后有`prefixSum[i + 1] = prefixSum[i] + nums[i]`
 - 然后前缀和数组建立之后，可以通过`i == 0 ? dp[j] : dp[j] - dp[i - 1]`直接求出区间`(i, j)`的和，就像[[303]Range Sum Query - Immutable](https://leetcode.cn/problems/range-sum-query-immutable/)中实现的API
 
 #### 常用算法模板
@@ -842,7 +842,7 @@
 
 ##### 贪心
 
-贪心算法没有统一的步骤，对于不同的题目，解法通常符合直觉
+贪心算法没有统一的步骤，对于不同的题目，解法通常会符合直觉。但是如果从来没有遇到过这题，大概率不可能当场想出来，即使知道是用贪心思路做细节上也不一定能完全做对。所以最好还是多做一些贪心的题
 
 - 典型题：
   - [[11]Container With Most Water](https://leetcode.cn/problems/container-with-most-water/)：这个题思路在于当我们向内移动板时，面积一定是减小的。但是向内移动短板时，面积有可能增大。所以为了这种可能性，要不断向内移动短板
@@ -850,6 +850,7 @@
   - [[300]Longest Increasing Subsequence](https://leetcode.cn/problems/longest-increasing-subsequence/)：本题要构造最长递增序列，采用贪心算法的思路为使序列增长的尽可能慢，这样序列就会尽可能的长。比如一个序列是[0, 4, 8]，此时遇到一个2，就需要把序列更新为[0, 2, 8]。由于这个序列是递增的，所以在查找更新位置时可以用二分降低复杂度
   - [[406]Queue Reconstruction by Height](https://leetcode.cn/problems/queue-reconstruction-by-height/)：本题的贪心思路为先让高个站好，然后遇到一个矮个就往k序号上插，这样前面正好有k个比他高的
   - [[621]Task Scheduler](https://leetcode.cn/problems/task-scheduler/)：贪心思路为先安排出现次数最多的任务，让这个任务两次执行的时间间隔正好为n。再在这个时间间隔内填充其他的任务
+  - [餐馆问题](https://blog.csdn.net/qq_43109561/article/details/99404646)：大意是餐馆有n张桌子，每张桌子可容纳的顾客数量不同，给出几批顾客，每批有顾客数量和花费。问不拼桌的情况下，怎么安排这些顾客餐馆盈利最大。思路是先将桌子按从小到大排序，再将顾客按照钱从大到小排序，排好序后给每一批顾客找个桌子吃饭，直到桌子用完，用完就中断循环，输出结果
 
 ##### 位运算
 
