@@ -1,6 +1,6 @@
 ## 非典型面试题
 
-- 面试一般会问leetcode算法题，考察重点在算法。这里记录一些非典型面试题，跟算法关系不大，但是问的也比较多。
+- 面试一般会问leetcode算法题，考察重点在算法。这里记录一些非典型面试题，跟算法关系不大，但是问的也比较多，更多的涉及到数据结构。
 
 #### 手写单例
 
@@ -89,7 +89,9 @@
   }
   ```
 
-#### 多线程交替打印
+#### 多线程
+
+##### 多线程交替打印
 
 - 本题表示一个奇偶数交替打印，首先Printer中有两个方法，分别打印奇数和偶数，main方法中分别启动相应的线程。
 
@@ -134,6 +136,109 @@
     ```
 
   - 当然也可以加锁，比如`synchronized`，`wait()`和`notifyAll()`配合使用
+
+##### 死锁
+
+- 死锁分顺序死锁和资源死锁。前者指的是java代码里的锁，每个锁就是一个对象，因为访问顺序有问题导致死锁；后者是非java代码的资源，比如两个线程去同时读取两个文件这种。面试中常实现的就是第一种，注意下面两个线程各睡1s就行，：
+
+  ```java
+  public class DeadLockDemo {
+      private final Object left = new Object();
+      private final Object right = new Object();
+  
+      public void leftRight() {
+          synchronized (left) {
+              try {
+                  Thread.sleep(1000);
+              } catch (InterruptedException e) {
+                  throw new RuntimeException(e);
+              }
+              synchronized (right) {
+                  System.out.println("leftRight");
+              }
+          }
+      }
+  
+      public void rightLeft() {
+          synchronized (right) {
+              try {
+                  Thread.sleep(1000);
+              } catch (InterruptedException e) {
+                  throw new RuntimeException(e);
+              }
+              synchronized (left) {
+                  System.out.println("rightLeft");
+              }
+          }
+      }
+  
+      public static void main(String[] args) {
+          DeadLockDemo deadLockDemo = new DeadLockDemo();
+          new Thread(deadLockDemo::leftRight).start();
+          new Thread(deadLockDemo::rightLeft).start();
+      }
+  }
+  ```
+
+##### 生产者消费者
+
+- 阻塞队列实现：生产者线程和消费者线程通过一个阻塞队列完成生产和消费，线程池的原理和这个也差不多
+
+  ```java
+  public class BlockingQueueModel {
+      private final BlockingQueue<Task> queue;
+      private final AtomicInteger counter = new AtomicInteger(0);
+  
+      public BlockingQueueModel(int capacity) {
+          this.queue = new ArrayBlockingQueue<>(capacity);
+      }
+  
+      class Producer implements Runnable {
+          @Override
+          public void run() {
+              try {
+                  Task task = new Task(counter.getAndIncrement());
+                  System.out.println("produce: " + task.no);
+                  queue.put(task);
+              } catch (Exception e) {
+                  throw new RuntimeException(e);
+              }
+          }
+      }
+  
+      class Consumer implements Runnable {
+          @Override
+          public void run() {
+              try {
+                  Task task = queue.take();
+                  System.out.println("consume: " + task.no);
+              } catch (Exception e) {
+                  throw new RuntimeException(e);
+              }
+          }
+      }
+  
+      public static void main(String[] args) {
+          BlockingQueueModel model = new BlockingQueueModel(5);
+          for (int i = 0; i < 5; i++) {
+              new Thread(model.new Producer()).start();
+          }
+          for (int i = 0; i < 5; i++) {
+              new Thread(model.new Consumer()).start();
+          }
+      }
+  }
+  
+  class Task {
+      int no;
+  
+      public Task(int no) {
+          this.no = no;
+      }
+  }
+  ```
+
+- 其他实现方式有wait和notifyAll等等，就不说了
 
 #### 实现栈和队列
 
@@ -530,4 +635,12 @@
   }
   ```
   
-  
+
+##### LFU Cache
+
+- [[460]LFU Cache](https://leetcode.cn/problems/lfu-cache/)：LFU Cache知道是啥就行了，目前为止没遇到面试官出过。这个比LRU Cache还长
+
+#### 加权轮询算法
+
+- 负载均衡算法的一种，此外还有最小连接数法，源地址哈希法
+- 这玩意儿面试应该不会问吧
