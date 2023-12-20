@@ -642,5 +642,60 @@
 
 #### 加权轮询算法
 
-- 负载均衡算法的一种，此外还有最小连接数法，源地址哈希法
-- 这玩意儿面试应该不会问吧
+- 负载均衡算法的一种，此外还有最小连接数法，源地址哈希法，这个出现频率真的高。为什么要有权重呢，因为服务可能部署在多台机器上，有的配置高，有的配置低，配置高的就可以设置一个大的权重。
+
+- 不同算法的比较：https://mp.weixin.qq.com/s/P25wnGkOjrZiq034UIu2pg
+
+- nginx采用平滑加权轮询算法保证调度不会集中压在同一台权重比较高的机器上：
+
+  - 正确性证明：https://tenfy.cn/2018/11/12/smooth-weighted-round-robin/
+
+  - 算法步骤（只有两步）：
+
+    - 对每个节点：`current += weight`
+    - 然后选择`current`最大的节点：`current -= total`
+
+  - 代码实现：
+
+    ```java
+    class WrrSmooth {
+        ServerNode[] nodes;
+        int total = 0;
+    
+        public WrrSmooth(ServerNode[] nodes) {
+            this.nodes = nodes;
+            for (ServerNode node : nodes) {
+                total += node.weight;
+            }
+        }
+    
+        public ServerNode nextNode() {
+            if (nodes == null || nodes.length == 0) {
+                return null;
+            }
+            ServerNode best = null;
+            for (ServerNode node : nodes) {
+                node.current += node.weight;
+                if (best == null || best.current < node.current) {
+                    best = node;
+                }
+            }
+            best.current -= total;
+            return best;
+        }
+    
+        static class ServerNode {
+            String name;
+            int weight;
+            int current = 0;
+    
+            public ServerNode(String name, int weight) {
+                this.name = name;
+                this.weight = weight;
+            }
+        }
+    }
+    ```
+
+    
+

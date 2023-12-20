@@ -63,5 +63,18 @@ wsl --install -d Ubuntu
    sudo chmod 777 /etc/wsl.conf
    ```
 
-   
+2. wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理
 
+   - `code %USERPROFILE%\.wslconfig`
+
+      ```
+      [experimental]
+      autoMemoryReclaim=gradual  # gradual  | dropcache | disabled
+      networkingMode=mirrored
+      dnsTunneling=true
+      firewall=true
+      autoProxy=true
+      hostAddressLoopback=true
+      ```
+   
+      

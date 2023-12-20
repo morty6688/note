@@ -358,8 +358,10 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 #### 编程相关
 
 ```
-si tabby filezilla switchhosts rapidee chatgpt telnet protobuf
+si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql
 ```
+
+- 装redis和mysql只为了使用他们的客户端测试docker或k8s组件的连接
 
 
 #### 系统相关
@@ -405,7 +407,7 @@ si steampp
   - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
     - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
   - [UACWhitelistTool](https://github.com/XIU2/UACWhitelistTool)：uac白名单小程序，生成一个不启动uac的快捷方式，可以添加到右键菜单
-  - [BingGPT](https://github.com/dice2o/BingGPT)
+  
   - [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher)：win11美化任务栏，卸载时把安装程序名改为ep_uninstall即可
   - translucenttb：下载windows store版。scoop下载的绿色版没有开机自启选项
     - 配合wallpaper engine一起用的话，将windows主题设置为深色，应用主题设置为浅色

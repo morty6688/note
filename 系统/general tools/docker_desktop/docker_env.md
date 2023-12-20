@@ -4,7 +4,7 @@
 
 - 安装docker desktop，启用k8s
 
-- 安装其他附件软件：
+- 安装其他附加软件：
 
   ```
   si helm openlens istioctl
@@ -26,11 +26,10 @@
     source <(kubectl completion zsh)
     ```
 
-- 使用demo profile安装istio
+- 安装istio配置档
 
   ```
-  istioctl install --set profile=demo -y
-  kubectl label namespace default istio-injection=enabled
+  istioctl install
   ```
 
 ## 常用命令
@@ -132,21 +131,19 @@
     docker update --restart no mysql
     ```
 
-
-
 ## 常用组件
 
 mall项目docker-compose示例：
 
 ```
-docker-compose -f docker-compose-env.yml -p mall up -d
+docker-compose -f mall.yml -p mall up -d
 ```
 
-[mall-docker-compose-env.yml](./mall/docker-compose-env.yml)
+[mall-docker-compose.yml](mall.yml)
 
 ### 数据库
 
-#### mysql
+#### MySQL
 
 - ```
    docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --restart always mysql
@@ -190,11 +187,13 @@ docker-compose -f docker-compose-env.yml -p mall up -d
 
 #### redis
 
-- ```
-   docker run -id --restart=always --privileged=true --name=redis -p 6379:6379 redis --requirepass "redis"
-   ```
+- 安装GUI：redisInsight，官网按钮有bug点不了，可以去github issues里找
 
-   - 安装GUI：redisInsight，官网按钮有bug点不了，可以去github issues里找
+- 单节点模式：
+
+  ```
+  docker run -id --restart=always --privileged=true --name=redis -p 6379:6379 redis --requirepass "redis"
+  ```
 
 ### 中间件
 
