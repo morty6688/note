@@ -139,7 +139,7 @@ mall项目docker-compose示例：
 docker-compose -f mall.yml -p mall up -d
 ```
 
-[mall-docker-compose.yml](mall.yml)
+[mall-docker-compose.yml](resources/compose_file/mall.yml)
 
 ### 数据库
 
@@ -197,17 +197,16 @@ docker-compose -f mall.yml -p mall up -d
 
 ### 中间件
 
-#### kafka
+#### 消息队列
 
-- [docker-compose.yml](../resources/kafka/docker-compose.yml)
+##### kafka
 
-   - 在该文件目录运行如下第一条命令即可完成部署，可以通过java或其他客户端直接访问localhost:9092；运行第二条命令即可停止kafka
+- [kafka.yml](resources/compose_file/kafka.yml)
 
-     ```
-     docker-compose up -d
-     docker-compose down
-     ```
-
+   ```
+   docker-compose -f kafka.yml -p kafka up -d
+   ```
+   
 - 使用：
 
    - 建立topic
@@ -245,6 +244,12 @@ docker-compose -f mall.yml -p mall up -d
      ```
      docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic quickstart --from-beginning
      ```
+
+##### RabbitMQ
+
+- ```
+  docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v `pwd`/data:/var/lib/rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --restart always rabbitmq:3.12.6-management-alpine
+  ```
 
 #### Logstash
 
@@ -287,7 +292,7 @@ docker-compose -f mall.yml -p mall up -d
      docker run --name kibana --link=elasticsearch:test -p 5601:5601 -d kibana:7.2.0
      ```
    
-   - 简单示例（在idea中打开）：[es-demo.http](../resources/es/es-demo.http)
+   - 简单示例（在idea中打开）：[es-demo.http](resources/es/es-demo.http)
    
    - **问题**：
    
@@ -302,13 +307,6 @@ docker-compose -f mall.yml -p mall up -d
        ```
        curl -s  'http://localhost:9200/_cat/indices/?v' | grep red
        ```
-
-
-#### RabbitMQ
-
-- ```
-   docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v `pwd`/data:/var/lib/rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --restart always rabbitmq:3.12.6-management-alpine
-   ```
 
 ### 微服务组件
 
@@ -365,7 +363,7 @@ docker-compose -f mall.yml -p mall up -d
      ```
      docker-compose -f zipkin-elasticsearch.yml -p zipkin-elasticsearch up -d
      ```
-     [zipkin-elasticsearch.yml](zipkin-elasticsearch.yml)
+     [zipkin-elasticsearch.yml](resources/compose_file/zipkin-elasticsearch.yml)
 
    - 整合rabbitmq：
 
@@ -392,7 +390,7 @@ docker-compose -f mall.yml -p mall up -d
   docker run --name seata-server -d -p 8091:8091 -p 7091:7091 --restart always seataio/seata-server:latest
   ```
 
-  - 将本地修改好的[application.yml](./seata/application.yml)（容器内部无法访问宿主机，要把nacos的ip改成host.docker.internal）复制到容器之后重启。[参考](https://github.com/seata/seata/blob/develop/server/src/main/resources/application.example.yml)
+  - 将本地修改好的[application.yml](resources/config_file/seata/application.yml)（容器内部无法访问宿主机，要把nacos的ip改成host.docker.internal）复制到容器之后重启。[参考](https://github.com/seata/seata/blob/develop/server/src/main/resources/application.example.yml)
 
     ```
     docker cp ./application.yml seata-server:/seata-server/resources

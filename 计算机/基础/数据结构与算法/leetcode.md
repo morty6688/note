@@ -735,11 +735,16 @@
 
     - [[322]Coin Change](https://leetcode.cn/problems/coin-change/)：本题思路很简单，只是需要注意初始化dp数组时，可以设置从1到amount的初始值都是amount+1，因为面值为amount的硬币最多也只能兑换为额度都是1的硬币，所以数量上限不可能超过amount。
 
+  - 小偷问题：
+  
+    - [[198]House Robber](https://leetcode.cn/problems/house-robber/)：这个思路很容易想。
+    - 
+  
   - 股票问题：
   
     - [[121]Best Time to Buy and Sell Stock](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)：只能买卖一次。跟最大子数组和差不多，区别是一个是preSum，这个是preMin。
     - [[309]Best Time to Buy and Sell Stock with Cooldown](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)：由于冷冻期间不能买卖股票，因此需要加一维状态区分冷冻期。分别表示持有股票或者不持有股票，但是处于或者不处于冷冻期下的收益。然后根据相应的状态转移列出转移方程。
-    
+  
   - [背包问题](https://github.com/tianyicui/pack)：
   
     - 描述：有一些物品和一个容量为N的背包，每件物品有体积Vi和价值Wi，问怎么放可以使背包中物品价值最大。
@@ -875,3 +880,4 @@
   
   - 约瑟夫环(Josephus problem)。
     - [LCR 187. 破冰游戏](https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/)，原来的剑指offer第62题
+

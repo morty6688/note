@@ -650,7 +650,7 @@
 
   - 正确性证明：https://tenfy.cn/2018/11/12/smooth-weighted-round-robin/
 
-  - 算法步骤（只有两步）：
+  - 算法步骤（只有两步，着重点在`current`）：
 
     - 对每个节点：`current += weight`
     - 然后选择`current`最大的节点：`current -= total`
