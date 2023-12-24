@@ -136,7 +136,7 @@
 mall项目docker-compose示例：
 
 ```
-docker-compose -f mall.yml -p mall up -d
+docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 ```
 
 [mall-docker-compose.yml](resources/compose_file/mall.yml)
@@ -201,49 +201,56 @@ docker-compose -f mall.yml -p mall up -d
 
 ##### kafka
 
-- [kafka.yml](resources/compose_file/kafka.yml)
+- GUI：[kafka-ui](https://github.com/provectus/kafka-ui)，已集成在下面的docker-compose文件中
+
+- 集群模式（1zk-3broker-1ui）：[kafka-cluster.yml](resources/compose_file/kafka-cluster.yml)
 
    ```
-   docker-compose -f kafka.yml -p kafka up -d
+   docker-compose -f ./resources/compose_file/kafka-cluster.yml -p kafka-cluster up -d
    ```
-   
+
 - 使用：
 
-   - 建立topic
+   - topic操作
 
-     ```
-     docker exec broker kafka-topics --bootstrap-server broker:9092 --create --topic quickstart
-     ```
-
-   - topic list
-
-     ```
+     - 建立名为events的topic。`--replication-factor 3`和`--partitions 4`分别可以指定副本因子数和分区数，副本因子数需要大于broker数，比如：
+   
+       ```
+       docker exec broker kafka-topics --bootstrap-server broker:9092 --create --topic events --replication-factor 3 --partitions 4
+       ```
+     
+     - topic list
+   
+       ```
      docker exec broker kafka-topics --bootstrap-server broker:9092 --list
-     ```
-
-   - topic详情
-
-     ```
-     docker exec broker kafka-topics --bootstrap-server broker:9092 --describe --topic quickstart
-     ```
-
-   - 删除topic
-
-     ```
-     docker exec broker kafka-topics --bootstrap-server broker:9092 --delete --topic quickstart
-     ```
-
-   - 写消息
-
-     ```
-     docker exec --interactive --tty broker kafka-console-producer --bootstrap-server broker:9092 --topic quickstart
-     ```
-
-   - 读消息
-
-     ```
-     docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic quickstart --from-beginning
-     ```
+       ```
+     
+     - topic详情
+   
+       ```
+     docker exec broker kafka-topics --bootstrap-server broker:9092 --describe --topic events
+       ```
+     
+     - 删除topic
+   
+       ```
+       docker exec broker kafka-topics --bootstrap-server broker:9092 --delete --topic events
+       ```
+     
+   - 消息操作
+   
+     - 写消息
+   
+       ```
+       docker exec --interactive --tty broker kafka-console-producer --bootstrap-server broker:9092 --topic events
+       ```
+   
+     - 读消息
+   
+       ```
+       docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic events --from-beginning
+       ```
+   
 
 ##### RabbitMQ
 
@@ -341,7 +348,7 @@ docker-compose -f mall.yml -p mall up -d
     ./bin/zkCli.sh
     ```
   
-  - 下载可视化GUI：https://github.com/vran-dev/PrettyZoo/releases
+  - GUI：[PrettyZoo](https://github.com/vran-dev/PrettyZoo/releases)
 
 ##### nacos
 
@@ -361,7 +368,7 @@ docker-compose -f mall.yml -p mall up -d
    - 整合es：
 
      ```
-     docker-compose -f zipkin-elasticsearch.yml -p zipkin-elasticsearch up -d
+     docker-compose -f ./resources/compose_file/zipkin-elasticsearch.yml -p zipkin-elasticsearch up -d
      ```
      [zipkin-elasticsearch.yml](resources/compose_file/zipkin-elasticsearch.yml)
 
