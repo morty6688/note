@@ -172,11 +172,11 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 #### pg
 
 - ```
-   docker run --name pg -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
+   docker run --name pg -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d  --restart always postgres
    ```
 
    - ```
-     psql -h localhost -U postgres -W
+     docker exec -it pg psql -hlocalhost -Upostgres -W
      ```
 
      ```
@@ -209,6 +209,8 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
    docker-compose -f ./resources/compose_file/kafka-cluster.yml -p kafka-cluster up -d
    ```
 
+   - docker-compose文件中将kafka容器内部设置为19092，外部设置为9092方便宿主机访问。生产环境不需要这么设置
+
 - 使用：
 
    - topic操作
@@ -216,25 +218,25 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
      - 建立名为events的topic。`--replication-factor 3`和`--partitions 4`分别可以指定副本因子数和分区数，副本因子数需要大于broker数，比如：
    
        ```
-       docker exec broker kafka-topics --bootstrap-server broker:9092 --create --topic events --replication-factor 3 --partitions 4
+       docker exec kafka1 kafka-topics --bootstrap-server kafka1:19092 --create --topic events --replication-factor 3 --partitions 4
        ```
      
      - topic list
    
        ```
-     docker exec broker kafka-topics --bootstrap-server broker:9092 --list
+     docker exec kafka1 kafka-topics --bootstrap-server kafka1:19092 --list
        ```
      
      - topic详情
    
        ```
-     docker exec broker kafka-topics --bootstrap-server broker:9092 --describe --topic events
+     docker exec kafka1 kafka-topics --bootstrap-server kafka1:19092 --describe --topic events
        ```
      
      - 删除topic
    
        ```
-       docker exec broker kafka-topics --bootstrap-server broker:9092 --delete --topic events
+       docker exec kafka1 kafka-topics --bootstrap-server kafka1:19092 --delete --topic events
        ```
      
    - 消息操作
@@ -242,13 +244,13 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
      - 写消息
    
        ```
-       docker exec --interactive --tty broker kafka-console-producer --bootstrap-server broker:9092 --topic events
+       docker exec --interactive --tty kafka1 kafka-console-producer --bootstrap-server kafka1:19092 --topic events
        ```
    
      - 读消息
    
        ```
-       docker exec --interactive --tty broker kafka-console-consumer --bootstrap-server broker:9092 --topic events --from-beginning
+       docker exec --interactive --tty kafka1 kafka-console-consumer --bootstrap-server kafka1:19092 --topic events --from-beginning
        ```
    
 

@@ -69,6 +69,8 @@ si aria2
 s config aria2-split 32
 s config aria2-max-connection-per-server 16
 s config aria2-min-split-size 1M
+# 有时候aria2会有问题
+scoop config aria2-enabled false
 ```
 
 #### 代理

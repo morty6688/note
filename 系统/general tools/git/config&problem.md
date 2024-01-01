@@ -20,6 +20,7 @@ git config --global core.editor "code --wait"
 
 ```bash
 git config --global http.proxy 127.0.0.1:1130
+git config --global https.proxy https://127.0.0.1:1130
 ```
 
 3. 配置ssh-key，将生成的.pub公钥添加到目标仓库
@@ -178,6 +179,14 @@ git config --global core.quotepath false
      ServerAliveInterval 10
      HostKeyAlgorithms +ssh-rsa
      PubkeyAcceptedKeyTypes +ssh-rsa
+   ```
+
+3. schannel: next InitializeSecurityContext failed
+
+   解决办法：
+
+   ```
+   git config --system http.sslbackend openssl
    ```
 
    
