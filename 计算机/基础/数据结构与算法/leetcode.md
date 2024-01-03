@@ -37,7 +37,7 @@
 
    ```
    leetcode：
-   1    3    5    8    9    11    15    17    19    20    21    22    23    24    31    33    34    37    39    40    42    43    46    47    48    49    50    51    53    54    55    56    62    64    67    69    70    72    75    76    77    78    79    83    84    88    90    91    93    94    95    96    98    101    102    104    105    108    109    110    111    112    113    121    122    123    127    128    130    131    135    136    139    141    142    144    145    146    147    151    152    153    154    155    160    162    165    167    168    169    172    179    188    189    190    198    200    204    205    206    207    208    210    213    215    216    217    221    224    225    226    230    231    232    234    235    236    238    240    241    242    257    260    268    278    279    283    287    292    300    303    309    316    318    322    326    328    337    338    342    343    345    347    367    371    376    377    378    392    394    404    405    406    409    413    415    416    417    435    437    438    442    448    451    452    455    461    462    470    474    476    485    494    496    501    503    504    513    518    524    530    538    540    543    547    560    565    566    567    572    581    583    594    605    617    621    628    633    637    645    646    647    650    662    665    667    669    671    677    680    684    687    693    695    696    697    714    725    739    743    744    763    766    769    785    912    946    1091    1143
+   1    3    5    8    9    11    15    17    19    20    21    22    23    24    31    33    34    37    39    40    42    43    46    47    48    49    50    51    53    54    55    56    62    64    67    69    70    72    75    76    77    78    79    83    84    88    90    91    93    94    95    96    98    101    102    104    105    108    109    110    111    112    113    121    122    123    127    128    130    131    135    136    139    141    142    144    145    146    147    148    151    152    153    154    155    160    162    165    167    168    169    172    179    188    189    190    198    200    204    205    206    207    208    210    213    215    216    217    221    224    225    226    230    231    232    234    235    236    238    240    241    242    257    260    268    278    279    283    287    292    300    303    309    316    318    322    326    328    337    338    342    343    345    347    367    371    376    377    378    392    394    404    405    406    409    413    415    416    417    435    437    438    442    448    451    452    455    461    462    470    474    476    485    494    496    501    503    504    513    518    524    530    538    540    543    547    560    565    566    567    572    581    583    594    605    617    621    628    633    637    645    646    647    650    662    665    667    669    671    677    680    684    687    693    695    696    697    714    725    739    743    744    763    766    769    785    912    946    1091    1143
 
    剑指offer：
    9    13    32    53    59    62
@@ -47,7 +47,7 @@
 
    - 双指针：15    88    165    167    283    345    524    581    633    680
 
-   - 排序：56    75    179    215    347    451    912
+   - 排序：56    75    147    148    179    215    347    451    912
 
    - 贪心：11    55    135    122    300    392    406    435    452    455    605    621    665    763
 
@@ -67,7 +67,7 @@
      
    - 数学：50    67    96    168    169    172    204    238    279    292    326    343    367    405    415    462    470    504    628    剑-62
 
-   - 链表：19    21    23    24    83    141    142    147    160    206    234    328    725
+   - 链表：19    21    23    24    83    141    142    160    206    234    328    725
 
    - 树：94    98    101    102    104    105    108    109    110    111    112    113    144    145    226    230    235    236    337    404    501    513    530    538    543    572    617    637    653    662    669    671    677    687    剑-32(103)    剑-59
       - 层序遍历：
@@ -513,64 +513,73 @@
 
 ​	归并排序同样为分治的思想，只是每次将左右两边的subList排序好，最后通过merge两个有序的subList得到最终结果。
 
-- 对数组的归并简单的方法是建立一个新数组进行copy，核心方法如下：
+- 首先是数组：
 
-  ```java
-  private void mergeSort(int[] nums, int left, int right) {
-      int mid = left + (right - left) / 2;
-      if (left < right) {
-          mergeSort(nums, left, mid);
-          mergeSort(nums, mid + 1, right);
-          merge(nums, left, mid, right);
-      }
-  }
-  
-  private void merge(int[] nums, int left, int mid, int right) {
-      int[] temp = new int[right - left + 1];
-      int i = left, j = mid + 1, k = 0;
-      while (i <= mid && j <= right) {
-          if (nums[i] < nums[j]) {
-              temp[k++] = nums[i++];
-          } else {
-              temp[k++] = nums[j++];
-          }
-      }
-      while (i <= mid) {
-          temp[k++] = nums[i++];
-      }
-      while (j <= right) {
-          temp[k++] = nums[j++];
-      }
-  
-      System.arraycopy(temp, 0, nums, left, temp.length);
-  }
-  ```
+  - 对数组的归并简单的方法是建立一个新数组进行copy，核心方法如下：
 
-- merge in place方法如下：
+    ```java
+    private void mergeSort(int[] nums, int left, int right) {
+        int mid = left + (right - left) / 2;
+        if (left < right) {
+            mergeSort(nums, left, mid);
+            mergeSort(nums, mid + 1, right);
+            merge(nums, left, mid, right);
+        }
+    }
+    
+    private void merge(int[] nums, int left, int mid, int right) {
+        int[] temp = new int[right - left + 1];
+        int i = left, j = mid + 1, k = 0;
+        while (i <= mid && j <= right) {
+            if (nums[i] < nums[j]) {
+                temp[k++] = nums[i++];
+            } else {
+                temp[k++] = nums[j++];
+            }
+        }
+        while (i <= mid) {
+            temp[k++] = nums[i++];
+        }
+        while (j <= right) {
+            temp[k++] = nums[j++];
+        }
+    
+        System.arraycopy(temp, 0, nums, left, temp.length);
+    }
+    ```
 
-  ```java
-  // TODO：添加原理
-  private void merge(int[] nums, int left, int mid, int right) {
-      int i = left, j = mid + 1;
-      while (i < j && j <= right) {
-          while (i < j && nums[i] <= nums[j]) {
-              i++;
-          }
-          int index = j;
-          while (j <= right && nums[j] <= nums[i]) {
-              j++;
-          }
-          swapAdjacentBlocks(nums, i, index - i, j - index);
-          i += (j - index);
-      }
-  }
-  
-  private void swapAdjacentBlocks(int arr[], int bias, int oneSize, int anotherSize) {
-      reverse(arr, bias, bias + oneSize - 1);
-      reverse(arr, bias + oneSize, bias + oneSize + anotherSize - 1);
-      reverse(arr, bias, bias + oneSize + anotherSize - 1);
-  }
-  ```
+
+  - merge in place方法如下：
+
+    ```java
+    // TODO：添加原理
+    private void merge(int[] nums, int left, int mid, int right) {
+        int i = left, j = mid + 1;
+        while (i < j && j <= right) {
+            while (i < j && nums[i] <= nums[j]) {
+                i++;
+            }
+            int index = j;
+            while (j <= right && nums[j] <= nums[i]) {
+                j++;
+            }
+            swapAdjacentBlocks(nums, i, index - i, j - index);
+            i += (j - index);
+        }
+    }
+    
+    private void swapAdjacentBlocks(int arr[], int bias, int oneSize, int anotherSize) {
+        reverse(arr, bias, bias + oneSize - 1);
+        reverse(arr, bias + oneSize, bias + oneSize + anotherSize - 1);
+        reverse(arr, bias, bias + oneSize + anotherSize - 1);
+    }
+    ```
+
+- 然后是链表：
+
+  - 题目：[[148]Sort List](https://leetcode.cn/problems/sort-list/)，链表排序不使用额外空间的话，只能用归并。堆排序需要额外的堆空间，快排需要记录每个节点的序号，都不合适
+  - 链表的话不像数组那样需要开辟额外空间，merge函数的参数只需要两个子链表的头结点，而且用一个dummy节点记录最后结果即可
+  - 数组可以直接得到mid，链表的话需要使用快慢指针确定mid。最外层调用为`sortList(head, null)`，不包括末尾节点。所以子链表前半和后半直接为`sortList(head, mid)`，`sortList(mid, tail)`
 
 ###### 特殊排序
 

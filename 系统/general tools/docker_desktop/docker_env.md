@@ -271,7 +271,7 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 #### ES
 
 - ```
-   docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d elasticsearch:7.2.0
+   docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d elasticsearch:7.17.16
    ```
 
    - 解决跨域问题：进入容器
@@ -289,7 +289,7 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
      ```
      cd /usr/share/elasticsearch/plugins/
-     elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.2.0/elasticsearch-analysis-ik-7.2.0.zip
+     elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.2.0/elasticsearch-analysis-ik-7.17.16.zip
      ```
 
      - 如果挂载运行的话，将类似elasticsearch-analysis-ik-7.2.0.zip的文件放到plugins下直接解压
@@ -298,7 +298,7 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
    - kibana部署（ui界面）：
    
      ```
-     docker run --name kibana --link=elasticsearch:test -p 5601:5601 -d kibana:7.2.0
+     docker run --name kibana --link=elasticsearch:test -p 5601:5601 -d kibana:7.17.16
      ```
    
    - 简单示例（在idea中打开）：[es-demo.http](resources/es/es-demo.http)
