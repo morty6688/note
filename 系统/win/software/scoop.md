@@ -360,7 +360,7 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 #### 编程相关
 
 ```
-si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql
+si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql jetbrains-toolbox
 ```
 
 - 装redis和mysql只为了使用他们的客户端测试docker或k8s组件的连接

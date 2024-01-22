@@ -20,7 +20,7 @@ git config --global core.editor "code --wait"
 
 ```bash
 git config --global http.proxy 127.0.0.1:1130
-git config --global https.proxy https://127.0.0.1:1130
+git config --global https.proxy http://127.0.0.1:1130
 ```
 
 3. 配置ssh-key，将生成的.pub公钥添加到目标仓库
@@ -189,4 +189,12 @@ git config --global core.quotepath false
    git config --system http.sslbackend openssl
    ```
 
-   
+4. ssh: connect to host github.com port 22: Connection timed out：
+
+   不知道为什么会出现这个。但是解决办法是在`~/.ssh/config`的每个配置中添加如下两行：
+
+   ```
+   Host github.com
+     HostName ssh.github.com
+     Port 443
+   ```

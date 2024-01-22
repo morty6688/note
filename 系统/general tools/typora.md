@@ -4,7 +4,7 @@
 
    - win: 
 
-     ```
+     ```json
      /** For advanced users. */
      {
        "defaultFontFamily": {
@@ -47,8 +47,20 @@
 
 5. 配置完成后重启
 
+### 插件
+
+1. 首先安装[typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin)
+
+   - ```powershell
+     # 使用管理员模式在解压后的目录中运行以下命令
+     .\install.ps1 -root C:\Users\lijian\scoop\apps\typora\current
+     ```
+
+2. 然后安装copy button
+
 ### 其他配置
 
 
 - 使用技巧
    - 中途取消列表：先向后缩进再取消，否则会取消整个列表
+

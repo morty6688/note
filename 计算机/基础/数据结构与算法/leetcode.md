@@ -96,8 +96,29 @@
 ##### 数组
 
 - 一些奇怪套路的典型题：
-  - [[31]Next Permutation](https://leetcode-cn.com/problems/next-permutation/)：有很奇怪的套路，需要先从后向前找一个升序相邻数对(i, j)，然后向后找第一个比i大的数记为k，交换i和k，然后reverse从i+1到结尾的元素。
+  - [[31]Next Permutation](https://leetcode-cn.com/problems/next-permutation/)：有很奇怪的套路，需要先**从后向前**找一个升序相邻数对(i, i+1)，然后**从后向前**第一个比i大的数记为j，交换i和j，然后reverse从i+1到结尾的元素。这个最好是记一个例子，比如`[4,1,3,2]`，变化路径是`[4,1,3,2] => [4,2,3,1] => [4,2,1,3]`。其中需要注意的点有：
+  
+    - 第一步查找i的时候，如果最后`i==-1`，说明整个序列是上升序列，直接翻转整个序列返回即可
+    - 循环中需要排除相等的情况，也就是如下两种写法二选一：
+  
+      ```java
+      while (i >= 0 && nums[i] >= nums[i + 1]) {
+          i--;
+      }
+      ```
+  
+      或者：
+  
+      ```java
+      while (i >= 0) {
+          if (nums[i] < nums[i + 1]) {
+              break;
+          }
+          i--;
+      }
+      ```
   - **数组环形链表**：如果数组里只包括数组索引，则可以将数组看成链表，如果出现重复索引，则可以看成环形链表
+  
     - [[287]Find the Duplicate Number](https://leetcode.cn/problems/find-the-duplicate-number/)：本题即可将数组看成环形链表，使用快慢指针解决
 
 ##### 双指针
@@ -108,7 +129,7 @@
 
 - 其他典型题：
 
-  - [[15]3Sum](https://leetcode.cn/problems/3sum/)：这题思路其实很简单，比较烦的去除重复元素时的细节处理。这个题细节处理有以下几点需要注意：
+  - [[15]3Sum](https://leetcode.cn/problems/3sum/)：这题思路其实很简单，比较烦的是去除重复元素时的细节处理。这个题细节处理有以下几点需要注意：
 
     - 外层指针`int i`的循环条件为`i < n - 2`，这个好理解，因为结果里至少需要三个数。同时尽量用`while`循环，如果用`for`循环会导致外层循环和内层循环去重逻辑不一致，外层不能写`i++`，很别扭，见下一条
 
@@ -150,7 +171,9 @@
 
 - 单链表部分的题，包括合并、反转等等操作之类的没啥难的；判定是否有环就用快慢指针，也没啥难的
 - 典型题：
+  - [[24]Swap Nodes in Pairs](https://leetcode.cn/problems/swap-nodes-in-pairs/)：两两一组反转链表，这个题思路是比较简单的，麻烦地方在于写起来很容易弄混pre, cur, post之间的关系，有的时候还会忘记更新cur。还是需要提前写一下
   - [[160]Intersection of Two Linked Lists](https://leetcode.cn/problems/intersection-of-two-linked-lists/)：本题有一个很取巧的解法是两个指针先顺着链表遍历，到结尾了再跳到另一个链表。两个指针相遇在节点处即为有交叉，相遇在null则没有
+  
 
 ##### 哈希表
 
@@ -193,7 +216,7 @@
 
 - java推荐使用Deque来实现栈和队列，Deque拥有两套API。其一为add/remove/element，会抛出异常，其二为offer/poll/peek，会返回特殊值，常用的为第一套。
 - add相当于addLast，push相当于addFirst，remove和pop均相当于removeFirst，element相当于getFirst。因此当做栈来使用时，用push/pop/element或者addLast/removeLast/getLast；当做队列来使用时用add/remove/element。
-- **addLast/removeLast/getLast可以保证一个栈内的元素用new ArrayList<>(deque)转换后是正向打印出来的。适合backtrack或者dfs等场合要保存路径时应用。**
+- 可以用来解决backtrack问题，见[backtrack](# backtrack)
 
 ###### 单调栈
 
@@ -346,29 +369,11 @@
 
   - [[108]Convert Sorted Array to Binary Search Tree](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/)：本题要把有序数组组成二叉搜索平衡树，因为其中序遍历一定有序，所以可以考虑二分，mid一定是根
 
-- 二叉树的公共祖先（LCA问题）：按是否二叉搜索树来区分难度，该题及其容易忘记，建议多做几遍
+- **二叉树的公共祖先**（LCA问题）：按是否二叉搜索树来区分难度。
 
   - 如果是搜索树，思路比较简单
 
-  - 如果不是搜索树，[[236]Lowest Common Ancestor of a Binary Tree](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)：
-
-    ```java
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null || root == p || root == q) {
-            return root;
-        }
-    	// 递归过程中可能找不到两者的公共祖先，而只能找到其中一个的祖先
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
-        if (left == null) {
-            return right;
-        }
-        if (right == null) {
-            return left;
-        }
-        return root;
-    }
-    ```
+  - 如果不是搜索树，[[236]Lowest Common Ancestor of a Binary Tree](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)。**本题切记搞清楚函数递归出口。如果根节点与要找的两个节点中的一个相同，则直接返回根节点，表示可能找到了局部公共祖先。递归返回时，如果左子树和右子树都返回了节点，那么说明了根节点就是结果；如果有一个结果是null，说明另一个节点是公共祖先**
 
 - 路径和问题：先看是不是从根节点到叶节点的路径
 
@@ -637,16 +642,26 @@
 
 - backtrack本质上是一种dfs，不同之处在于**dfs通常解决可达性问题，到出口了直接返回；backtrack通常解决排列组合问题，需保存中间结果，之后继续递归。**
 
-  - 通常用一个栈（一般用Deque，结果容易处理）来保存中间结果。所以进入下一层递归时，需要将某元素标记为访问过，而返回上一层递归时，需要将访问标记删除
+  - Deque的API：**addLast/removeLast/getLast可以保证一个栈内的元素用new ArrayList<>(deque)转换后是正向打印出来的。适合backtrack或者dfs等场合要保存路径时应用。所以通常用Deque来保存中间结果**
 
+  - 有些字符串的backtrack问题也可以用StringBuilder，
+
+  - 进入下一层递归时，需要将某元素标记为访问过或者加入中间结果，而返回上一层递归时，需要将访问标记删除或者从中间结果删除
+  
   - 通常需要一个pos变量表示当前位置，表示进入下一层时从哪个位置开始
-
+  
   - 典型题：
   
     - [[17]Letter Combinations of a Phone Number](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)：比较简单
   
+    - [[22]Generate Parentheses](https://leetcode.cn/problems/generate-parentheses/)：本题与传统backtrack不太一样。backtrack函数中需要记录open和close的数量。当open数量小于n，close小于open时，分别添加每个数量并进入下一层递归；同时因为结果是字符串，所以最好使用StringBuilder保存中间结果，同时用`append()`和`deleteCharAt(cur.length() - 1)`来处理递归前后的中间结果
+  
+    - [[39]Combination Sum](https://leetcode-cn.com/problems/combination-sum/)：比较典型的题，可以重复利用元素，要注意进入下一层pos的值
+  
+    - [[剑-38]字符串的排列](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/)：本题跟上题不一样的是，要对结果去重
+  
     - [[46]Permutations](https://leetcode-cn.com/problems/permutations/)
-    
+  
       ```java
       // backtrack需要一个pos变量表示当前位置，还需要一个栈来保存中间结果。本例中，nums是swap in place的，因此省略了这个队列
       private void backtrack(List<List<Integer>> res, int[] nums, int pos) {
@@ -677,13 +692,6 @@
           }
       }
       ```
-  
-    - [[39]Combination Sum](https://leetcode-cn.com/problems/combination-sum/)：比较典型的题，可以重复利用元素，要注意进入下一层pos的值
-    
-    
-      - [[22]Generate Parentheses](https://leetcode-cn.com/problems/generate-parentheses/)：本题的一个特殊之处在于有两个pos，左括号和右括号，因此解法略有不同
-      - [[剑-38]字符串的排列](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/)：本题跟上题不一样的是，要对结果去重
-    
   
 
 ###### dfs
@@ -781,8 +789,10 @@
       }
       ```
 
-    - [[322]Coin Change](https://leetcode.cn/problems/coin-change/)：本题思路很简单，只是需要注意初始化dp数组时，可以设置从1到amount的初始值都是amount+1，因为面值为amount的硬币最多也只能兑换为额度都是1的硬币，所以数量上限不可能超过amount。
+    - [[152]Maximum Product Subarray](https://leetcode.cn/problems/maximum-product-subarray/)：本题看似跟上一题一样，但是由于乘积会有负数的问题。所以每次循环不仅需要更新preMax，还需要更新preMin，而且更新这两个值的时候需要从三个数中更新。
 
+    - [[322]Coin Change](https://leetcode.cn/problems/coin-change/)：本题思路很简单，只是需要注意初始化dp数组时，可以设置从1到amount的初始值都是amount+1，因为面值为amount的硬币最多也只能兑换为额度都是1的硬币，所以数量上限不可能超过amount。
+  
     - 对从2到n的所有数分解质因数，并统计全部质因数个数（例如输入4，输出4。因为2和3分解后都是1个质因数，4=2*2有两个质因数，所以总共是4个）：本题也是典型的数组动态规划，思路比较简单。唯一需要注意的可能是质数搜索范围为2到`sqrt{n}`
   
   - 小偷问题：

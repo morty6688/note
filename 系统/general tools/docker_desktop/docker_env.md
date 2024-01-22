@@ -29,10 +29,20 @@
 - 安装istio配置档
 
   ```
-  istioctl install
+  istioctl install --set profile=demo -y
+  kubectl label namespace default istio-injection=enabled
   ```
+  
+  - 有的时候default不能注入，可以新建一个namespace比如demo来注入
+  
+    ```
+    kubectl create ns demo
+    kubectl label namespace demo istio-injection=enabled
+    ```
 
 ## 常用命令
+
+### docker
 
 - 入门Dockerfile示例：
 
@@ -131,9 +141,13 @@
     docker update --restart no mysql
     ```
 
+### k8s
+
+- 缩放：https://www.51cto.com/article/713770.html
+
 ## 常用组件
 
-mall项目docker-compose示例：
+以mall项目docker-compose示例：
 
 ```
 docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
@@ -145,34 +159,39 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 #### MySQL
 
-- ```
-   docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --restart always mysql
+- 注意：**5.7挂载配置需要在conf下新建两个文件夹mysql.conf.d和conf.d，8.x挂载需要建conf.d**
+
+- for win：
+
+   ```bash
+   docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --restart always -v //d/shared/mono/mysql8/data:/var/lib/mysql -v //d/shared/mono/mysql8/conf:/etc/mysql -v //d/shared/mono/mysql8/logs:/logs mysql
    ```
 
-   - ```
-     mysql -hlocalhost -uroot -p
-     create database test
-     ```
-     
-     使用`show databases`查看全部数据库，`use test`切换到test数据库，`show tables`查看全部表
-     
-   - 复制宿主机sql到容器并执行
-   
-     ```
-     docker cp ./mall.sql mysql:/home
-     ```
-   
-     ```
-     mysql -uroot -p
-     source /home/mall.sql
-     ```
-   
-   - 5.7挂载配置需要在conf下新建两个文件夹mysql.conf.d和conf.d
+- ```
+  mysql -hlocalhost -uroot -p
+  ```
 
-#### pg
+  ```
+  create database test;
+  ```
+
+  使用`show databases`查看全部数据库，`use test`切换到test数据库，`show tables`查看全部表
+
+- 复制宿主机sql到容器并执行
+
+  ```
+  docker cp ./mall.sql mysql:/home
+  ```
+
+  ```
+  mysql -uroot -p
+  source /home/mall.sql
+  ```
+
+#### PG
 
 - ```
-   docker run --name pg -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d  --restart always postgres
+   docker run --name pg -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d -v //d/shared/mono/postgresql/data:/var/lib/postgresql/data --restart always postgres
    ```
 
    - ```
@@ -191,9 +210,12 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 - 单节点模式：
 
-  ```
-  docker run -id --restart=always --privileged=true --name=redis -p 6379:6379 redis --requirepass "redis"
-  ```
+  - for win：
+  
+    ```bash
+    docker run -id --restart=always --privileged=true --name=redis -v //d/shared/mono/redis/data:/data -p 6379:6379 redis
+    ```
+  
 
 ### 中间件
 
@@ -256,8 +278,10 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 ##### RabbitMQ
 
-- ```
-  docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v `pwd`/data:/var/lib/rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --restart always rabbitmq:3.12.6-management-alpine
+- for win：
+
+  ```
+  docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v //d/shared/mono/rabbitmq/data:/var/lib/rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --restart always rabbitmq:3.12.6-management-alpine
   ```
 
 #### Logstash
@@ -270,38 +294,30 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 #### ES
 
-- ```
-   docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d elasticsearch:7.17.16
+- for win：
+  
+   ```
+   docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d --restart always -v //d/shared/mono/elasticsearch/plugins:/usr/share/elasticsearch/plugins -v //d/shared/mono/elasticsearch/data:/usr/share/elasticsearch/data elasticsearch:7.17.16
    ```
 
-   - 解决跨域问题：进入容器
-
-     ```
-     cd /usr/share/elasticsearch/config/
-     vi elasticsearch.yml
-     
-     // 加入如下内容：
-     http.cors.enabled: true
-     http.cors.allow-origin: "*"
-     ```
-
-   - ik分词器安装：进入容器
-
-     ```
-     cd /usr/share/elasticsearch/plugins/
-     elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.2.0/elasticsearch-analysis-ik-7.17.16.zip
-     ```
-
-     - 如果挂载运行的话，将类似elasticsearch-analysis-ik-7.2.0.zip的文件放到plugins下直接解压
-     - 如果对应版本的release没有的话，参考这个issue自己编译：https://github.com/medcl/elasticsearch-analysis-ik/issues/1017
+   - 如果遇到奇怪的权限问题：删除文件夹重建（win）或加权限（linux）
    
+   - ik分词器安装，进入容器：
+   
+     ```
+     elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.17.16/elasticsearch-analysis-ik-7.17.16.zip
+     ```
+   
+     - 如果挂载运行的话，将类似elasticsearch-analysis-ik-7.17.16.zip的文件放到plugins下直接解压
+     - 如果对应版本的release没有的话，参考这个issue自己编译：https://github.com/medcl/elasticsearch-analysis-ik/issues/1017
+
    - kibana部署（ui界面）：
    
      ```
-     docker run --name kibana --link=elasticsearch:test -p 5601:5601 -d kibana:7.17.16
+     docker run --name kibana --link=elasticsearch:test -p 5601:5601 -d --restart always kibana:7.17.16
      ```
    
-   - 简单示例（在idea中打开）：[es-demo.http](resources/es/es-demo.http)
+   - 简单示例（在idea中打开）：[es-demo.http](./resources/es/es-demo.http)：（如果要在kibana中使用，将localhost:9200删掉）
    
    - **问题**：
    
@@ -321,12 +337,12 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 以下表格列出每项功能的可选组件，可以自由组合（标删除线的在spring boot 3无法使用）
 
-| 注册中心 + 动态配置                      | 网关（路由以及限流重试等） | 负载均衡      | 容错                         | 链路追踪         | 远程调用 | 分布式事务 |      |
-| ---------------------------------------- | -------------------------- | ------------- | ---------------------------- | ---------------- | -------- | ---------- | ---- |
-| eureka + config + bus + rabbitmq（无语） | ~~zuul~~                   | ~~ribbon~~    | ~~hystrix~~                  | ~~sleuth~~       | Feign    | Seata      |      |
-| Consul                                   | gateway                    | load balancer | Sentinel（也包含限流等功能） | tracing + zipkin | dubbo    |            |      |
-| Nacos                                    |                            |               |                              |                  |          |            |      |
-| zk                                       |                            |               |                              |                  |          |            |      |
+| 注册中心 + 动态配置                      | 网关（路由以及限流重试等） | 负载均衡      | 容错                         | 链路追踪         | 远程调用 | 分布式事务 |
+| ---------------------------------------- | -------------------------- | ------------- | ---------------------------- | ---------------- | -------- | ---------- |
+| eureka + config + bus + rabbitmq（无语） | ~~zuul~~                   | ~~ribbon~~    | ~~hystrix~~                  | ~~sleuth~~       | Feign    | Seata      |
+| Consul                                   | gateway                    | load balancer | Sentinel（也包含限流等功能） | tracing + zipkin | dubbo    |            |
+| Nacos                                    |                            |               |                              |                  |          |            |
+| zk                                       |                            |               |                              |                  |          |            |
 
 #### 注册中心
 
@@ -338,11 +354,11 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 ##### zk
 
-- ```
-  docker run -d --name zookeeper -p 2181:2181 -v /d/shared/mono/zookeeper/conf/zoo.cfg:/conf/zoo.cfg zookeeper:latest
+- for win：
+  
   ```
-
-  - 单个容器挂载用win terminal，win bash会有奇怪的bug
+  docker run -d --name zookeeper -p 2181:2181 -v //d/shared/mono/zookeeper/conf/zoo.cfg:/conf/zoo.cfg zookeeper:latest
+  ```
   
   - 启动zk容器中的客户端：
   
@@ -405,18 +421,20 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
     docker cp ./application.yml seata-server:/seata-server/resources
     ```
 
-  - 或者将resources文件夹复制出来，再挂载启动（用win terminal，win bash会有奇怪的bug）
+  - 或者将resources文件夹复制出来，再挂载启动
 
-    ```
-    docker cp seata-server:/seata-server/resources /d/shared/mono/seata
-    ```
-
-    ```
-    docker run -d --name seata-server -p 8091:8091 -p 7091:7091 -v /d/shared/mono/seata/resources:/seata-server/resources seataio/seata-server:1.7.1
-    ```
+    - for win：
+    
+      ```
+      docker cp seata-server:/seata-server/resources //d/shared/mono/seata
+      ```
+    
+      ```
+      docker run -d --name seata-server -p 8091:8091 -p 7091:7091 -v //d/shared/mono/seata/resources:/seata-server/resources seataio/seata-server:1.7.1
+      ```
+    
 
 
 - 默认AT模式，必须建日志表：[undo_log](https://github.com/seata/seata/blob/develop/script/client/at/db/mysql.sql)
 
 - client项目resources下需要放配置文件：[conf](https://github.com/seata/seata/tree/develop/script/client/conf)
-

@@ -41,7 +41,7 @@
 
   - change `spring.redis` to `spring,data.redis`
   - change `spring.profiles` to `spring.config.activate.on-profile`
-  - `spring.main.allow-circular-references: true` to allow circular dependency
+  - set `spring.main.allow-circular-references: true` to allow circular dependency
 
 
 - Spring Security:
@@ -67,10 +67,20 @@
               .including(ErrorAttributeOptions.Include.STACK_TRACE);
       Map<String, Object> error = getErrorAttributes(request, options);
       ```
+  
 - `HttpStatus` need to be replaced with `HttpStatusCode`: https://stackoverflow.com/questions/76273423/how-come-spring-webclient-onstatus-is-not-applicable-for-httpstatusis4xxclient
 
-- Replace `org.springframework.core.LocalVariableTableParameterNameDiscoverer` which was deprecated with `org.springframework.core.DefaultParameterNameDiscoverer`
-- in new version, `org.apache.tomcat.util.codec.binary.Base64` delete `encodeBase64(byte[] binaryData)` method, need to be replaced with `Base64.encodeBase64String(bytes).getBytes()`
-- Apache HttpClient 5.x migration guide: https://hc.apache.org/httpcomponents-client-5.3.x/migration-guide/index.html. Many of the config items have been removed, just delete them
-- 
 
+  - the parameter numbers of `handleError` in  `DefaultResponseErrorHandler` has changed, removed the `HttpStatus`, now u can get `HttpStatusCode` directly from `ClientHttpResponse`
+
+- Replace `org.springframework.core.LocalVariableTableParameterNameDiscoverer` which was deprecated with `org.springframework.core.DefaultParameterNameDiscoverer`
+
+- in new version, `org.apache.tomcat.util.codec.binary.Base64` delete `encodeBase64(byte[] binaryData)` method, need to be replaced with `Base64.encodeBase64String(bytes).getBytes()`
+
+- Apache `HttpClient 5.x` migration guide: https://hc.apache.org/httpcomponents-client-5.3.x/migration-guide/index.html. Many of the config items have been removed, just delete them. e.g. in `ConnectionKeepAliveStrategy`, it will return `TimeValue` rather than `long`
+
+- Elasticsearch migration: //todo
+
+- tomcat migration: //todo
+
+- 
