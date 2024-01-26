@@ -2,7 +2,7 @@
 
 ### docker，k8s，helm, istio 安装
 
-- 安装docker desktop，启用k8s
+- 安装docker desktop，启动k8s
 
 - 安装其他附加软件：
 
@@ -10,35 +10,30 @@
   si helm openlens istioctl
   ```
 
-- zsh自动补全（可能有性能问题）
+  - openlens设置：
+    - 设置proxy
+    - 插件：@alebcay/openlens-node-pod-menu
 
-  - 在.zshrc文件中添加如下命令：
-
-    ```
-    # k8s
-    alias k=kubectl
-    complete -F __start_kubectl k
-    ```
-
-  - 然后需要自动补全的shell里执行
+  - 安装istio配置档：
 
     ```
-    source <(kubectl completion zsh)
+    istioctl install --set profile=demo -y
+    kubectl label namespace default istio-injection=enabled
     ```
-
-- 安装istio配置档
+  
+    - 可以通过以下命令查看label：
+  
+      ```
+      k get ns --show-labels
+      ```
+  
+- zsh自动补全（在.zshrc文件中添加如下命令）
 
   ```
-  istioctl install --set profile=demo -y
-  kubectl label namespace default istio-injection=enabled
+  # k8s
+  alias k=kubectl
+  source <(kubectl completion zsh)
   ```
-  
-  - 有的时候default不能注入，可以新建一个namespace比如demo来注入
-  
-    ```
-    kubectl create ns demo
-    kubectl label namespace demo istio-injection=enabled
-    ```
 
 ## 常用命令
 
@@ -141,27 +136,25 @@
     docker update --restart no mysql
     ```
 
-### k8s
-
-- 缩放：https://www.51cto.com/article/713770.html
-
 ## 常用组件
 
-以mall项目docker-compose示例：
+- 环境使用方法：
 
-```
-docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
-```
+  - 使用idea自带的运行按钮
 
-[mall-docker-compose.yml](resources/compose_file/mall.yml)
+  - 或者使用命令行，以mall项目docker-compose示例：
+
+    ```bash
+    docker-compose -f ./resources/compose_file/mall.yml up -d
+    ```
+
+    [mall-docker-compose.yml](resources/compose_file/mall.yml)
 
 ### 数据库
 
 #### MySQL
 
 - 注意：**5.7挂载配置需要在conf下新建两个文件夹mysql.conf.d和conf.d，8.x挂载需要建conf.d**
-
-- for win：
 
    ```bash
    docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --restart always -v //d/shared/mono/mysql8/data:/var/lib/mysql -v //d/shared/mono/mysql8/conf:/etc/mysql -v //d/shared/mono/mysql8/logs:/logs mysql
@@ -210,12 +203,9 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 - 单节点模式：
 
-  - for win：
-  
-    ```bash
-    docker run -id --restart=always --privileged=true --name=redis -v //d/shared/mono/redis/data:/data -p 6379:6379 redis
-    ```
-  
+  ```bash
+  docker run -id --restart=always --privileged=true --name=redis -v //d/shared/mono/redis/data:/data -p 6379:6379 redis
+  ```
 
 ### 中间件
 
@@ -227,12 +217,8 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 - 集群模式（1zk-3broker-1ui）：[kafka-cluster.yml](resources/compose_file/kafka-cluster.yml)
 
-   ```
-   docker-compose -f ./resources/compose_file/kafka-cluster.yml -p kafka-cluster up -d
-   ```
-
    - docker-compose文件中将kafka容器内部设置为19092，外部设置为9092方便宿主机访问。生产环境不需要这么设置
-
+   
 - 使用：
 
    - topic操作
@@ -278,11 +264,9 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 ##### RabbitMQ
 
-- for win：
-
-  ```
-  docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v //d/shared/mono/rabbitmq/data:/var/lib/rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --restart always rabbitmq:3.12.6-management-alpine
-  ```
+```
+docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v //d/shared/mono/rabbitmq/data:/var/lib/rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --restart always rabbitmq:3.12.6-management-alpine
+```
 
 #### Logstash
 
@@ -294,44 +278,42 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 #### ES
 
-- for win：
-  
-   ```
-   docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d --restart always -v //d/shared/mono/elasticsearch/plugins:/usr/share/elasticsearch/plugins -v //d/shared/mono/elasticsearch/data:/usr/share/elasticsearch/data elasticsearch:7.17.16
-   ```
+```
+docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d --restart always -v //d/shared/mono/elasticsearch/plugins:/usr/share/elasticsearch/plugins -v //d/shared/mono/elasticsearch/data:/usr/share/elasticsearch/data elasticsearch:7.17.16
+```
 
-   - 如果遇到奇怪的权限问题：删除文件夹重建（win）或加权限（linux）
-   
-   - ik分词器安装，进入容器：
-   
-     ```
-     elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.17.16/elasticsearch-analysis-ik-7.17.16.zip
-     ```
-   
-     - 如果挂载运行的话，将类似elasticsearch-analysis-ik-7.17.16.zip的文件放到plugins下直接解压
-     - 如果对应版本的release没有的话，参考这个issue自己编译：https://github.com/medcl/elasticsearch-analysis-ik/issues/1017
+- 如果遇到奇怪的权限问题：删除文件夹重建（win）或加权限（linux）
 
-   - kibana部署（ui界面）：
-   
-     ```
-     docker run --name kibana --link=elasticsearch:test -p 5601:5601 -d --restart always kibana:7.17.16
-     ```
-   
-   - 简单示例（在idea中打开）：[es-demo.http](./resources/es/es-demo.http)：（如果要在kibana中使用，将localhost:9200删掉）
-   
-   - **问题**：
-   
-     - 有时es会有索引状态为红，可以用下列命令删掉：
-   
-       ```
-       curl -s  'http://localhost:9200/_cat/indices/?v' | grep red | awk '{print $3}' | xargs -i curl -XDELETE http://localhost:9200/{}
-       ```
-   
-       然后在用下列命令查看：
-   
-       ```
-       curl -s  'http://localhost:9200/_cat/indices/?v' | grep red
-       ```
+- ik分词器安装，进入容器：
+
+  ```
+  elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.17.16/elasticsearch-analysis-ik-7.17.16.zip
+  ```
+
+  - 如果挂载运行的话，将类似elasticsearch-analysis-ik-7.17.16.zip的文件放到plugins下直接解压
+  - 如果对应版本的release没有的话，参考这个issue自己编译：https://github.com/medcl/elasticsearch-analysis-ik/issues/1017
+
+- kibana部署（ui界面）：
+
+  ```
+  docker run --name kibana --link=elasticsearch:test -p 5601:5601 -d --restart always kibana:7.17.16
+  ```
+
+- 简单示例（在idea中打开）：[es-demo.http](./resources/es/es-demo.http)：（如果要在kibana中使用，将localhost:9200删掉）
+
+- **问题**：
+
+  - 有时es会有索引状态为红，可以用下列命令删掉：
+
+    ```
+    curl -s  'http://localhost:9200/_cat/indices/?v' | grep red | awk '{print $3}' | xargs -i curl -XDELETE http://localhost:9200/{}
+    ```
+
+    然后在用下列命令查看：
+
+    ```
+    curl -s  'http://localhost:9200/_cat/indices/?v' | grep red
+    ```
 
 ### 微服务组件
 
@@ -354,19 +336,17 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
 ##### zk
 
-- for win：
-  
+```
+docker run -d --name zookeeper -p 2181:2181 -v //d/shared/mono/zookeeper/conf/zoo.cfg:/conf/zoo.cfg zookeeper:latest
+```
+
+- 启动zk容器中的客户端：
+
   ```
-  docker run -d --name zookeeper -p 2181:2181 -v //d/shared/mono/zookeeper/conf/zoo.cfg:/conf/zoo.cfg zookeeper:latest
+  ./bin/zkCli.sh
   ```
-  
-  - 启动zk容器中的客户端：
-  
-    ```
-    ./bin/zkCli.sh
-    ```
-  
-  - GUI：[PrettyZoo](https://github.com/vran-dev/PrettyZoo/releases)
+
+- GUI：[PrettyZoo](https://github.com/vran-dev/PrettyZoo/releases)
 
 ##### nacos
 
@@ -383,15 +363,10 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
    docker run -d -p 9411:9411 --name zipkin --restart always openzipkin/zipkin
    ```
 
-   - 整合es：
-
-     ```
-     docker-compose -f ./resources/compose_file/zipkin-elasticsearch.yml -p zipkin-elasticsearch up -d
-     ```
-     [zipkin-elasticsearch.yml](resources/compose_file/zipkin-elasticsearch.yml)
+   - 整合es：[zipkin-elasticsearch.yml](resources/compose_file/zipkin-elasticsearch.yml)
 
    - 整合rabbitmq：
-
+   
      ```
      docker run -d --name zipkin_rabbitmq -p 9411:9411 -e RABBIT_ADDRESSES=localhost:5673 -e RABBIT_USER=admin -e RABBIT_PASSWORD=admin openzipkin/zipkin
      ```
@@ -423,16 +398,13 @@ docker-compose -f ./resources/compose_file/mall.yml -p mall up -d
 
   - 或者将resources文件夹复制出来，再挂载启动
 
-    - for win：
+    ```
+    docker cp seata-server:/seata-server/resources //d/shared/mono/seata
+    ```
     
-      ```
-      docker cp seata-server:/seata-server/resources //d/shared/mono/seata
-      ```
-    
-      ```
-      docker run -d --name seata-server -p 8091:8091 -p 7091:7091 -v //d/shared/mono/seata/resources:/seata-server/resources seataio/seata-server:1.7.1
-      ```
-    
+    ```
+    docker run -d --name seata-server -p 8091:8091 -p 7091:7091 -v //d/shared/mono/seata/resources:/seata-server/resources seataio/seata-server:1.7.1
+    ```
 
 
 - 默认AT模式，必须建日志表：[undo_log](https://github.com/seata/seata/blob/develop/script/client/at/db/mysql.sql)

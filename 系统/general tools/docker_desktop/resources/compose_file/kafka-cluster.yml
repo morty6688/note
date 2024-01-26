@@ -1,5 +1,5 @@
 version: '3.8'
-
+name: kafka-cluster
 services:
   kafka-ui:
     container_name: kafka-ui

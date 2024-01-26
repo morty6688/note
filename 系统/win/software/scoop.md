@@ -223,24 +223,36 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
 
 ##### js/ts
 
-- 用nvm来管理node版本（首先安装一个最新的lts版本）
+- 用nvm来管理node版本（nvm 1.1.12有bug，node 20.11.0是一个lts版本）
 
   ```
-  si nvm
-  nvm install v18.18.0
-  nvm use 18.18.0
+  si nvm@1.1.11
+  ```
+
+  ```
+  nvm install v20.11.0
+  ```
+
+  ```
+  nvm use 20.11.0
   ```
 
 - 然后安装pnpm或yarn，或者直接使用npm
 
   ```
-  # 代理和镜像
+  # 查看npm全局包
+  npm list -g
+  ```
+  
+  ```
+  # npm代理
   npm config set proxy http://127.0.0.1:1130
   npm config set https-proxy http://127.0.0.1:1130
+  ```
   
-  yarn config set proxy http://127.0.0.1:1130
-  yarn config set https-proxy http://127.0.0.1:1130
-  
+  ```
+  # pnpm代理
+  npm install -g pnpm
   pnpm config set proxy http://127.0.0.1:1130
   pnpm config set https-proxy http://127.0.0.1:1130
   
@@ -249,6 +261,13 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   alias pi='pnpm install'
   alias pl='pnpm list'
   alias pui='pnpm uninstall'
+  ```
+  
+  ```
+  # yarn代理
+  npm install -g yarn
+  yarn config set proxy http://127.0.0.1:1130
+  yarn config set https-proxy http://127.0.0.1:1130
   ```
 
 ##### go
@@ -412,7 +431,7 @@ si steampp
   
   - [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher)：win11美化任务栏，卸载时把安装程序名改为ep_uninstall即可
   - translucenttb：下载windows store版。scoop下载的绿色版没有开机自启选项
-    - 配合wallpaper engine一起用的话，将windows主题设置为深色，应用主题设置为浅色
+    - 配合wallpaper engine一起用的话，将windows主题设置为深色，应用主题设置为浅色（个性化 - 颜色 - 选择模式 - 自定义）
   
   - feem：局域网全速传输文件。因为免费版默认目标文件夹是下载，建议把windows下载目录移动到D盘
   

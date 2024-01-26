@@ -37,12 +37,35 @@ git config --global core.quotepath false
 
 #### 进阶配置
 
-- win安装zsh：
+- 安装zsh和powerlevel10k：
 
-  https://gist.github.com/fworks/af4c896c9de47d827d4caa6fd7154b6b
+  - for win：https://gist.github.com/fworks/af4c896c9de47d827d4caa6fd7154b6b
 
-  - 安装powerlevel10k，在用户目录下创建[.bashrc](resources/.bashrc)文件，并设置zsh默认（目前的版本创建完这个文件之后，第一次启动会报错并生成一个.bash_profile，再次启动就一切正常
-  - **更新时注意事项**：所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scu命令清理旧版本时，需要重新安装[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)，即解压zsh到Git目录。
+    - powerlevel10k：在用户目录下创建[.bashrc](resources/.bashrc)文件，并设置zsh默认（目前的版本创建完这个文件之后，第一次启动会报错并生成一个.bash_profile，再次启动就一切正常
+  
+    - **更新时注意事项**：所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scu命令清理旧版本时，需要重新安装[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)，即解压zsh到Git目录。
+  
+  - for ubuntu：
+  
+    ```
+    sudo apt install zsh -y
+    ```
+  
+    - powerlevel10k：
+  
+      ```
+      sudo apt install zsh
+      git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/tools/theme/powerlevel10k
+      echo 'source ~/tools/theme/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+      zsh
+      ```
+  
+    - 设为默认：
+  
+      ```
+      cat /etc/shells
+      chsh -s /bin/zsh
+      ```
   
 - 双账号配置，在自己的主账号配置好之后，执行以下操作：
 
@@ -100,24 +123,6 @@ git config --global core.quotepath false
   autoload -Uz compinit && compinit
   autoload -Uz bashcompinit && bashcompinit
   ```
-
-- ubuntu配置
-
-  - powerlevel10k
-
-    ```
-    sudo apt install zsh
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/tools/theme/powerlevel10k
-    echo 'source ~/tools/theme/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-    zsh
-    ```
-
-  - ubuntu设置为默认
-
-    ```
-    cat /etc/shells
-    chsh -s /bin/zsh
-    ```
 
 
 #### 其他用法
