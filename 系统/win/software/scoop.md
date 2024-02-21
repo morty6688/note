@@ -1,6 +1,6 @@
 ## 介绍与使用
 
-首先下载一个绿色版clash-verge或其他代理软件，同步一下系统时间，卸载掉系统自带的终端，安装vscode
+首先下载一个绿色版clash-verge/clash-for-win或其他代理软件，同步一下系统时间，卸载掉系统自带的终端，安装vscode
 
 然后安装：https://github.com/ScoopInstaller/Install
 
@@ -16,6 +16,16 @@
    ```
 
    - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成基本配置
+2. 代理
+
+    ```
+    scoop config proxy 127.0.0.1:1130
+    scoop update
+    ```
+
+    ```
+    scoop config rm proxy
+    ```
 
 2. 添加仓库
 
@@ -71,20 +81,6 @@ s config aria2-max-connection-per-server 16
 s config aria2-min-split-size 1M
 # 有时候aria2会有问题
 scoop config aria2-enabled false
-```
-
-#### 代理
-
-```
-s config proxy 127.0.0.1:1130
-```
-
-```
-s config rm proxy
-```
-
-```
-sup
 ```
 
 #### 更新
