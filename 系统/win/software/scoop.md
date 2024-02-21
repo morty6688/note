@@ -9,7 +9,7 @@
 #### 前置工作
 
 0. 搜狗输入法
-   - 使用ahk禁用搜狗输入法的全部快捷键：ctrl+句号等等；只开启系统功能快捷键-英文输入法(ctrl+shift+i)和语音输入(ctrl+shift+a)；调整字号适应高分屏
+   - 只开启系统功能快捷键-英文输入法(ctrl+shift+i)和语音输入(ctrl+shift+a)；调整字号适应高分屏；安装ahk后使用ahk禁用搜狗输入法的全部快捷键（ahk脚本里已经有了）：ctrl+句号等等；
 
 1. ```
    scoop install git

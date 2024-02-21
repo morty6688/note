@@ -41,7 +41,14 @@ git config --global core.quotepath false
 
   - for win：https://gist.github.com/fworks/af4c896c9de47d827d4caa6fd7154b6b
 
-    - powerlevel10k：在用户目录下创建[.bashrc](resources/.bashrc)文件，并设置zsh默认（目前的版本创建完这个文件之后，第一次启动会报错并生成一个.bash_profile，再次启动就一切正常
+    - powerlevel10k（使用bash运行以下命令）：
+      ```
+      git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+      echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+      ```
+    
+      在用户目录下创建[.bashrc](resources/.bashrc)文件，里面设置zsh为默认（目前的版本创建完这个文件之后，第一次启动会报错并生成一个.bash_profile，再次启动就一切正常
+
   
     - **更新时注意事项**：所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scu命令清理旧版本时，需要重新安装[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)，即解压zsh到Git目录。
   
