@@ -26,6 +26,23 @@
       ```
       k get ns --show-labels
       ```
+
+  - krew配置（k8s插件管理器，需要使用管理员模式打开shell安装）：
+
+    ```
+    si krew
+    ```
+
+    - kubecm（切换kubeconfig，需要命令行挂一下临时代理）：
+      ```
+      k krew install kc
+      ```
+      使用方法：
+      ```
+      k kc list
+      ```
+
+  - telepresence：直接使用官网提供的ps1脚本安装。其他用法见官网
   
 - zsh自动补全（在.zshrc文件中添加如下命令）
 
