@@ -43,6 +43,11 @@
       ```
 
   - telepresence：直接使用官网提供的ps1脚本安装。其他用法见官网
+
+      ```
+      alias tp=telepresence
+      alias tpc='telepresence connect'
+      ```
   
 - zsh自动补全（在.zshrc文件中添加如下命令）
 

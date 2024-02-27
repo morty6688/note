@@ -154,7 +154,7 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
 - visualvm启动：
 
   ```
-  visualvm --jdkhome "C:\Users\lijian\scoop\apps\ojdkbuild8\current"
+  visualvm --jdkhome "C:\Users\xxx\scoop\apps\ojdkbuild8\current"
   ```
 
   然后安装插件
@@ -306,6 +306,15 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
   ```
 
+- 安装[bloomrpc](https://github.com/bloomrpc/bloomrpc)
+
+- .zshrc设置：
+
+  ```
+  # go
+  alias gmt='go mod tidy'
+  ```
+
 
 ##### solidity
 
@@ -375,10 +384,12 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 #### 编程相关
 
 ```
-si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql jetbrains-toolbox
+si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql jetbrains-toolbox make
 ```
 
 - 装redis和mysql只为了使用他们的客户端测试docker或k8s组件的连接
+
+- make需要设置以下path：`C:\Users\xxx\scoop\apps\make\current\bin\make.exe`
 
 
 #### 系统相关
@@ -399,7 +410,6 @@ si steampp
   - steam
   - chrome
   - vscode
-    - tabnine：全局搜索tabnine_config.json，修改一项设置`"inline_suggestions_mode": false`
   - idea
   
     - 常见问题：
@@ -418,6 +428,10 @@ si steampp
       - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked.
       
       - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
+
+      - terminal修改path：`C:\Users\xxx\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
+
+      - 其他设置可以直接同步
   
   - Logi Options+/G Hub
   - docker-desktop：用作开发环境配置，[docker_env](../../general%20tools/docker_desktop/docker_env.md)。这年头安装完还要重启系统的软件不多了。。。
@@ -443,7 +457,8 @@ si steampp
 
   - displayfusion
     - 用鼠标中键来转移窗口，取消窗口上的小按钮
-    - win11 - 使用经典上下文菜单
+    - win11 - 使用经典上下文菜单（有待优化）
+    - 关闭 `任务栏 - 在每个显示器上启用任务栏`
   - directory opus
   - quicker
   

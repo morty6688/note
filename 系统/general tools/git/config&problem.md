@@ -129,6 +129,9 @@ git config --global core.quotepath false
   # completion
   autoload -Uz compinit && compinit
   autoload -Uz bashcompinit && bashcompinit
+
+  # vscode
+  alias cz='code ~/.zshrc'
   ```
 
 
