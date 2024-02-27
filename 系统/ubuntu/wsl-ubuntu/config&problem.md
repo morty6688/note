@@ -1,56 +1,56 @@
 ### 配置
 
-https://github.com/microsoft/wslg
-
-```
-wsl --install -d Ubuntu
-```
-
 #### 基本配置
 
-- 添加用户并赋权：
+- 查看，安装，关机以及注销版本
 
   ```
+  wsl -l -v
+  ```
+
+  ```
+  wsl --install -d Ubuntuwsl --install -d Ubuntu
+  ```
+
+  ```
+  wsl --shutdown
+  ```
+
+  ```
+  wsl --unregister Ubuntu
+  ```
+
+- 添加root用户密码，可以使用`su`命令切换到root用户：
+
+  ```bash
   sudo passwd root
-  su 
   ```
 
-- ~~开启wslg的systemd~~（会导致docker desktop 4.18.0的版本无法启动）
-
-  - ```
-    cd /etc
-    touch wsl.conf
-    sudo chmod 777 /etc/wsl.conf
-    code /etc/wsl.conf
-    ```
-    
-  - 然后添加下面内容到wsl.conf
-
-    ```
-    [boot]
-    systemd=true
-    ```
-
-- ~~换源（更新失败时将https换为http）~~目前看来不需要了
+- 端口占用查看及kill：
 
   ```
-  sudo cp /etc/apt/sources.list /etc/apt/sources.list.copy
+  sudo lsof -i :8080
+  kill -9 <PID>
   ```
-
-​		https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/
-
-- 端口：
-
-  ```
-  netstat -ap
-  ```
-
+  
 - 系统：
 
   ```
-  lsb_release -a
-  uname -a
+  lsb_release -cdir
   ```
+
+- 与win共享：
+
+  - windows中访问wsl文件：资源管理器地址栏输入`\\wsl$`
+
+  - wsl中访问windows文件：`/mnt/c/desktop/tool`
+
+
+
+#### 软件安装
+
+- 安装zsh和p10k：见git篇
+- 
 
 
 ### 问题
@@ -63,10 +63,14 @@ wsl --install -d Ubuntu
    sudo chmod 777 /etc/wsl.conf
    ```
 
-2. wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理
+2. wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理（这个有bug，见https://github.com/microsoft/WSL/issues/11085）
 
-   - `code %USERPROFILE%\.wslconfig`
+   - 创建wslconfig：
 
+      ```bash
+      code $USERPROFILE/.wslconfig
+      ```
+      
       ```
       [experimental]
       autoMemoryReclaim=gradual  # gradual  | dropcache | disabled
@@ -77,4 +81,19 @@ wsl --install -d Ubuntu
       hostAddressLoopback=true
       ```
    
-      
+3. ~~开启wslg的systemd~~（会导致docker desktop 4.18.0的版本无法启动）
+
+   - ```
+     cd /etc
+     touch wsl.conf
+     sudo chmod 777 /etc/wsl.conf
+     code /etc/wsl.conf
+     ```
+
+   - 然后添加下面内容到wsl.conf
+
+     ```
+     [boot]
+     systemd=true
+     ```
+

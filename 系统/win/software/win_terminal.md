@@ -37,7 +37,7 @@
 
 
 2. 添加右键菜单
-   -  https://github.com/grimux/windowsterminal-shell-scoop
+   -  https://github.com/lijian12345/windowsterminal-shell-scoop
 
 
 3. wsl设置

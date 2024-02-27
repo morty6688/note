@@ -272,7 +272,7 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   si go
   ```
 
-- 换源：
+- 代理：
 
   ```
   go env -w GOPROXY=https://goproxy.cn,direct
@@ -458,7 +458,7 @@ si steampp
   - displayfusion
     - 用鼠标中键来转移窗口，取消窗口上的小按钮
     - win11 - 使用经典上下文菜单（有待优化）
-    - 关闭 `任务栏 - 在每个显示器上启用任务栏`
+    - 关闭 `任务栏 - 在每个显示器上启用任务栏`，启动系统自带的`在所有显示器上显示任务栏`
   - directory opus
   - quicker
   
