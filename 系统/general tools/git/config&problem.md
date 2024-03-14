@@ -116,6 +116,7 @@ git config --global core.quotepath false
   alias gr='git rebase'
   alias gm='git merge'
   alias gcm='git commit'
+  alias gcf='git config'
   
   # history
   HISTFILE=~/.zsh_history

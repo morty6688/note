@@ -328,6 +328,53 @@ si solidity
 si rustup
 ```
 
+#####  php
+
+- 安装：
+
+  ```
+  si php composer php-xdebug
+  ```
+
+  ```
+  composer config -g -- disable-tls true
+  ```
+
+- openssl：
+
+  - 首先下载证书并放到相应位置：
+
+    - 查看证书位置：
+
+      ```
+      php -r "print_r(openssl_get_cert_locations());"
+      ```
+
+    - 下载文件：http://curl.haxx.se/ca/cacert.pem
+
+    - 修改php.ini：
+
+      ```
+      extension=php_openssl.dll
+      openssl.cafile=C:\Program Files\Common Files\SSL\cacert.pem
+      ```
+
+- xdebug（修改php.ini，我真是服了，什么古代语言，debugger还需要自己设置）：
+
+  ```
+  implicit_flush = On
+  
+  [XDebug]
+  ; Only Zend OR (!) XDebug
+  zend_extension_ts="C:\Users\lijian\scoop\apps\php-xdebug\current\php_xdebug.dll"
+  xdebug.remote_enable=true
+  xdebug.remote_host=localhost
+  xdebug.remote_port=10000
+  xdebug.remote_handler=dbgp
+  ```
+
+  
+
 #### 环境
 
 数据库及中间件见[docker_env](../../general%20tools/docker_desktop/docker_env.md)
@@ -378,7 +425,7 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 
 - icaros：使用管理员模式启动
 
-- sharex：启动时会跟onedrive冲突快捷键。此时先关闭sharex，然后按截图键，在onedrive弹出的窗口中选择`no, thx!`，再启动sharex即可
+- sharex：启动时会跟onedrive冲突快捷键。此时先关闭sharex，然后按截图键，在onedrive弹出的窗口中选择`no, thx!`，再启动sharex即可。onedrive没啥卵用，建议禁用开机自启
 
 
 #### 编程相关
