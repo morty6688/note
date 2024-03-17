@@ -2,38 +2,44 @@
 
 #### 基本配置
 
-1. config命令
+- config命令
 
-```bash
-git config --list
+  ```bash
+  git config --list
+  
+  git config --global user.name lijian12345
+  git config --global user.email 
+  
+  git config --local user.name lijian12345
+  git config --local user.email 
+  # 使用vscode作为默认编辑器
+  git config --global core.editor "code --wait"
+  ```
 
-git config --global user.name lijian12345
-git config --global user.email 
+- 代理
 
-git config --local user.name lijian12345
-git config --local user.email 
-# 使用vscode作为默认编辑器
-git config --global core.editor "code --wait"
-```
+  ```
+  git config --global http.proxy 127.0.0.1:1130
+  git config --global https.proxy http://127.0.0.1:1130
+  ```
 
-2. 代理
+- 配置ssh-key，将生成的.pub公钥添加到目标仓库
 
-```bash
-git config --global http.proxy 127.0.0.1:1130
-git config --global https.proxy http://127.0.0.1:1130
-```
+  ```
+  ssh-keygen -t ed25519 -C "your_email@example.com"	
+  ```
 
-3. 配置ssh-key，将生成的.pub公钥添加到目标仓库
+- 命令行显示中文
 
-```
-ssh-keygen -t ed25519 -C "your_email@example.com"
-```
+  ```
+  git config --global core.quotepath false
+  ```
 
-4. 命令行显示中文
+- 测试连接
 
-```
-git config --global core.quotepath false
-```
+  ```
+  ssh -T git@github.com
+  ```
 
 #### 进阶配置
 
@@ -50,7 +56,7 @@ git config --global core.quotepath false
       在用户目录下创建[.bashrc](resources/.bashrc)文件，里面设置zsh为默认（目前的版本创建完这个文件之后，第一次启动会报错并生成一个.bash_profile，再次启动就一切正常
 
   
-    - **更新时注意事项**：所有使用scoop对于Git的更新或修改操作全部需要切换到powershell执行，并在修改前结束bash.exe和zsh.exe进程。使用scu命令清理旧版本时，需要重新安装[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)，即解压zsh到Git目录。
+    - **更新时注意事项**：所有使用scoop对于Git的更新或修改操作全部需要**切换到powershell执行**，并在修改前结束bash.exe和zsh.exe进程。使用scu命令清理旧版本时，需要**重新安装[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)**，即解压zsh到Git目录。
   
   - for ubuntu：
   
@@ -74,12 +80,14 @@ git config --global core.quotepath false
       chsh -s /bin/zsh
       ```
   
-- 双账号配置，在自己的主账号配置好之后，执行以下操作：
+- 多账号配置，在自己的主账号配置好之后，执行以下操作：
 
   - `ssh-keygen -t ed25519 -C "your_sub_email@sub.com"`，当出现提示时输入正确的路径，如`Enter file in which to save the key (/Users/you/.ssh/id_ed25519): /c/Users/username/.ssh/sub_ed25519`，注意路径要输全路径，不能输入`~/.ssh/sub_ed25519`，有时候识别不出来，然后把生成的公钥传到副账号github中
 
-  - `code ~/.ssh/config`，输入如下内容：
+  - 如果想使用其他机器上的key，可以把本地生成的密钥对覆盖掉，**记得添加空行**，不然会报错
 
+  - `code ~/.ssh/config`，输入如下内容：
+  
     ```
     Host github.com
       User 主账号的用户名
@@ -95,8 +103,8 @@ git config --global core.quotepath false
       IdentityFile ~/.ssh/sub_ed25519
     ```
 
-  - 克隆副账号项目时用`git clone git@sub.com:副账号/项目名.git`
-
+  - 克隆副账号项目时用`git clone git@sub.com:副账号/项目名.git`，其他域名不同的账号直接克隆
+  
   - 副账号项目设置：`git config --local user.email your_sub_email@sub.com`
 
 
@@ -130,7 +138,7 @@ git config --global core.quotepath false
   # completion
   autoload -Uz compinit && compinit
   autoload -Uz bashcompinit && bashcompinit
-
+  
   # vscode
   alias cz='code ~/.zshrc'
   ```

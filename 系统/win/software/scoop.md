@@ -48,7 +48,7 @@
 
    - [typora配置](../../general%20tools/typora.md)
 
-   - powershell：更新时切换成windows自带的那个powershell去更新
+   - powershell：更新时切换成windows自带的那个powershell去更新。同时记得设置两个powershell的别名，见[powershell](powershell.md)
 
    - clash设置：
    
@@ -282,12 +282,6 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   go env | grep GOPROXY
   ```
 
-- 下载依赖
-
-  ```
-  go mod download
-  ```
-
 - win上兼容syscall，最好不要用这些信号量
 
   在types_windows.go里添加如下内容
@@ -299,14 +293,14 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   	SIGTSTP = Signal(18)
   ```
 
-- 安装protobuf的go生成工具
+- 安装protobuf的go生成工具，以及其他等等
 
   ```
   go install github.com/golang/protobuf/protoc-gen-go@latest
   go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
   ```
 
-- 安装[bloomrpc](https://github.com/bloomrpc/bloomrpc)
+- 安装[bloomrpc](https://github.com/bloomrpc/bloomrpc)。也可以直接使用idea自带的http client
 
 - .zshrc设置：
 
@@ -455,8 +449,14 @@ si steampp
 
 - 带自动更新或无法使用的
   - steam
+  
   - chrome
+  
+    - 常见问题：
+      - 屏幕闪烁：https://www.reddit.com/r/chrome/comments/15uuyry/artifactsflickering_on_chrome_w10/。解决办法：把angle显卡后端设为d3d9
+  
   - vscode
+  
   - idea
   
     - 常见问题：
@@ -471,22 +471,26 @@ si steampp
         - IDEA有时会卡在开始界面无法启动，查idea.log发现是`java.net.BindException: *Address already in use*: *bind*`，这说明IDEA启动需要的端口被占用，使用该命令重启
       
         - 有时idea启动应用说端口被占用，但是使用`netstat -ano|findstr 8080 `结果为空，可能是端口处于tcp排除范围，使用`netsh interface ipv4 show excludedportrange protocol=tcp`可以看到排除范围，这时也可以用上述命令重启
-  
+
       - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked.
       
       - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
-
+  
       - terminal修改path：`C:\Users\xxx\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
-
+  
       - 其他设置可以直接同步
   
   - Logi Options+/G Hub
+  
   - docker-desktop：用作开发环境配置，[docker_env](../../general%20tools/docker_desktop/docker_env.md)。这年头安装完还要重启系统的软件不多了。。。
+  
   - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
     - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
+  
   - [UACWhitelistTool](https://github.com/XIU2/UACWhitelistTool)：uac白名单小程序，生成一个不启动uac的快捷方式，可以添加到右键菜单
   
   - [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher)：win11美化任务栏，卸载时把安装程序名改为ep_uninstall即可
+  
   - translucenttb：下载windows store版。scoop下载的绿色版没有开机自启选项
     - 配合wallpaper engine一起用的话，将windows主题设置为深色，应用主题设置为浅色（个性化 - 颜色 - 选择模式 - 自定义）
   
@@ -496,6 +500,7 @@ si steampp
   - potplayer：scoop下载的没有解码器，而且多了直播这个奇怪的功能
   
       - 开启电平控制
+  - powertoys：通过win商店安装
   
   
   - [KBLAutoSwitch](https://github.com/flyinclouds/KBLAutoSwitch)：根据程序自动切换输入法，还有一些bug存在
