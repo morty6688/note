@@ -154,7 +154,7 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
 - visualvm启动：
 
   ```
-  visualvm --jdkhome "C:\Users\xxx\scoop\apps\ojdkbuild8\current"
+  visualvm --jdkhome "C:\Users\lijian\scoop\apps\ojdkbuild8\current"
   ```
 
   然后安装插件
@@ -430,7 +430,7 @@ si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql jetbr
 
 - 装redis和mysql只为了使用他们的客户端测试docker或k8s组件的连接
 
-- make需要设置以下path：`C:\Users\xxx\scoop\apps\make\current\bin\make.exe`
+- make需要设置以下path：`C:\Users\lijian\scoop\apps\make\current\bin\make.exe`
 
 
 #### 系统相关
@@ -475,22 +475,18 @@ si steampp
       - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked.
       
       - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
-  
-      - terminal修改path：`C:\Users\xxx\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
-  
+
+      - terminal修改path：`C:\Users\lijian\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
+
       - 其他设置可以直接同步
   
   - Logi Options+/G Hub
-  
   - docker-desktop：用作开发环境配置，[docker_env](../../general%20tools/docker_desktop/docker_env.md)。这年头安装完还要重启系统的软件不多了。。。
-  
   - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
     - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
-  
   - [UACWhitelistTool](https://github.com/XIU2/UACWhitelistTool)：uac白名单小程序，生成一个不启动uac的快捷方式，可以添加到右键菜单
   
   - [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher)：win11美化任务栏，卸载时把安装程序名改为ep_uninstall即可
-  
   - translucenttb：下载windows store版。scoop下载的绿色版没有开机自启选项
     - 配合wallpaper engine一起用的话，将windows主题设置为深色，应用主题设置为浅色（个性化 - 颜色 - 选择模式 - 自定义）
   

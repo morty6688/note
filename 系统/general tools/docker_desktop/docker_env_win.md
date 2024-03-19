@@ -42,11 +42,14 @@
       k kc list
       ```
 
-  - telepresence：直接使用官网提供的ps1脚本安装。其他用法见官网
+  - telepresence：直接使用官网提供的ps1脚本安装。如果需要替换版本，可以将其他版本exe放到和ps1脚本同目录下替换原始exe，再运行ps1脚本或者直接替换c盘的exe
 
       ```
       alias tp=telepresence
       alias tpc='telepresence connect'
+      alias tps='telepresence status'
+      alias tpq='telepresence quit'
+      alias tpv='telepresence version'
       ```
   
 - zsh自动补全（在.zshrc文件中添加如下命令）

@@ -54,7 +54,7 @@
        ```
 
 
-4. bash临时添加代理
+4. bash临时代理
 
    - ```
      export http_proxy='http://127.0.0.1:1130'    
