@@ -254,9 +254,11 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   
   # pnpm alias
   alias p='pnpm'
-  alias pi='pnpm install'
   alias pl='pnpm list'
+  alias pi='pnpm install'
   alias pui='pnpm uninstall'
+  alias ps='pnpm start'
+  alias pb='pnpm build'
   ```
   
   ```
@@ -264,6 +266,14 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   npm install -g yarn
   yarn config set proxy http://127.0.0.1:1130
   yarn config set https-proxy http://127.0.0.1:1130
+  
+  # yarn alias
+  alias y='yarn'
+  alias ys='yarn start'
+  alias yb='yarn build'
+  alias yl='yarn list'
+  alias yi='yarn install'
+  alias yui='yarn uninstall'
   ```
 
 ##### go
@@ -439,11 +449,6 @@ si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql jetbr
 si rufus dismplusplus hasher renamer locale-emulator recuva
 ```
 
-#### 游戏相关
-
-```
-si steampp
-```
 
 ### 暂未用 scoop
 
@@ -496,7 +501,6 @@ si steampp
   - potplayer：scoop下载的没有解码器，而且多了直播这个奇怪的功能
   
       - 开启电平控制
-  - powertoys：通过win商店安装
   
   
   - [KBLAutoSwitch](https://github.com/flyinclouds/KBLAutoSwitch)：根据程序自动切换输入法，还有一些bug存在
@@ -536,6 +540,3 @@ si steampp
     s bucket add main
     sup
     ```
-
-- 
-
