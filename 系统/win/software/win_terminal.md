@@ -54,11 +54,12 @@
        ```
 
 
-4. bash临时代理
+4. bash临时代理（待测试）
 
    - ```
      export http_proxy='http://127.0.0.1:1130'    
      export https_proxy='http://127.0.0.1:1130'
+     export telnet_proxy='http://127.0.0.1:1130'
      ```
 
      
