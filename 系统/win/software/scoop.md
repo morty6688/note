@@ -424,7 +424,7 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 
 - mpv：
 
-  - [让B站视频可以在mpv中播放](https://github.com/diannaojiang/Bilibili-Playin-Mpv)，替换[mpv.reg](resources/mpv.reg)
+  - [让B站视频可以在mpv中播放](https://github.com/diannaojiang/Bilibili-Playin-Mpv)，导入[mpv.reg](resources/mpv.reg)
   - ~~进阶设置~~：https://bbs.acgrip.com/thread-7443-1-1.html
 
 - icaros：使用管理员模式启动
@@ -435,7 +435,7 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 #### 编程相关
 
 ```
-si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql jetbrains-toolbox make
+si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql make
 ```
 
 - 装redis和mysql只为了使用他们的客户端测试docker或k8s组件的连接
@@ -523,8 +523,9 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
   - TIM，qq广告和bug太多
   - 115
   - 图吧工具箱
-  - pico 串流助手
+  - PICO 互联
   - pdf 补丁丁
+  - 游戏加加
   
 
 ## 问题
