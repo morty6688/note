@@ -58,7 +58,7 @@
 1. vscode修改文件没有权限的问题：
 
    ```
-   sudo chown -R lijian /etc/wsl.conf
+   sudo chown -R morty /etc/wsl.conf
    # or
    sudo chmod 777 /etc/wsl.conf
    ```

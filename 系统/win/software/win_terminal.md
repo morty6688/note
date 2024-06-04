@@ -7,7 +7,7 @@
        ```
        // Git Bash亚克力半透明主题，font项为了支持powershell10k的字体
        {
-         "commandline": "C:\\Users\\lijian\\scoop\\apps\\git\\current\\bin\\bash.exe -i -l",
+         "commandline": "C:\\Users\\morty\\scoop\\apps\\git\\current\\bin\\bash.exe -i -l",
          "startingDirectory": "~",
          "font": 
          {
@@ -37,7 +37,7 @@
 
 
 2. 添加右键菜单
-   -  https://github.com/lijian12345/windowsterminal-shell-scoop
+   -  https://github.com/morty6688/windowsterminal-shell-scoop
 
 
 3. wsl设置
@@ -48,7 +48,7 @@
        // WSL2
        {
          "source": "Windows.Terminal.Wsl",
-         "startingDirectory": "\\\\wsl$\\Ubuntu\\home\\lijian"
+         "startingDirectory": "\\\\wsl$\\Ubuntu\\home\\morty"
          // 后面的跟bash一样
        }
        ```

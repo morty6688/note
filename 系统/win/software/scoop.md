@@ -154,7 +154,7 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
 - visualvm启动：
 
   ```
-  visualvm --jdkhome "C:\Users\lijian\scoop\apps\ojdkbuild8\current"
+  visualvm --jdkhome "C:\Users\morty\scoop\apps\ojdkbuild8\current"
   ```
 
   然后安装插件
@@ -370,7 +370,7 @@ si rustup
   
   [XDebug]
   ; Only Zend OR (!) XDebug
-  zend_extension_ts="C:\Users\lijian\scoop\apps\php-xdebug\current\php_xdebug.dll"
+  zend_extension_ts="C:\Users\morty\scoop\apps\php-xdebug\current\php_xdebug.dll"
   xdebug.remote_enable=true
   xdebug.remote_host=localhost
   xdebug.remote_port=10000
@@ -440,7 +440,7 @@ si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql make
 
 - 装redis和mysql只为了使用他们的客户端测试docker或k8s组件的连接
 
-- make需要设置以下path：`C:\Users\lijian\scoop\apps\make\current\bin\make.exe`
+- make需要设置以下path：`C:\Users\morty\scoop\apps\make\current\bin\make.exe`
 
 
 #### 系统相关
@@ -481,7 +481,7 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
       
       - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
 
-      - terminal修改path：`C:\Users\lijian\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
+      - terminal修改path：`C:\Users\morty\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
 
       - 其他设置可以直接同步
   

@@ -7,10 +7,10 @@
   ```bash
   git config --list
   
-  git config --global user.name lijian12345
+  git config --global user.name morty6688
   git config --global user.email 
   
-  git config --local user.name lijian12345
+  git config --local user.name morty6688
   git config --local user.email 
   # 使用vscode作为默认编辑器
   git config --global core.editor "code --wait"

@@ -53,7 +53,7 @@
 
    - ```powershell
      # 使用管理员模式在解压后的目录中运行以下命令
-     .\install.ps1 -root C:\Users\lijian\scoop\apps\typora\current
+     .\install.ps1 -root C:\Users\morty\scoop\apps\typora\current
      ```
 
 2. 然后安装copy button
