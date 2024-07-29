@@ -4,6 +4,8 @@
 
 - 安装docker desktop，启动k8s
 
+  - 添加代理：Resources - Proxies
+
 - 安装其他附加软件：
 
   ```
@@ -229,6 +231,14 @@
      ```
 
      使用`\l`查看全部数据库，`\c test`切换到test数据库，`\dt`查看全部表
+
+#### Mongo
+
+- ```
+  docker run --name mongo -p 27017:27017 -d -v //d/shared/mono/mongo/db:/data/db --restart always mongo
+  ```
+
+  
 
 #### redis
 

@@ -168,6 +168,8 @@
   - 针对每个提交可以进行edit，drop等等操作，edit时使用`git commit --amend`修改，修改完毕后需要返回idea解决冲突，之后用`git rebase --continue`完成rebase操作
   - 使用`gu -f`强制push可以覆盖掉remote仓库的历史
 
+- `git reset`可以重置stage区域
+
 ### 问题
 
 1. git版本为2.27.0以上时，使用git pull命令出现以下的警告：

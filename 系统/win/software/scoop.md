@@ -161,27 +161,57 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
 
 ##### python
 
-- conda：
+- anaconda3：
 
-  - 使用管理员权限安装，然后初始化（win上git_bash+zsh使用conda命令行无法激活环境，详见[讨论](https://github.com/conda/conda/issues/9922)。建议使用idea直接创建conda环境，避免命令行激活。conda solving environment是真的慢，不如用venv）
+  ```
+  si extras/anaconda3
+  conda init
+  ```
 
-    ```
-    si extras/anaconda3
-    conda init
-    ```
-
-  - 换源（~/.condarc)：
+  - 在.zshrc中添加下列语句，来解决zsh+bash无法激活环境的问题（参考[讨论](https://github.com/conda/conda/issues/9922)）：
 
     ```
-    channels:
-      - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-      - http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
-      - http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
-      - http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
-      - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-    show_channel_urls: true
-    auto_activate_base: false
-    report_errors: true
+    # anaconda3
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    eval "$('/c/Users/lijian/scoop/apps/anaconda3/current/App/Scripts/conda.exe' 'shell.zsh' 'hook' | sed -e 's/"$CONDA_EXE" $_CE_M $_CE_CONDA "$@"/"$CONDA_EXE" $_CE_M $_CE_CONDA "$@" | tr -d \x27\\r\x27/g')"
+    # <<< conda initialize <<<
+    
+    export PYTHONIOENCODING=UTF-8
+    ```
+
+  - alias
+
+    ```
+    # anaconda alias
+    alias c='conda'
+    alias ci='conda install'
+    alias cu='conda update'
+    alias cr='conda remove'
+    alias cl='conda list'
+    alias ca='conda activate'
+    alias cda='conda deactivate'
+    alias cc='conda create --name'
+    alias cr='conda remove --name'
+    alias cel='conda env list'
+    
+    # pip
+    alias pi='pip install'
+    alias pl='pip list'
+    ```
+
+  - channel
+
+    ```
+    conda install -c conda-forge ta-lib
+    ```
+
+  - can't find conda.exe: find conda.sh in global win files and refer to [this](https://stackoverflow.com/questions/75639901/why-did-activating-the-conda-environment-fail)
+
+  - 设置默认不开启环境：
+
+    ```
+    conda config --set auto_activate_base false
     ```
 
 - venv
@@ -253,12 +283,12 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   pnpm config set https-proxy http://127.0.0.1:1130
   
   # pnpm alias
-  alias p='pnpm'
-  alias pl='pnpm list'
-  alias pi='pnpm install'
-  alias pui='pnpm uninstall'
-  alias ps='pnpm start'
-  alias pb='pnpm build'
+  alias pn='pnpm'
+  alias pnl='pnpm list'
+  alias pni='pnpm install'
+  alias pnui='pnpm uninstall'
+  alias pns='pnpm start'
+  alias pnb='pnpm build'
   ```
   
   ```
@@ -435,7 +465,7 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 #### 编程相关
 
 ```
-si tabby filezilla switchhosts rapidee chatgpt telnet protobuf redis mysql make
+si tabby filezilla switchhosts rapidee telnet protobuf redis mysql make
 ```
 
 - 装redis和mysql只为了使用他们的客户端测试docker或k8s组件的连接
@@ -501,6 +531,8 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
   - potplayer：scoop下载的没有解码器，而且多了直播这个奇怪的功能
   
       - 开启电平控制
+  - chatbox：配合AiHubMix的API Key使用
+  - SnipDo和OpenAI Translator
   
   
   - [KBLAutoSwitch](https://github.com/flyinclouds/KBLAutoSwitch)：根据程序自动切换输入法，还有一些bug存在
