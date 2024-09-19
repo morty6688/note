@@ -8,7 +8,7 @@
 
 #### 前置工作
 
-0. 搜狗输入法
+0. 搜狗输入法（语音输入总是出bug，这一部分换用讯飞）
    - 只开启系统功能快捷键-英文输入法(ctrl+shift+i)和语音输入(ctrl+shift+a)；调整字号适应高分屏；安装ahk后使用ahk禁用搜狗输入法的全部快捷键（ahk脚本里已经有了）：ctrl+句号等等；
 
 1. ```
@@ -418,7 +418,7 @@ si rustup
 #### 日常使用
 
 ```
-si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox
+si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox magpie
 ```
 
 - everything->工具->选项：
@@ -507,7 +507,7 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
       
         - 有时idea启动应用说端口被占用，但是使用`netstat -ano|findstr 8080 `结果为空，可能是端口处于tcp排除范围，使用`netsh interface ipv4 show excludedportrange protocol=tcp`可以看到排除范围，这时也可以用上述命令重启
 
-      - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked.
+      - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked；或者删除.idea然后重启
       
       - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
 
@@ -533,6 +533,7 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
       - 开启电平控制
   - chatbox：配合AiHubMix的API Key使用
   - SnipDo和OpenAI Translator
+  - watt-toolkit
   
   
   - [KBLAutoSwitch](https://github.com/flyinclouds/KBLAutoSwitch)：根据程序自动切换输入法，还有一些bug存在

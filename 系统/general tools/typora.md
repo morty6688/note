@@ -52,11 +52,15 @@
 1. 首先安装[typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin)
 
    - ```powershell
-     # 使用管理员模式在解压后的目录中运行以下命令
+     # 使用powershell管理员模式在解压后的目录中运行以下命令（记得替换用户名）
      .\install.ps1 -root C:\Users\morty\scoop\apps\typora\current
      ```
 
 2. 然后安装copy button
+
+3. typora版本更新之后只需要替换window.html（待验证）
+
+4. 遇到问题将loader.js改为loader.js.bak
 
 ### 其他配置
 
