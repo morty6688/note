@@ -256,11 +256,11 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   ```
 
   ```
-  nvm install v20.11.0
+  nvm install v20.18.0
   ```
 
   ```
-  nvm use 20.11.0
+  nvm use 20.18.0
   ```
 
 - 然后安装pnpm或yarn，或者直接使用npm
@@ -277,12 +277,15 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   ```
   
   ```
+  npm install -g pnpm
+  
   # pnpm代理
   npm install -g pnpm
   pnpm config set proxy http://127.0.0.1:1130
   pnpm config set https-proxy http://127.0.0.1:1130
   
   # pnpm alias
+  alias pnin='pnpm init'
   alias pn='pnpm'
   alias pnl='pnpm list'
   alias pni='pnpm install'

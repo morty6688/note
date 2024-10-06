@@ -45,6 +45,11 @@
   function sin { scoop install $args }
   function sui { scoop uninstall $args }
   function se { scoop search $args }
+  
+  # proxy
+  $proxy = "http://127.0.0.1:1130"
+  $env:HTTP_PROXY = $proxy
+  $env:HTTPS_PROXY = $proxy
   ```
 
   - 注意`sli`和`sin`命令相比bash版本多了一个字母
