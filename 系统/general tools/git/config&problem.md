@@ -19,9 +19,14 @@
 - 代理
 
   ```
-  git config --global http.proxy 127.0.0.1:1130
-  git config --global https.proxy http://127.0.0.1:1130
+  git config --global http.proxy 'socks5://127.0.0.1:1130'
   ```
+
+  - ssh：把下面这句加到`~/.ssh/config`开头
+
+    ```
+    ProxyCommand connect -S 127.0.0.1:1130 -a none %h %p
+    ```
 
 - 配置ssh-key，将生成的.pub公钥添加到目标仓库
 
@@ -35,6 +40,18 @@
   git config --global core.quotepath false
   ```
 
+- clone保留原仓库换行符
+
+  ```
+  git config --global core.autocrlf input
+  ```
+  
+- 取消设置
+
+  ```
+  git config --global --unset https.proxy
+  ```
+  
 - 测试连接
 
   ```
@@ -67,7 +84,7 @@
     - powerlevel10k：
   
       ```
-      sudo apt install zsh
+      
       git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/tools/theme/powerlevel10k
       echo 'source ~/tools/theme/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
       zsh
@@ -141,7 +158,24 @@
   
   # vscode
   alias cz='code ~/.zshrc'
+  
+  # proxy
+  proxy () {
+    export http_proxy="http://127.0.0.1:1130"
+    export https_proxy=$http_proxy
+    export socks5_proxy="socks5://127.0.0.1:1130"
+    echo "HTTP Proxy on"
+  }
+  
+  # noproxy
+  noproxy () {
+    unset http_proxy
+    unset https_proxy
+    echo "HTTP Proxy off"
+  }
   ```
+  
+  - 测试代理可以用`curl www.google.com`
 
 
 #### 其他用法
@@ -224,3 +258,10 @@
      HostName ssh.github.com
      Port 443
    ```
+
+5. 代码拉一半卡住不动了，fetch-pack: unexpected disconnect while reading sideband packet
+   fatal: fetch-pack: invalid index-pack output
+
+   解决办法：这是某版本的git命令行bug，可以用github desktop拉
+
+   

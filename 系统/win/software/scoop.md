@@ -9,7 +9,7 @@
 #### 前置工作
 
 0. 搜狗输入法（语音输入总是出bug，这一部分换用讯飞）
-   - 只开启系统功能快捷键-英文输入法(ctrl+shift+i)和语音输入(ctrl+shift+a)；调整字号适应高分屏；安装ahk后使用ahk禁用搜狗输入法的全部快捷键（ahk脚本里已经有了）：ctrl+句号等等；
+   - 只开启系统功能快捷键-英文输入法(ctrl+shift+i)和语音输入(ctrl+shift+a)；调整字号适应高分屏；安装ahk后使用ahk禁用搜狗输入法的全部快捷键（ahk脚本里已经有了）：ctrl+句号等等；设置-高级-关闭桌面右下角推荐
 
 1. ```
    scoop install git
@@ -122,15 +122,17 @@ s info openjdk
 
 #### 注意事项
 
-- 可以用类似`scoop reset openjdk`来切换像java一样的开发工具版本
+- 可以用类似`scoop reset openjdk`来切换像java一样的开发工具版本（24/12/10切换失败）
 
 #### 按语言
 
 ##### java
 
 ```
-si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
+si oraclejdk-lts maven gradle visualvm
 ```
+
+- 历史遗留oracle-jdk1.8：https://github.com/frekele/oracle-java/releases/tag/8u202-b08，或者`si ojdkbuild8`好像也可以
 
 - maven换源（~/.m2）：
 
@@ -256,14 +258,14 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   ```
 
   ```
-  nvm install v20.18.0
+  nvm install v22.11.0
   ```
 
   ```
-  nvm use 20.18.0
+  nvm use 22.11.0
   ```
 
-- 然后安装pnpm或yarn，或者直接使用npm
+- 然后安装pnpm或yarn（切换node版本后将这些都重装一遍）
 
   ```
   # 查看npm全局包
@@ -274,6 +276,11 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   # npm代理
   npm config set proxy http://127.0.0.1:1130
   npm config set https-proxy http://127.0.0.1:1130
+  
+  npm config rm proxy
+  npm config rm https-proxy
+  # 镜像
+  npm config set registry https://registry.npmmirror.com
   ```
   
   ```
@@ -285,13 +292,15 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   pnpm config set https-proxy http://127.0.0.1:1130
   
   # pnpm alias
-  alias pnin='pnpm init'
+  alias pni='pnpm init'
+  alias pnin='pnpm install'
   alias pn='pnpm'
   alias pnl='pnpm list'
-  alias pni='pnpm install'
-  alias pnui='pnpm uninstall'
+  alias pna='pnpm add'
+  alias pnr='pnpm remove'
   alias pns='pnpm start'
   alias pnb='pnpm build'
+  alias pnu='pnpm update'
   ```
   
   ```
@@ -307,6 +316,16 @@ si oraclejdk-lts ojdkbuild8 openjdk17 maven gradle visualvm
   alias yl='yarn list'
   alias yi='yarn install'
   alias yui='yarn uninstall'
+  ```
+  
+  ```
+  # nestjs
+  npm i -g @nestjs/cli
+  ```
+  
+  ```
+  # vue
+  pnpm create vue@latest
   ```
 
 ##### go
@@ -421,7 +440,7 @@ si rustup
 #### 日常使用
 
 ```
-si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox magpie
+si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox magpie openai-translator
 ```
 
 - everything->工具->选项：
@@ -510,12 +529,14 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
       
         - 有时idea启动应用说端口被占用，但是使用`netstat -ano|findstr 8080 `结果为空，可能是端口处于tcp排除范围，使用`netsh interface ipv4 show excludedportrange protocol=tcp`可以看到排除范围，这时也可以用上述命令重启
 
-      - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked；或者删除.idea然后重启
+        - 改变某个文件夹的分隔符：*File* → *File Properties*→ *Line Separators*，重新格式化也可以在右键菜单里找到
       
+      - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked；**或者删除.idea然后重新右键菜单打开当前项目，不要从idea的最近项目里打开**
+
       - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
 
       - terminal修改path：`C:\Users\morty\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
-
+      
       - 其他设置可以直接同步
   
   - Logi Options+/G Hub

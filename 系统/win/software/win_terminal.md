@@ -54,12 +54,14 @@
        ```
 
 
-4. bash临时代理（待测试）
+4. bash临时代理（已经写到.zshrc函数中）
 
    - ```
-     export http_proxy='http://127.0.0.1:1130'    
-     export https_proxy='http://127.0.0.1:1130'
+     export http_proxy=http://127.0.0.1:1130
+     export https_proxy=$http_proxy
+     export socks5_proxy="socks5://127.0.0.1:1130"
+     
      export telnet_proxy='http://127.0.0.1:1130'
      ```
-
+     
      

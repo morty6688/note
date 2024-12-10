@@ -247,7 +247,7 @@
 - 单节点模式：
 
   ```bash
-  docker run -id --restart=always --privileged=true --name=redis -v //d/shared/mono/redis/data:/data -p 6379:6379 redis
+  docker run -id --restart=always --privileged=true --name=redis -v //d/shared/mono/redis/data:/data -p 6379:6379 redis --requirepass "root"
   ```
 
 ### 中间件

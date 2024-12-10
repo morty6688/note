@@ -2,23 +2,36 @@
 
 #### 基本配置
 
-- 查看，安装，关机以及注销版本
+- 查看当前安装，列出所有发行版，安装，关机以及注销版本
 
   ```
   wsl -l -v
   ```
 
   ```
-  wsl --install -d Ubuntuwsl --install -d Ubuntu
+  wsl -l -o
   ```
 
   ```
-  wsl --shutdown
+  wsl --install -d Ubuntu
+  ```
+
+  ```
+  wsl --shutdown Ubuntu
   ```
 
   ```
   wsl --unregister Ubuntu
   ```
+
+- 与win共享：
+
+  - windows中访问wsl文件：资源管理器地址栏输入`\\wsl$`
+  
+  - wsl中访问windows文件：`/mnt/c/desktop/tool`
+
+
+#### 常用命令
 
 - 添加root用户密码，可以使用`su`命令切换到root用户：
 
@@ -32,25 +45,19 @@
   sudo lsof -i :8080
   kill -9 <PID>
   ```
-  
+
 - 系统：
 
   ```
   lsb_release -cdir
   ```
 
-- 与win共享：
-
-  - windows中访问wsl文件：资源管理器地址栏输入`\\wsl$`
-
-  - wsl中访问windows文件：`/mnt/c/desktop/tool`
-
-
-
 #### 软件安装
 
-- 安装zsh和p10k：见git篇
-- 
+- 安装zsh和p10k：[zsh](../../general%20tools/git/config&problem.md#进阶配置)
+- 开发工具
+  - jdk8：https://stackoverflow.com/questions/57107129/how-to-install-oracle-java-8-on-ubuntu-18-04
+
 
 
 ### 问题
