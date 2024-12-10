@@ -149,7 +149,7 @@ si oraclejdk-lts maven gradle visualvm
   - 阿里云仓库：[链接](https://maven.aliyun.com/)
   - 配置文件：[settings.xml](resources/settings.xml)
 
-- gradle换源（放到gradle user home/.gradle）：
+- gradle代理（放到gradle user home/.gradle）：
 
 ​		[gradle.properties](resources/gradle.properties)
 
