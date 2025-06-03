@@ -132,7 +132,7 @@ s info openjdk
 si oraclejdk-lts maven gradle visualvm
 ```
 
-- 历史遗留oracle-jdk1.8：https://github.com/frekele/oracle-java/releases/tag/8u202-b08，或者`si ojdkbuild8`好像也可以
+- 历史遗留oracle-jdk1.8：https://github.com/frekele/oracle-java/releases/tag/8u202-b08
 
 - maven换源（~/.m2）：
 
@@ -265,13 +265,13 @@ si oraclejdk-lts maven gradle visualvm
   nvm use 22.11.0
   ```
 
-- 然后安装pnpm或yarn（切换node版本后将这些都重装一遍）
+- 然后安装pnpm或yarn（优先用pnpm，切换node版本后将这些都重装一遍）
 
   ```
   # 查看npm全局包
   npm list -g
   ```
-  
+
   ```
   # npm代理
   npm config set proxy http://127.0.0.1:1130
@@ -281,8 +281,19 @@ si oraclejdk-lts maven gradle visualvm
   npm config rm https-proxy
   # 镜像
   npm config set registry https://registry.npmmirror.com
-  ```
   
+  # npm alias
+  alias nin='npm init'
+  alias ni='npm install -D'
+  alias n='npm'
+  alias nl='npm list'
+  alias na='npm add'
+  alias nr='npm remove'
+  alias ns='npm start'
+  alias nb='npm build'
+  alias nu='npm update'
+  ```
+
   ```
   npm install -g pnpm
   
@@ -292,8 +303,8 @@ si oraclejdk-lts maven gradle visualvm
   pnpm config set https-proxy http://127.0.0.1:1130
   
   # pnpm alias
-  alias pni='pnpm init'
-  alias pnin='pnpm install'
+  alias pnin='pnpm init'
+  alias pni='pnpm install'
   alias pn='pnpm'
   alias pnl='pnpm list'
   alias pna='pnpm add'
@@ -301,8 +312,11 @@ si oraclejdk-lts maven gradle visualvm
   alias pns='pnpm start'
   alias pnb='pnpm build'
   alias pnu='pnpm update'
-  ```
   
+  # 缓存清除（适用于下载不完整的时候，比如electron postinstall失败）
+  pnpm store prune
+  ```
+
   ```
   # yarn代理
   npm install -g yarn
@@ -317,16 +331,60 @@ si oraclejdk-lts maven gradle visualvm
   alias yi='yarn install'
   alias yui='yarn uninstall'
   ```
-  
+
   ```
   # nestjs
   npm i -g @nestjs/cli
   ```
-  
+
+  ```
+  # electron（记得改mirror，win上build要提权）
+  pnpm create @quick-start/electron
+  ```
+
   ```
   # vue
   pnpm create vue@latest
   ```
+
+- 配置：
+
+  ```
+  pna vite-plugin-vue-devtools unplugin-vue-setup-extend-plus unplugin-auto-import vite-plugin-compression vite-plugin-svg-icons @vitejs/plugin-vue-jsx vite-plugin-compression2 @eslint/eslintrc
+  ```
+
+  - `unplugin-auto-import`：
+
+    - js环境：`vite.config.js`中添加以下代码
+
+      ```js
+      AutoImport({
+        imports: ['vue'],
+        dts: false,
+        eslintrc: {
+          enabled: true,
+        },
+      }),
+      ```
+
+      `eslint.config.js/mjs`中添加以下代码，以禁用 ESLint对auto import的error of no-undef
+
+      ```js
+      import { FlatCompat } from '@eslint/eslintrc'
+      
+      const compat = new FlatCompat()
+      
+      export default [
+        // existing contents
+        ...compat.extends('./.eslintrc-auto-import.json')
+      ]
+      ```
+
+    - ts环境：修改`vite.config.ts`中`dts`为`true`或者`'src/auto-imports.d.ts'`，会自动生成类型文件；`eslint.config.js/mjs`中同样添加上面代码；同时在`tsconfig.app.json`的`include`项中添加配置：`"*.d.ts"`
+
+- 问题：
+
+  - idea控制台有时会输出乱码，在package.json中添加`chcp 65001 &&` 切换
 
 ##### go
 
@@ -370,6 +428,14 @@ si oraclejdk-lts maven gradle visualvm
   # go
   alias gmt='go mod tidy'
   ```
+
+- 历史版本：
+
+  ```
+  si go@1.20
+  ```
+
+  
 
 
 ##### solidity
@@ -429,7 +495,6 @@ si rustup
   xdebug.remote_handler=dbgp
   ```
 
-  
 
 #### 环境
 
@@ -440,7 +505,7 @@ si rustup
 #### 日常使用
 
 ```
-si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox magpie openai-translator
+si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox magpie qtscrcpy
 ```
 
 - everything->工具->选项：
@@ -556,7 +621,6 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
   
       - 开启电平控制
   - chatbox：配合AiHubMix的API Key使用
-  - SnipDo和OpenAI Translator
   - watt-toolkit
   
   
@@ -583,6 +647,7 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
   - PICO 互联
   - pdf 补丁丁
   - 游戏加加
+  - 欧路词典：可以直接导入pdf翻译，比较方便
   
 
 ## 问题

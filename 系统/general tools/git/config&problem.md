@@ -45,17 +45,23 @@
   ```
   git config --global core.autocrlf input
   ```
-  
+
 - 取消设置
 
   ```
   git config --global --unset https.proxy
   ```
-  
+
 - 测试连接
 
   ```
   ssh -T git@github.com
+  ```
+
+- 导出归档
+
+  ```
+  git archive -o latest.zip HEAD
   ```
 
 #### 进阶配置
@@ -133,7 +139,7 @@
   # git alias
   alias g='git'
   alias gc='git clone'
-  alias gi='git init'
+  alias gin='git init'
   alias ga='git add'
   alias gp='git pull'
   alias gu='git push'
