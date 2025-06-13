@@ -610,7 +610,8 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
     - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
   - [UACWhitelistTool](https://github.com/XIU2/UACWhitelistTool)：uac白名单小程序，生成一个不启动uac的快捷方式，可以添加到右键菜单
   
-  - [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher)：win11美化任务栏，卸载时把安装程序名改为ep_uninstall即可
+  - ~~[ExplorerPatcher](https://github.com/valinet/ExplorerPatcher)：win11美化任务栏（24h2版本win已经无法使用）~~
+  - [StartAllBack](https://www.startallback.com/)：更好用的美化工具（可惜要付费）
   - translucenttb：下载windows store版。scoop下载的绿色版没有开机自启选项
     - 配合wallpaper engine一起用的话，将windows主题设置为深色，应用主题设置为浅色（个性化 - 颜色 - 选择模式 - 自定义）
   
