@@ -27,7 +27,7 @@
     scoop config rm proxy
     ```
 
-2. 添加仓库
+3. 添加仓库
 
    ```
    scoop bucket add java
@@ -36,6 +36,7 @@
    scoop bucket add extras
    scoop bucket add nonportable
    scoop bucket add dorado https://github.com/chawyehsu/dorado
+   scoop bucket add nirsoft-alternative https://github.com/ScoopInstaller/Nirsoft.git
    ```
 
 3. ```
@@ -505,7 +506,7 @@ si rustup
 #### 日常使用
 
 ```
-si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox magpie qtscrcpy
+si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox magpie qtscrcpy fileactivitywatch
 ```
 
 - everything->工具->选项：
@@ -552,12 +553,15 @@ si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dl
 #### 编程相关
 
 ```
-si tabby filezilla switchhosts rapidee telnet protobuf redis mysql make
+si tabby filezilla switchhosts rapidee telnet protobuf redis mysql make pandoc
 ```
 
 - 装redis和mysql只为了使用他们的客户端测试docker或k8s组件的连接
 
 - make需要设置以下path：`C:\Users\morty\scoop\apps\make\current\bin\make.exe`
+
+- pandoc需要miktex：去官网下载安装包，装好后会自动更新宏包，更新完要设置环境变量：`C:\Users\morty\AppData\Local\Programs\MiKTeX\miktex\bin\x64`
+
 
 
 #### 系统相关
