@@ -1,6 +1,14 @@
-### 基本配置
+### 偏好设置
 
-1. 配置文件（conf.user.json）：
+1. 文件：开启自动保存；启动时重新打开上次的文件和目录
+
+2. 图像：复制图片到文件夹；优先相对路径
+
+3. markdown：代码块显示行号
+
+4. 通用：右键菜单加入新建markdown
+
+5. 配置文件（conf.user.json）：
 
    - win: 
 
@@ -37,34 +45,21 @@
        "flags": [] // default [], append Chrome launch flags, e.g: [["disable-gpu"], ["host-rules", "MAP * 127.0.0.1"]]
      }
      ```
-   
+
    - mac: 见[mac_setup](../mac/setup.md)
 
 
-2. 通用设置项：开启自动保存；启动时重新打开上次的文件和目录
-3. 图像设置项：复制图片到文件夹；优先相对路径
-4. markdown设置项：代码块显示行号
-
-5. 配置完成后重启
-
 ### 插件
 
-1. 首先安装[typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin)
+- 安装[typora_plugin](https://github.com/obgnail/typora_plugin)，按照步骤替换文件
+  - 把自动编号功能关掉
 
-   - ```powershell
-     # 使用powershell管理员模式在解压后的目录中运行以下命令（记得替换用户名）
-     .\install.ps1 -root C:\Users\morty\scoop\apps\typora\current
-     ```
-
-2. 然后安装copy button
-
-3. typora版本更新之后只需要替换window.html（待验证）
-
-4. 遇到问题将loader.js改为loader.js.bak
 
 ### 其他配置
 
+#### 使用技巧
 
-- 使用技巧
-   - 中途取消列表：先向后缩进再取消，否则会取消整个列表
+- 中途取消列表：先向后缩进再取消，否则会取消整个列表
+- 在数字编号后面回车，可以在上一行增加编号
+- 在当前行文本后直接按`ctrl+shift+k`，可以直接在下一行添加一个代码块
 

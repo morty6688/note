@@ -2,19 +2,29 @@
 
 #### 基本配置
 
-- config命令
+- 修改配置：config命令
 
-  ```bash
-  git config --list
-  
-  git config --global user.name morty6688
-  git config --global user.email 
-  
-  git config --local user.name morty6688
-  git config --local user.email 
-  # 使用vscode作为默认编辑器
-  git config --global core.editor "code --wait"
-  ```
+  - 查看配置
+
+    ```
+    git config --list
+    ```
+
+  - 设置
+
+    ```
+    git config --global user.name morty6688
+    git config --global user.email "你的邮箱"
+    
+    # 使用vscode作为默认编辑器
+    git config --global core.editor "code --wait"
+    
+    # 命令行显示中文
+    git config --global core.quotepath false
+    
+    # clone保留原仓库换行符
+    git config --global core.autocrlf input
+    ```
 
 - 代理
 
@@ -22,47 +32,24 @@
   git config --global http.proxy 'socks5://127.0.0.1:1130'
   ```
 
-  - ssh：把下面这句加到`~/.ssh/config`开头
+  - 取消代理：
 
     ```
-    ProxyCommand connect -S 127.0.0.1:1130 -a none %h %p
+    git config --global --unset http.proxy
     ```
 
 - 配置ssh-key，将生成的.pub公钥添加到目标仓库
 
   ```
-  ssh-keygen -t ed25519 -C "your_email@example.com"	
+  ssh-keygen -t ed25519 -C "你的邮箱"	
   ```
 
-- 命令行显示中文
+  - 测试连接
 
-  ```
-  git config --global core.quotepath false
-  ```
+    ```
+    ssh -T git@github.com
+    ```
 
-- clone保留原仓库换行符
-
-  ```
-  git config --global core.autocrlf input
-  ```
-
-- 取消设置
-
-  ```
-  git config --global --unset https.proxy
-  ```
-
-- 测试连接
-
-  ```
-  ssh -T git@github.com
-  ```
-
-- 导出归档
-
-  ```
-  git archive -o latest.zip HEAD
-  ```
 
 #### 进阶配置
 
@@ -209,6 +196,12 @@
   - 使用`gu -f`强制push可以覆盖掉remote仓库的历史
 
 - `git reset`可以重置stage区域
+
+- 导出归档：
+
+  ```
+  git archive -o latest.zip HEAD
+  ```
 
 ### 问题
 

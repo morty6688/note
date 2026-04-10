@@ -1,58 +1,52 @@
-## 介绍与使用
+# Scoop
 
-首先下载一个绿色版clash-verge/clash-for-win或其他代理软件，同步一下系统时间，卸载掉系统自带的终端，安装vscode
+### 基本安装
 
-然后安装：https://github.com/ScoopInstaller/Install
+安装（在windows自带的那个powershell里运行）：
 
-### 使用方法
+```
+irm get.scoop.sh | iex
+```
 
-#### 前置工作
+0. ```
+    scoop install git
+    ```
 
-0. 搜狗输入法（语音输入总是出bug，这一部分换用讯飞）
-   - 只开启系统功能快捷键-英文输入法(ctrl+shift+i)；调整字号适应高分屏；安装ahk后使用ahk禁用搜狗输入法的全部快捷键（ahk脚本里已经有了）：ctrl+句号等等；设置-高级-关闭桌面右下角推荐
+    - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成基本配置
 
-1. ```
-   scoop install git
-   ```
-
-   - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成基本配置
-2. 代理
+1. 代理
 
     ```
     scoop config proxy 127.0.0.1:1130
     scoop update
     ```
 
-    ```
-    scoop config rm proxy
-    ```
+    - 取消代理
 
-3. 添加仓库
+      ```
+      scoop config rm proxy
+      ```
+
+2. 添加仓库
 
    ```
    scoop bucket add java
-   scoop bucket add main
    scoop bucket add versions
    scoop bucket add extras
    scoop bucket add nonportable
    scoop bucket add dorado https://github.com/chawyehsu/dorado
    scoop bucket add nirsoft-alternative https://github.com/ScoopInstaller/Nirsoft.git
    ```
-
+   
 3. ```
-   scoop install windows-terminal powershell typora
+   scoop install windows-terminal powershell
    ```
 
    - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成进阶配置
-
    - [win terminal配置](win_terminal.md)
-
-   - [typora配置](../../general%20tools/typora.md)
-
    - powershell：更新时切换成windows自带的那个powershell去更新。同时记得设置两个powershell的别名，见[powershell](powershell.md)
-
    - clash设置：
-   
+
      - 一些uwp应用比如微软商店可能会打不开，需要添加`UWP Loopback`，例如`你的账户`这个程序，不添加到loopback可能会造成登录异常。cv需要下载网络回环管理器来应对这个，cfw不需要
      - cfw：`allow LAN`功能开启后，点击旁边的图标查看192.168开头的局域网地址，可以让局域网内其他设备使用代理。比如给switch添加代理，修改其网络设置将上述局域网地址和代理端口加上即可。
 
@@ -506,48 +500,31 @@ si rustup
 #### 日常使用
 
 ```
-si everything autohotkey qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox magpie qtscrcpy fileactivitywatch
+si qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox magpie qtscrcpy fileactivitywatch
 ```
 
-- everything->工具->选项：
-
-  - 常规->选中随系统自启动，everything服务，集成到右键菜单；去掉以管理员模式运行；
-  - 界面->选中单击托盘图标打开搜索窗口，自动聚焦于输入框
-  - 结果->选中搜索关键词为空时不显示搜索结果，双击路径列打开目录
-  - 视图->选中高亮光标经过行，显示大小，选中数量等等
-  - 快捷键->显示窗口快捷键（Alt+F）
-  - 索引->选中索引文件夹大小
-
-- autohotkey：
-
-  - 使用如下设置，并将快捷方式放到Windows启动目录：
-  
-    [AHK启动脚本](ahk.md)
-
 - qbittorrent-enhanced：
-  
+
   - 行为：设置启动时最小化，最小化到系统托盘
   - Bittorrent：设置做种限制
-  
+
 - pdf-xchange-editor：
-  
+
   - 勾选文档 - 打开上次的文档；页面显示 - 默认缩放 - 适合可见；页面显示 - 默认页面设置 - 连续；
-  - 设置 Esc 键为选择文本快捷键（右键工具栏 - 命令 - 搜索”选择文本“）；设置`键为打字机工具
+  - 设置 Esc 键为选择文本快捷键（右键工具栏 - 自定义工具栏 - 命令 - 搜索”选择文本“）；设置`键为打字机工具（直接打字好像就行）
+  - **之前都好好的，现在连了代理下不了了，只能从微软商店下**
 
 #### 图像影音
 
 ```
-si sharex imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dlp icaros-np extras/kodi twinkle-tray obs-studio mkvtoolnix
+si imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dlp icaros-np extras/kodi twinkle-tray obs-studio mkvtoolnix
 ```
 
 - mpv：
 
   - [让B站视频可以在mpv中播放](https://github.com/diannaojiang/Bilibili-Playin-Mpv)，导入[mpv.reg](resources/mpv.reg)
   - ~~进阶设置~~：https://bbs.acgrip.com/thread-7443-1-1.html
-
 - icaros：使用管理员模式启动
-
-- sharex：启动时会跟onedrive冲突快捷键。此时先关闭sharex，然后按截图键，在onedrive弹出的窗口中选择`no, thx!`，再启动sharex即可。onedrive没啥卵用，建议禁用开机自启
 
 
 #### 编程相关
@@ -562,8 +539,6 @@ si tabby filezilla switchhosts rapidee telnet protobuf redis mysql make pandoc
 
 - pandoc需要miktex：去官网下载安装包，装好后会自动更新宏包，更新完要设置环境变量：`C:\Users\morty\AppData\Local\Programs\MiKTeX\miktex\bin\x64`
 
-
-
 #### 系统相关
 
 ```
@@ -573,16 +548,7 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
 
 ### 暂未用 scoop
 
-- 带自动更新或无法使用的
-  - steam
-  
-  - chrome
-  
-    - 常见问题：
-      - 屏幕闪烁：https://www.reddit.com/r/chrome/comments/15uuyry/artifactsflickering_on_chrome_w10/。解决办法：把angle显卡后端设为d3d9
-  
-  - vscode
-  
+- 带自动更新或无法使用
   - idea
   
     - 常见问题：
@@ -597,27 +563,24 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
         - IDEA有时会卡在开始界面无法启动，查idea.log发现是`java.net.BindException: *Address already in use*: *bind*`，这说明IDEA启动需要的端口被占用，使用该命令重启
       
         - 有时idea启动应用说端口被占用，但是使用`netstat -ano|findstr 8080 `结果为空，可能是端口处于tcp排除范围，使用`netsh interface ipv4 show excludedportrange protocol=tcp`可以看到排除范围，这时也可以用上述命令重启
-
+  
         - 改变某个文件夹的分隔符：*File* → *File Properties*→ *Line Separators*，重新格式化也可以在右键菜单里找到
       
       - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked；**或者删除.idea然后重新右键菜单打开当前项目，不要从idea的最近项目里打开**
-
+  
       - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
-
+  
       - terminal修改path：`C:\Users\morty\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
       
       - 其他设置可以直接同步
   
-  - Logi Options+/G Hub
+  - 外设
+  
+    - 罗技：OOM
+  
   - docker-desktop：用作开发环境配置，[docker_env](../../general%20tools/docker_desktop/docker_env.md)。这年头安装完还要重启系统的软件不多了。。。
-  - bandizip：scoop下载的是绿色版，不能添加到资源管理器上下文菜单
-    - 勾选文件关联 - 基本选项，取消勾选解压/压缩完成后不要关闭进度窗口
-  - [UACWhitelistTool](https://github.com/XIU2/UACWhitelistTool)：uac白名单小程序，生成一个不启动uac的快捷方式，可以添加到右键菜单
   
   - ~~[ExplorerPatcher](https://github.com/valinet/ExplorerPatcher)：win11美化任务栏（24h2版本win已经无法使用）~~
-  - [StartAllBack](https://www.startallback.com/)：更好用的美化工具（可惜要付费）
-  - translucenttb：下载windows store版。scoop下载的绿色版没有开机自启选项
-    - 配合wallpaper engine一起用的话，将windows主题设置为深色，应用主题设置为浅色（个性化 - 颜色 - 选择模式 - 自定义）
   
   - feem：局域网全速传输文件。因为免费版默认目标文件夹是下载，建议把windows下载目录移动到D盘
   
@@ -626,34 +589,23 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
   
       - 开启电平控制
   - chatbox：配合AiHubMix的API Key使用
-  - watt-toolkit
   
   
   - [KBLAutoSwitch](https://github.com/flyinclouds/KBLAutoSwitch)：根据程序自动切换输入法，还有一些bug存在
   
 - 付费：
 
-  - displayfusion
-    - 用鼠标中键来转移窗口，取消窗口上的小按钮
-    - win11 - 使用经典上下文菜单（有待优化）
-    - 关闭 `任务栏 - 在每个显示器上启用任务栏`，启动系统自带的`在所有显示器上显示任务栏`
-  - directory opus
   - quicker
   
 - 国内：
   
-  - wechat
-  - 搜狗输入法
-  - mouseinc
-  - 火绒
   - TIM，qq广告和bug太多
   - 115
   - 图吧工具箱
   - PICO 互联
   - pdf 补丁丁
   - 游戏加加
-  - 欧路词典：可以直接导入pdf翻译，比较方便
-  
+  - 欧路词典
 
 ## 问题
 
@@ -668,3 +620,7 @@ si rufus dismplusplus hasher renamer locale-emulator recuva
     s bucket add main
     sup
     ```
+
+### Chrome：
+
+- 屏幕闪烁：https://www.reddit.com/r/chrome/comments/15uuyry/artifactsflickering_on_chrome_w10/。解决办法：把angle显卡后端设为d3d9。**该问题似乎已修复**。
