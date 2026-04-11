@@ -55,7 +55,7 @@
 
 - 安装zsh和powerlevel10k：
 
-  - for win：https://gist.github.com/fworks/af4c896c9de47d827d4caa6fd7154b6b
+  - zsh地址：[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)
 
     - powerlevel10k（使用bash运行以下命令）：
       ```
@@ -63,12 +63,12 @@
       echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
       ```
     
-      在用户目录下创建[.bashrc](resources/.bashrc)文件，里面设置zsh为默认（目前的版本创建完这个文件之后，第一次启动会报错并生成一个.bash_profile，再次启动就一切正常
+      在用户目录下创建[.bashrc](resources/.bashrc)文件，里面设置zsh为默认（创建完这个文件之后，第一次启动会报错并生成一个.bash_profile，再次启动就一切正常）
 
   
-    - **更新时注意事项**：所有使用scoop对于Git的更新或修改操作全部需要**切换到powershell执行**，并在修改前结束bash.exe和zsh.exe进程。使用scu命令清理旧版本时，需要**重新安装[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)**，即解压zsh到Git目录。
+    - **更新时注意事项**：所有使用scoop对于Git的更新或修改操作全部需要**切换到powershell执行**，并在修改前结束bash.exe和zsh.exe进程。使用scu命令清理旧版本时，需要**重新安装zsh**，即解压zsh到Git目录。
   
-  - for ubuntu：
+  - （可选）for ubuntu：
   
     ```
     sudo apt install zsh -y
@@ -90,7 +90,7 @@
       chsh -s /bin/zsh
       ```
   
-- 多账号配置，在自己的主账号配置好之后，执行以下操作：
+- （可选）多账号配置，在自己的主账号配置好之后，执行以下操作：
 
   - `ssh-keygen -t ed25519 -C "your_sub_email@sub.com"`，当出现提示时输入正确的路径，如`Enter file in which to save the key (/Users/you/.ssh/id_ed25519): /c/Users/username/.ssh/sub_ed25519`，注意路径要输全路径，不能输入`~/.ssh/sub_ed25519`，有时候识别不出来，然后把生成的公钥传到副账号github中
 
@@ -134,7 +134,6 @@
   alias gr='git rebase'
   alias gm='git merge'
   alias gcm='git commit'
-  alias gcf='git config'
   
   # history
   HISTFILE=~/.zsh_history
@@ -144,6 +143,18 @@
   
   # show color
   alias ls='ls --color=auto'
+  
+  # scoop alias
+  alias s='scoop'
+  alias sup='scoop update'
+  alias ss='scoop update && scoop status'
+  alias sl='scoop list'
+  alias se='scoop search'
+  alias si='scoop install'
+  alias sui='scoop uninstall'
+  alias scu='scoop cleanup'
+  alias sho='scoop hold'
+  alias suh='scoop unhold'
   
   # completion
   autoload -Uz compinit && compinit
@@ -164,11 +175,16 @@
   noproxy () {
     unset http_proxy
     unset https_proxy
+    unset socks5_proxy
     echo "HTTP Proxy off"
   }
   ```
   
-  - 测试代理可以用`curl www.google.com`
+  - 测试代理可以用：
+  
+    ```
+    curl www.google.com
+    ```
 
 
 #### 其他用法

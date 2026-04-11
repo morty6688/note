@@ -6,7 +6,7 @@
 
 3. markdown：代码块显示行号
 
-4. 通用：右键菜单加入新建markdown
+4. 通用：右键菜单加入：新建markdown（第一行是加入，第二行是删除），需要重启
 
 5. 配置文件（conf.user.json）：
 

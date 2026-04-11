@@ -2,18 +2,19 @@
 
 ### 基本安装
 
-安装（在windows自带的那个powershell里运行）：
+安装（ powershell 1.0 里运行，不需要管理员权限）：
 
 ```
 irm get.scoop.sh | iex
 ```
 
 0. ```
-    scoop install git
+    scoop install git powershell windows-terminal
     ```
 
     - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成基本配置
-
+    - [win terminal配置](win_terminal.md)，完成win terminal的设置
+    
 1. 代理
 
     ```
@@ -38,34 +39,11 @@ irm get.scoop.sh | iex
    scoop bucket add nirsoft-alternative https://github.com/ScoopInstaller/Nirsoft.git
    ```
    
-3. ```
-   scoop install windows-terminal powershell
-   ```
-
+3. 进阶配置
+   
    - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成进阶配置
-   - [win terminal配置](win_terminal.md)
-   - powershell：更新时切换成windows自带的那个powershell去更新。同时记得设置两个powershell的别名，见[powershell](powershell.md)
-   - clash设置：
-
-     - 一些uwp应用比如微软商店可能会打不开，需要添加`UWP Loopback`，例如`你的账户`这个程序，不添加到loopback可能会造成登录异常。cv需要下载网络回环管理器来应对这个，cfw不需要
-     - cfw：`allow LAN`功能开启后，点击旁边的图标查看192.168开头的局域网地址，可以让局域网内其他设备使用代理。比如给switch添加代理，修改其网络设置将上述局域网地址和代理端口加上即可。
-
-
-#### 设置别名
-
-- ~/.zshrc里添加scoop别名
-
-```
-# scoop alias
-alias s='scoop'
-alias sup='scoop update'
-alias ss='scoop update && scoop status'
-alias sl='scoop list'
-alias se='scoop search'
-alias si='scoop install'
-alias sui='scoop uninstall'
-alias scu='scoop cleanup'
-```
+   - powershell：更新时切换成 powershell 1.0 去更新。同时记得设置两个powershell的别名，见[powershell](powershell.md)
+   - 在vs code里select default profile：git bash
 
 #### 安装 aria2
 
@@ -74,9 +52,13 @@ si aria2
 s config aria2-split 32
 s config aria2-max-connection-per-server 16
 s config aria2-min-split-size 1M
-# 有时候aria2会有问题
-scoop config aria2-enabled false
 ```
+
+- 有时候aria2会有问题：
+
+  ```
+  scoop config aria2-enabled false
+  ```
 
 #### 更新
 
@@ -88,9 +70,9 @@ ss
 sup -a
 
 # 禁止某个软件更新
-s hold git
+sho git
 # 取消
-s unhold git
+suh git
 ```
 
 #### 清除缓存（安装失败时清除残留）
