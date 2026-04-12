@@ -97,40 +97,24 @@ s info openjdk
 
 ### 开发工具安装
 
-#### 注意事项
+```
+si oraclejdk-lts maven gradle visualvm python nvm go protobuf solidity rustup
+```
 
-- 可以用类似`scoop reset openjdk`来切换像java一样的开发工具版本（24/12/10切换失败）
-
-#### 按语言
+#### 具体语言配置
 
 ##### java
-
-```
-si oraclejdk-lts maven gradle visualvm
-```
 
 - 历史遗留oracle-jdk1.8：https://github.com/frekele/oracle-java/releases/tag/8u202-b08
 
 - maven换源（~/.m2）：
 
-  - ~~3.8.1以上版本禁用https：~~
-
-  ```xml
-  <mirror>
-      <id>maven-default-http-blocker</id>
-      <mirrorOf>!*</mirrorOf>
-      <url>http://0.0.0.0/</url>
-  </mirror>
-  ```
-
   - 阿里云仓库：[链接](https://maven.aliyun.com/)
   - 配置文件：[settings.xml](resources/settings.xml)
 
-- gradle代理（放到gradle user home/.gradle）：
+- gradle代理（放到gradle user home/.gradle）：[gradle.properties](resources/gradle.properties)
 
-​		[gradle.properties](resources/gradle.properties)
-
-- visualvm启动：
+- （可选）visualvm启动：
 
   ```
   visualvm --jdkhome "C:\Users\morty\scoop\apps\ojdkbuild8\current"
@@ -140,7 +124,29 @@ si oraclejdk-lts maven gradle visualvm
 
 ##### python
 
-- anaconda3：
+- 安装其他版本python
+
+  ```
+  si python310
+  ```
+
+- venv
+
+  - 直接使用ai助手或者ide来创建环境
+  
+  - ~~pip代理~~
+  
+    ```
+    code pip/pip.ini
+    ```
+  
+    ```
+    [global]
+    proxy     = 127.0.0.1:1130 
+    [install]
+    ```
+  
+- （可选，venv也够用了）anaconda3：
 
   ```
   si extras/anaconda3
@@ -193,29 +199,8 @@ si oraclejdk-lts maven gradle visualvm
     conda config --set auto_activate_base false
     ```
 
-- venv
 
-  ```
-  si python310
-  ```
-
-  - 直接使用idea创建环境
-  
-  - pip代理
-  
-    ```
-    code pip/pip.ini
-    ```
-    
-    ```
-    [global]
-    proxy     = 127.0.0.1:1130 
-    [install]
-    ```
-    
-
-
-- cuda和cuDNN（不一定要装，更多的是用在虚拟环境中，可以添加下面的bucket，方便查看cudnn版本）
+- （可选）cuda和cuDNN（不一定要装，一般用不到这么底层的东西。更多的是用在虚拟环境中，可以添加下面的bucket，方便查看cudnn版本）
 
   ```
   si cuda
@@ -228,101 +213,116 @@ si oraclejdk-lts maven gradle visualvm
 
 ##### js/ts
 
-- 用nvm来管理node版本（nvm 1.1.12有bug，node 20.11.0是一个lts版本）
+- **用nvm来管理node版本**
 
   ```
-  si nvm@1.1.11
-  ```
-
-  ```
-  nvm install v22.11.0
-  ```
-
-  ```
-  nvm use 22.11.0
+  nvm install lts
+  nvm use lts
   ```
 
 - 然后安装pnpm或yarn（优先用pnpm，切换node版本后将这些都重装一遍）
 
-  ```
-  # 查看npm全局包
-  npm list -g
-  ```
+  - 查看npm全局包
 
-  ```
-  # npm代理
-  npm config set proxy http://127.0.0.1:1130
-  npm config set https-proxy http://127.0.0.1:1130
-  
-  npm config rm proxy
-  npm config rm https-proxy
-  # 镜像
-  npm config set registry https://registry.npmmirror.com
-  
-  # npm alias
-  alias nin='npm init'
-  alias ni='npm install -D'
-  alias n='npm'
-  alias nl='npm list'
-  alias na='npm add'
-  alias nr='npm remove'
-  alias ns='npm start'
-  alias nb='npm build'
-  alias nu='npm update'
-  ```
+    ```
+    npm list -g
+    ```
 
-  ```
-  npm install -g pnpm
-  
-  # pnpm代理
-  npm install -g pnpm
-  pnpm config set proxy http://127.0.0.1:1130
-  pnpm config set https-proxy http://127.0.0.1:1130
-  
-  # pnpm alias
-  alias pnin='pnpm init'
-  alias pni='pnpm install'
-  alias pn='pnpm'
-  alias pnl='pnpm list'
-  alias pna='pnpm add'
-  alias pnr='pnpm remove'
-  alias pns='pnpm start'
-  alias pnb='pnpm build'
-  alias pnu='pnpm update'
-  
-  # 缓存清除（适用于下载不完整的时候，比如electron postinstall失败）
-  pnpm store prune
-  ```
+  - npm代理
 
-  ```
-  # yarn代理
-  npm install -g yarn
-  yarn config set proxy http://127.0.0.1:1130
-  yarn config set https-proxy http://127.0.0.1:1130
-  
-  # yarn alias
-  alias y='yarn'
-  alias ys='yarn start'
-  alias yb='yarn build'
-  alias yl='yarn list'
-  alias yi='yarn install'
-  alias yui='yarn uninstall'
-  ```
+    ```
+    npm config set proxy http://127.0.0.1:1130
+    npm config set https-proxy http://127.0.0.1:1130
+    ```
 
-  ```
-  # nestjs
-  npm i -g @nestjs/cli
-  ```
+    - 取消代理
 
-  ```
-  # electron（记得改mirror，win上build要提权）
-  pnpm create @quick-start/electron
-  ```
+      ```
+      npm config rm proxy
+      npm config rm https-proxy
+      ```
 
-  ```
-  # vue
-  pnpm create vue@latest
-  ```
+  - ~~镜像~~
+
+    ```
+    npm config set registry https://registry.npmmirror.com
+    ```
+
+  - pnpm
+
+    ```
+    npm install -g pnpm
+    ```
+
+    - 代理
+
+      ```
+      pnpm config set proxy http://127.0.0.1:1130
+      pnpm config set https-proxy http://127.0.0.1:1130
+      ```
+
+      - 取消代理
+
+        ```
+        pnpm config delete proxy
+        pnpm config delete https-proxy
+        ```
+
+    - 缓存清除（适用于下载不完整的时候，比如electron postinstall失败）
+
+      ```
+      pnpm store prune
+      ```
+
+  - yarn
+
+    ```
+    npm install -g yarn
+    ```
+
+    - 代理
+
+      ```
+      yarn config set proxy http://127.0.0.1:1130
+      yarn config set https-proxy http://127.0.0.1:1130
+      ```
+
+      - 取消代理
+
+        ```
+        yarn config delete proxy
+        yarn config delete https-proxy
+        ```
+
+  - bun
+
+    ```
+    npm install -g bun
+    ```
+
+    - 升级
+
+      ```
+      bun upgrade
+      ```
+
+  - nestjs
+
+    ```
+    npm i -g @nestjs/cli
+    ```
+
+  - electron（记得改mirror，win上build要提权）
+
+    ```
+    pnpm create @quick-start/electron
+    ```
+
+  - vue
+
+    ```
+    pnpm create vue@latest
+    ```
 
 - 配置：
 
@@ -365,21 +365,40 @@ si oraclejdk-lts maven gradle visualvm
 
 ##### go
 
-- ```
-  si go
-  ```
-
 - 代理：
 
   ```
   go env -w GOPROXY=https://goproxy.cn,direct
   ```
 
+  - 查看代理
+
+    ```
+    go env | grep GOPROXY
+    ```
+
+  - 取消代理
+
+    ```
+    go env -w GOPROXY=direct
+    ```
+
+- 安装protobuf的go生成工具，以及其他等等
+
   ```
-  go env | grep GOPROXY
+  go install github.com/golang/protobuf/protoc-gen-go@latest
+  go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
   ```
 
-- win上兼容syscall，最好不要用这些信号量
+- 安装[bloomrpc](https://github.com/bloomrpc/bloomrpc)。也可以直接使用ide自带的http client
+
+- （可选）历史版本：
+
+  ```
+  si go@1.20
+  ```
+
+- （兼容）win上兼容syscall，最好不要用这些信号量
 
   在types_windows.go里添加如下内容
 
@@ -390,44 +409,8 @@ si oraclejdk-lts maven gradle visualvm
   	SIGTSTP = Signal(18)
   ```
 
-- 安装protobuf的go生成工具，以及其他等等
 
-  ```
-  go install github.com/golang/protobuf/protoc-gen-go@latest
-  go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-  ```
-
-- 安装[bloomrpc](https://github.com/bloomrpc/bloomrpc)。也可以直接使用idea自带的http client
-
-- .zshrc设置：
-
-  ```
-  # go
-  alias gmt='go mod tidy'
-  ```
-
-- 历史版本：
-
-  ```
-  si go@1.20
-  ```
-
-  
-
-
-##### solidity
-
-```
-si solidity
-```
-
-##### rust
-
-```
-si rustup
-```
-
-#####  php
+#####  php（可选）
 
 - 安装：
 
@@ -472,122 +455,54 @@ si rustup
   xdebug.remote_handler=dbgp
   ```
 
-
 #### 环境
 
-数据库及中间件见[docker_env](../../general%20tools/docker_desktop/docker_env.md)
-
-### 常用软件安装
-
-#### 日常使用
-
-```
-si qbittorrent-enhanced pdf-xchange-editor telegram discord trafficmonitor firefox magpie qtscrcpy fileactivitywatch
-```
-
-- qbittorrent-enhanced：
-
-  - 行为：设置启动时最小化，最小化到系统托盘
-  - Bittorrent：设置做种限制
-
-- pdf-xchange-editor：
-
-  - 勾选文档 - 打开上次的文档；页面显示 - 默认缩放 - 适合可见；页面显示 - 默认页面设置 - 连续；
-  - 设置 Esc 键为选择文本快捷键（右键工具栏 - 自定义工具栏 - 命令 - 搜索”选择文本“）；设置`键为打字机工具（直接打字好像就行）
-  - **之前都好好的，现在连了代理下不了了，只能从微软商店下**
-
-#### 图像影音
-
-```
-si imageglass screenoff ffmpeg screentogif neteasemusic qqmusic mpv yt-dlp icaros-np extras/kodi twinkle-tray obs-studio mkvtoolnix
-```
-
-- mpv：
-
-  - [让B站视频可以在mpv中播放](https://github.com/diannaojiang/Bilibili-Playin-Mpv)，导入[mpv.reg](resources/mpv.reg)
-  - ~~进阶设置~~：https://bbs.acgrip.com/thread-7443-1-1.html
-- icaros：使用管理员模式启动
-
+- 安装[docker-desktop](https://www.docker.com/products/docker-desktop/)
+  - 把前面的装完再装这个，这个装完会重启系统并安装wsl
+  - 数据库及中间件配置见[docker_env](../../general%20tools/docker_desktop/docker_env.md)
 
 #### 编程相关
 
 ```
-si tabby filezilla switchhosts rapidee telnet protobuf redis mysql make pandoc
+si filezilla make pandoc latex switchhosts telnet
 ```
-
-- 装redis和mysql只为了使用他们的客户端测试docker或k8s组件的连接
 
 - make需要设置以下path：`C:\Users\morty\scoop\apps\make\current\bin\make.exe`
+- 其他可选：tabby
 
-- pandoc需要miktex：去官网下载安装包，装好后会自动更新宏包，更新完要设置环境变量：`C:\Users\morty\AppData\Local\Programs\MiKTeX\miktex\bin\x64`
+#### 注意事项
 
-#### 系统相关
-
-```
-si rufus dismplusplus hasher renamer locale-emulator recuva
-```
+- 可以用类似`scoop reset openjdk`来切换像java一样的开发工具版本（24/12/10切换失败）
 
 
-### 暂未用 scoop
+### 其他
 
-- 带自动更新或无法使用
-  - idea
-  
-    - 常见问题：
-  
-      - winnat问题，重启网络（使用管理员模式）：
-  
-        ```
-        net stop winnat
-        net start winnat
-        ```
-      
-        - IDEA有时会卡在开始界面无法启动，查idea.log发现是`java.net.BindException: *Address already in use*: *bind*`，这说明IDEA启动需要的端口被占用，使用该命令重启
-      
-        - 有时idea启动应用说端口被占用，但是使用`netstat -ano|findstr 8080 `结果为空，可能是端口处于tcp排除范围，使用`netsh interface ipv4 show excludedportrange protocol=tcp`可以看到排除范围，这时也可以用上述命令重启
-  
-        - 改变某个文件夹的分隔符：*File* → *File Properties*→ *Line Separators*，重新格式化也可以在右键菜单里找到
-      
-      - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked；**或者删除.idea然后重新右键菜单打开当前项目，不要从idea的最近项目里打开**
-  
-      - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
-  
-      - terminal修改path：`C:\Users\morty\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
-      
-      - 其他设置可以直接同步
-  
-  - 外设
-  
-    - 罗技：OOM
-  
-  - docker-desktop：用作开发环境配置，[docker_env](../../general%20tools/docker_desktop/docker_env.md)。这年头安装完还要重启系统的软件不多了。。。
-  
-  - ~~[ExplorerPatcher](https://github.com/valinet/ExplorerPatcher)：win11美化任务栏（24h2版本win已经无法使用）~~
-  
-  - feem：局域网全速传输文件。因为免费版默认目标文件夹是下载，建议把windows下载目录移动到D盘
-  
-  
-  - potplayer：scoop下载的没有解码器，而且多了直播这个奇怪的功能
-  
-      - 开启电平控制
-  - chatbox：配合AiHubMix的API Key使用
-  
-  
-  - [KBLAutoSwitch](https://github.com/flyinclouds/KBLAutoSwitch)：根据程序自动切换输入法，还有一些bug存在
-  
-- 付费：
+- idea（vibe coding大环境下，不确定以后还需不需要用）
 
-  - quicker
-  
-- 国内：
-  
-  - TIM，qq广告和bug太多
-  - 115
-  - 图吧工具箱
-  - PICO 互联
-  - pdf 补丁丁
-  - 游戏加加
-  - 欧路词典
+  - 常见问题：
+
+    - winnat问题，重启网络（使用管理员模式）：
+
+      ```
+      net stop winnat
+      net start winnat
+      ```
+    
+      - IDEA有时会卡在开始界面无法启动，查idea.log发现是`java.net.BindException: *Address already in use*: *bind*`，这说明IDEA启动需要的端口被占用，使用该命令重启
+    
+      - 有时idea启动应用说端口被占用，但是使用`netstat -ano|findstr 8080 `结果为空，可能是端口处于tcp排除范围，使用`netsh interface ipv4 show excludedportrange protocol=tcp`可以看到排除范围，这时也可以用上述命令重启
+
+      - 改变某个文件夹的分隔符：*File* → *File Properties*→ *Line Separators*，重新格式化也可以在右键菜单里找到
+    
+    - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked；**或者删除.idea然后重新右键菜单打开当前项目，不要从idea的最近项目里打开**
+
+    - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
+
+    - terminal修改path：`C:\Users\morty\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
+    
+    - 其他设置可以直接同步
+
+- [~~KBLAutoSwitch~~](https://github.com/flyinclouds/KBLAutoSwitch)：根据程序自动切换输入法，还有一些bug存在
 
 ## 问题
 

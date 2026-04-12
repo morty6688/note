@@ -77,14 +77,13 @@
     - powerlevel10k：
   
       ```
-      
       git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/tools/theme/powerlevel10k
       echo 'source ~/tools/theme/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
       zsh
       ```
-  
+      
     - 设为默认：
-  
+    
       ```
       cat /etc/shells
       chsh -s /bin/zsh
@@ -178,6 +177,50 @@
     unset socks5_proxy
     echo "HTTP Proxy off"
   }
+  
+  # npm alias
+  alias nin='npm init'
+  alias ni='npm install -D'
+  alias n='npm'
+  alias nl='npm list'
+  alias na='npm add'
+  alias nr='npm remove'
+  alias ns='npm start'
+  alias nb='npm build'
+  alias nu='npm update'
+  
+  # pnpm alias
+  alias pnin='pnpm init'
+  alias pni='pnpm install'
+  alias pn='pnpm'
+  alias pnl='pnpm list'
+  alias pna='pnpm add'
+  alias pnr='pnpm remove'
+  alias pns='pnpm start'
+  alias pnb='pnpm build'
+  alias pnu='pnpm update'
+  
+  # yarn alias
+  alias y='yarn'
+  alias ys='yarn start'
+  alias yb='yarn build'
+  alias yl='yarn list'
+  alias yi='yarn install'
+  alias yui='yarn uninstall'
+  
+  # telepresence
+  alias tp=telepresence
+  alias tpc='telepresence connect'
+  alias tps='telepresence status'
+  alias tpq='telepresence quit'
+  alias tpv='telepresence version'
+  
+  # pip
+  alias pi='pip install'
+  alias pl='pip list'
+  
+  # go
+  alias gmt='go mod tidy'
   ```
   
   - 测试代理可以用：
