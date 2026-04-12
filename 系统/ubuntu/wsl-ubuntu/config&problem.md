@@ -1,3 +1,9 @@
+### 安装
+
+- docker-desktop安装重启后会自动激活wsl的安装。安装完成后会出现wsl settings程序和wsl程序。
+  - 在wsl settings里设置：网络 - 网络模式 为 mirrored。然后把下面 主机地址环回 和 尽力进行dns分析 都设置为 true，目前版本设置完这一页全是 true。
+  - 然后用`wsl --shutdown` 关闭wsl，重新点击wsl开启，不弹出warning信息说明设置成功。
+
 ### 配置
 
 #### 基本配置
@@ -29,8 +35,6 @@
   - windows中访问wsl文件：资源管理器地址栏输入`\\wsl$`
 
   - wsl中访问windows文件：`/mnt/c/desktop/tool`
-
-- 设置`networkingMode=mirrored`，见下文（设置之后host的代理可以穿透到wsl，如果不行，注销ubuntu重装安装）
 
 
 #### 常用命令
@@ -85,24 +89,6 @@
    sudo chmod 777 /etc/wsl.conf
    ```
 
-2. wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理
-
-   - 创建wslconfig：
-
-      ```bash
-      code $USERPROFILE/.wslconfig
-      ```
-      
-      ```
-      [experimental]
-      autoMemoryReclaim=gradual  # gradual  | dropcache | disabled
-      networkingMode=mirrored
-      dnsTunneling=true
-      firewall=true
-      autoProxy=true
-      hostAddressLoopback=true
-      ```
-   
 3. ~~开启wslg的systemd~~（会导致docker desktop 4.18.0的版本无法启动）
 
    - ```
