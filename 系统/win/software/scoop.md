@@ -36,6 +36,7 @@ irm get.scoop.sh | iex
    scoop bucket add extras
    scoop bucket add nonportable
    scoop bucket add dorado https://github.com/chawyehsu/dorado
+   scoop bucket add lemon https://github.com/hoilc/scoop-lemon
    scoop bucket add nirsoft-alternative https://github.com/ScoopInstaller/Nirsoft.git
    ```
    
@@ -455,19 +456,18 @@ si oraclejdk-lts maven gradle visualvm python nvm go protobuf solidity rustup
   xdebug.remote_handler=dbgp
   ```
 
-#### 环境
+#### docker环境
 
 - 安装[docker-desktop](https://www.docker.com/products/docker-desktop/)
   - 把前面的装完再装这个，这个装完会重启系统并安装wsl
-  - 数据库及中间件配置见[docker_env](../../general%20tools/docker_desktop/docker_env.md)
+  - 数据库及中间件配置见[docker_env_win](../../general%20tools/docker_desktop/docker_env_win.md)
 
-#### 编程相关
+#### 编程相关scoop软件
 
 ```
-si filezilla make pandoc latex switchhosts telnet
+si filezilla make pandoc latex switchhosts telnet innounp orange dbeaver
 ```
 
-- make需要设置以下path：`C:\Users\morty\scoop\apps\make\current\bin\make.exe`
 - 其他可选：tabby
 
 #### 注意事项

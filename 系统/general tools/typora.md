@@ -52,7 +52,10 @@
 ### 插件
 
 - 安装[typora_plugin](https://github.com/obgnail/typora_plugin)，按照步骤替换文件
+，  - 安装：用everything搜window.html，打开所在目录把解压出来的plugin复制进去，然后进入/plugin/bin目录运行ps脚本
   - 把自动编号功能关掉
+  - 悬浮动作按钮：距右边框改为20px
+  
 
 
 ### 其他配置

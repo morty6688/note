@@ -4,57 +4,6 @@
 
 - 安装docker desktop，启动k8s
 
-  - 添加代理：Resources - Proxies
-
-- 安装其他附加软件：
-
-  ```
-  si helm openlens istioctl
-  ```
-
-  - openlens设置：
-    - 设置proxy
-    - 插件：@alebcay/openlens-node-pod-menu
-
-  - 安装istio配置档：
-
-    ```
-    istioctl install --set profile=demo -y
-    kubectl label namespace default istio-injection=enabled
-    ```
-
-    - 可以通过以下命令查看label：
-
-      ```
-      k get ns --show-labels
-      ```
-
-  - krew配置（k8s插件管理器，需要使用管理员模式打开shell安装）：
-
-    ```
-    si krew
-    ```
-
-    - kubecm（切换kubeconfig，需要命令行挂一下临时代理）：
-      ```
-      k krew install kc
-      ```
-      使用方法：
-      ```
-      k kc list
-      ```
-
-  - telepresence：直接使用官网提供的ps1脚本安装。如果需要替换版本，可以将其他版本exe放到和ps1脚本同目录下替换原始exe，再运行ps1脚本或者直接替换c盘的exe
-
-      ```
-      # telepresence
-      alias tp=telepresence
-      alias tpc='telepresence connect'
-      alias tps='telepresence status'
-      alias tpq='telepresence quit'
-      alias tpv='telepresence version'
-      ```
-
 - zsh自动补全（在.zshrc文件中添加如下命令）
 
   ```
@@ -63,6 +12,41 @@
   source <(kubectl completion zsh)
   ```
 
+- 安装其他附加软件：
+
+  ```
+  si helm openlens istioctl krew
+  ```
+
+  - openlens设置：
+    - 插件：@alebcay/openlens-node-pod-menu
+    
+  - 安装istio配置档：
+  
+    ```
+    istioctl install --set profile=demo -y
+    kubectl label namespace default istio-injection=enabled
+    ```
+  
+    - 可以通过以下命令查看label：
+  
+      ```
+      k get ns --show-labels
+      ```
+  
+  - krew配置（k8s插件管理器）：
+  
+    - kubecm（切换kubeconfig）：
+      ```
+      k krew install kc
+      ```
+      使用方法：
+      ```
+      k kc list
+      ```
+    
+  - telepresence：直接从github装，alias已添加到.zshrc。
+  
 - 合并`.kubeconfig`文件
 
   ```
@@ -175,7 +159,7 @@
 
 - 环境使用方法：
 
-  - 使用idea自带的运行按钮
+  - 使用ide自带的运行按钮
 
   - 或者使用命令行，以mall项目docker-compose示例：
 
@@ -195,15 +179,23 @@
    docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --restart always -v //d/shared/mono/mysql8/data:/var/lib/mysql -v //d/shared/mono/mysql8/conf:/etc/mysql -v //d/shared/mono/mysql8/logs:/logs mysql
    ```
 
-- ```
+- 打开docker desktop里的终端，运行以下命令：
+  
+  ```
   mysql -hlocalhost -uroot -p
   ```
-
+  
   ```
   create database test;
   ```
 
   使用`show databases`查看全部数据库，`use test`切换到test数据库，`show tables`查看全部表
+  
+- 开发环境在sql客户端里（比如dbeaver）使用以下链接：
+
+  ```
+  jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
+  ```
 
 - 复制宿主机sql到容器并执行
 
@@ -238,17 +230,16 @@
   docker run --name mongo -p 27017:27017 -d -v //d/shared/mono/mongo/db:/data/db --restart always mongo
   ```
 
-  
 
 #### redis
-
-- 安装GUI：redisInsight，官网按钮有bug点不了，可以去github issues里找
 
 - 单节点模式：
 
   ```bash
   docker run -id --restart=always --privileged=true --name=redis -v //d/shared/mono/redis/data:/data -p 6379:6379 redis --requirepass "root"
   ```
+
+- gui：[tiny-rdm](https://github.com/tiny-craft/tiny-rdm)
 
 ### 中间件
 
