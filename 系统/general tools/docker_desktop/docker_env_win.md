@@ -229,6 +229,8 @@
 - ```
   docker run --name mongo -p 27017:27017 -d -v //d/shared/mono/mongo/db:/data/db --restart always mongo
   ```
+  
+  - gui：studio 3T
 
 
 #### redis

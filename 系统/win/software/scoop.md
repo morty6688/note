@@ -99,7 +99,7 @@ s info openjdk
 ### 开发工具安装
 
 ```
-si oraclejdk-lts maven gradle visualvm python nvm go protobuf solidity rustup
+si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rustup
 ```
 
 #### 具体语言配置
@@ -125,28 +125,76 @@ si oraclejdk-lts maven gradle visualvm python nvm go protobuf solidity rustup
 
 ##### python
 
-- 安装其他版本python
+- python312是兼容性比较好的一个版本
+
+- [换阿里源](https://mirrors.tuna.tsinghua.edu.cn/help/pypi/)
 
   ```
-  si python310
+  python -m pip install -i https://mirrors.aliyun.com/pypi/simple/ --upgrade pip
   ```
+
+  ```
+  pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+  ```
+
+  - 查看
+
+    ```
+    pip config get global.index-url
+    ```
+
+    ```
+    pip config list
+    ```
+
+  - **有一个bug还未修复，会导致pip upgrade失败**：详见[link](https://github.com/ScoopInstaller/Main/issues/5090)
+
+    - 解决办法是先随便安装一个包，然后再升级，比如：
+
+      ```
+      python -m pip install requests
+      ```
 
 - venv
 
   - 直接使用ai助手或者ide来创建环境
-  
-  - ~~pip代理~~
-  
+
+  - 先创建项目目录，然后运行如下命令，之后在ide里选择环境：
+
     ```
-    code pip/pip.ini
+    python -m venv .venv
     ```
-  
-    ```
-    [global]
-    proxy     = 127.0.0.1:1130 
-    [install]
-    ```
-  
+
+- 一些常用可部署仓库：
+
+  - [MinerU](https://github.com/opendatalab/MinerU/blob/master/README_zh-CN.md)，用于将pdf转换为markdown
+
+    - 创建好环境好执行：
+
+      ```
+      pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+      
+      uv pip install "mineru[core]"
+      ```
+
+    - 模型文件下载：
+
+      ```
+      mineru-models-download --model_type all
+      ```
+
+    - 使用时要断开代理（建议直接用下面的web-ui）：
+
+      ```
+      mineru -p 1.pdf -o .
+      ```
+
+    - **web-ui**（也要断开代理，服务起来之后就可以打开代理了）：
+
+      ```
+      mineru-gradio --server-port 8080
+      ```
+
 - （可选，venv也够用了）anaconda3：
 
   ```
@@ -201,10 +249,9 @@ si oraclejdk-lts maven gradle visualvm python nvm go protobuf solidity rustup
     ```
 
 
-- （可选）cuda和cuDNN（不一定要装，一般用不到这么底层的东西。更多的是用在虚拟环境中，可以添加下面的bucket，方便查看cudnn版本）
+- （可选）cuDNN（不一定要装，一般用不到这么底层的东西。更多的是用在虚拟环境中，可以添加下面的bucket，方便查看cudnn版本）
 
   ```
-  si cuda
   s bucket add cudnn-versions https://github.com/shmishtopher/cudnn-versions
   si cuDNNv8.6.0-CUDAv11.8-windows
   # 如果安装不成功，将cuDNN压缩包中的bin、include、lib目录下的文件解压到cuda文件夹下的对应目录
@@ -366,7 +413,7 @@ si oraclejdk-lts maven gradle visualvm python nvm go protobuf solidity rustup
 
 ##### go
 
-- 代理：
+- 代理（换源）：
 
   ```
   go env -w GOPROXY=https://goproxy.cn,direct
