@@ -50,7 +50,6 @@
     ssh -T git@github.com
     ```
 
-
 #### 进阶配置
 
 - 安装zsh和powerlevel10k：
@@ -158,6 +157,20 @@
   # completion
   autoload -Uz compinit && compinit
   autoload -Uz bashcompinit && bashcompinit
+  
+  # word navigation in VS Code/Git Bash terminals
+  bindkey '^[[1;5D' backward-word
+  bindkey '^[[1;5C' forward-word
+  bindkey '^[[5D' backward-word
+  bindkey '^[[5C' forward-word
+  bindkey '^[[H' beginning-of-line
+  bindkey '^[[F' end-of-line
+  bindkey '^[[1~' beginning-of-line
+  bindkey '^[[4~' end-of-line
+  bindkey '^[[7~' beginning-of-line
+  bindkey '^[[8~' end-of-line
+  bindkey '^[OH' beginning-of-line
+  bindkey '^[OF' end-of-line
   
   # vscode
   alias cz='code ~/.zshrc'

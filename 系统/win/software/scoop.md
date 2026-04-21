@@ -183,14 +183,18 @@ si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rus
       mineru-models-download --model_type all
       ```
 
-    - 使用时要断开代理（建议直接用下面的web-ui）：
+    - 使用时要断开代理：
 
       ```
-      mineru -p 1.pdf -o .
+      export MINERU_MODEL_SOURCE=modelscope
+      
+      mineru -p islp.pdf -o . -s 0 -e 27 --source local
       ```
 
-    - **web-ui**（也要断开代理，服务起来之后就可以打开代理了）：
-
+      - 也可以先断开代理启动命令，等跑起来之后再打开代理
+    
+    - web-ui（也要断开代理，服务起来之后就可以打开代理了）：
+    
       ```
       mineru-gradio --server-port 8080
       ```
@@ -512,10 +516,10 @@ si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rus
 #### 编程相关scoop软件
 
 ```
-si filezilla make pandoc latex switchhosts telnet innounp orange dbeaver
+si ripgrep make pandoc latex switchhosts telnet innounp orange dbeaver
 ```
 
-- 其他可选：tabby
+- 其他可选：tabby，filezilla
 
 #### 注意事项
 
