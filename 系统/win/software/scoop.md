@@ -155,6 +155,26 @@ si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rus
       python -m pip install requests
       ```
 
+- uv
+
+  - 一个更先进的包/环境管理工具，可以替代venv等
+
+  - 使用也比较简单
+
+    ```
+    uv init example
+    cd example
+    uv add ruff
+    uv run ruff check
+    ```
+
+  - 锁定和同步环境
+
+    ```
+    uv lock
+    uv sync
+    ```
+
 - venv
 
   - 直接使用ai助手或者ide来创建环境
