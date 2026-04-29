@@ -2,7 +2,7 @@
 
 1. 文件：开启自动保存；启动时重新打开上次的文件和目录
 
-2. 图像：复制图片到文件夹；优先相对路径
+2. 图像：复制图片到文件夹（对网络位置）；优先相对路径；
 
 3. markdown：代码块显示行号；扩展语法全部勾选
 
@@ -34,9 +34,11 @@
          // All other options are the menu items 'text label' displayed from each typora menu
          "有序列表": "Ctrl+/",
          "无序列表": "Ctrl+.",
-         "源代码模式": "Ctrl+`",
+         "源代码模式": "Ctrl+g",
          "打开文件夹": "Ctrl+Shift+O",
          "删除线": "alt+shift+d",
+         "内联公式": "ctrl+q",
+         "代码": "ctrl+`",
          // "删除...": "Delete"
        },
        // "autoSaveTimer": 0.01, // Double, default is 5. The unit is "minute"
@@ -45,7 +47,7 @@
        "flags": [] // default [], append Chrome launch flags, e.g: [["disable-gpu"], ["host-rules", "MAP * 127.0.0.1"]]
      }
      ```
-
+   
    - mac: 见[mac_setup](../mac/setup.md)
 
 
@@ -56,7 +58,13 @@
   - 安装：用everything搜window.html，打开所在目录把解压出来的plugin复制进去，然后进入/plugin/bin目录运行ps脚本
   
   - 把自动编号功能关掉
+  
+  - 标签页管理 - 快捷键 - 去掉==ctrl+`==用于切换标签页的快捷键
+  
   - 悬浮动作按钮：距右边框改为20px
+  
+  - 需要开启的插件：
+    - 光标历史
   
 
 ### 其他配置
