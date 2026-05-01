@@ -219,7 +219,7 @@ si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rus
       mineru-gradio --server-port 8080
       ```
 
-- （可选，venv也够用了）anaconda3：
+- （可选，venv和uv也够用了）anaconda3：
 
   ```
   si extras/anaconda3
