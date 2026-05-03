@@ -39,7 +39,7 @@
 - 然后在打开的文件最后一行添加：
 
   ```
-  cd /storage/emulated/0/Documents/Test
+  cd /storage/emulated/0/Documents/proj
   ```
 
   - 由于obsidian文件权限有bug，所以只能采取折中办法：把项目目录都放到Documents下面

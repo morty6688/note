@@ -168,11 +168,33 @@ si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rus
     uv run ruff check
     ```
 
+    - 使用`uv pip install`时需要先运行`uv venv`，但是不建议这么搞
+
   - 锁定和同步环境
 
     ```
     uv lock
+    ```
+
+    ```
     uv sync
+    ```
+
+  - 安装**torch**需要修改toml文件，然后运行`uv sync`
+
+    ```
+    # 依赖里添加这三个
+    dependencies = ["torch>=2.11.0", "torchvision>=0.26.0", "torchaudio>=2.11.0"]
+    
+    [[tool.uv.index]]
+    name = "pytorch-cu130"
+    url = "https://download.pytorch.org/whl/cu130"
+    explicit = true
+    
+    [tool.uv.sources]
+    torch = { index = "pytorch-cu130" }
+    torchvision = { index = "pytorch-cu130" }
+    torchaudio = { index = "pytorch-cu130" }
     ```
 
 - venv
@@ -192,25 +214,27 @@ si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rus
     - 创建好环境好执行：
 
       ```
-      pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu130
-      
+      pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu130
+      ```
+    
+      ```
       uv pip install "mineru[core]"
       ```
 
     - 模型文件下载：
-
+    
       ```
       mineru-models-download --model_type all
       ```
 
     - 使用时要断开代理：
-
+    
       ```
       export MINERU_MODEL_SOURCE=modelscope
       
       mineru -p islp.pdf -o . -s 0 -e 27 --source local
       ```
-
+    
       - 也可以先断开代理启动命令，等跑起来之后再打开代理
     
     - web-ui（也要断开代理，服务起来之后就可以打开代理了）：
