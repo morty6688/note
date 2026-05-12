@@ -18,7 +18,7 @@
    cd /storage/emulated/0/
    ```
 
-   - 可以在根目录下创建新目录
+   - 可以在根目录下创建新目录，也可以直接放到Documents下面（由于documentsui有闪退bug，所以只能采取折中办法：把项目目录都放到Documents下面）
 
 3. ```
    git config --global http.proxy socks5://127.0.0.1:19802
@@ -36,19 +36,6 @@
 
    公钥导入github，然后就可以clone了
 
-#### 起始目录
-
-- ```
-  nano /data/data/com.termux/files/usr/etc/bash.bashrc
-  ```
-
-- 然后在打开的文件最后一行添加：
-
-  ```
-  cd /storage/emulated/0/Documents/proj
-  ```
-
-  - 由于obsidian文件权限有bug，所以只能采取折中办法：把项目目录都放到Documents下面
 
 #### zsh
 
@@ -90,6 +77,9 @@
   
   # .zhsrc
   alias nz='nano ~/.zshrc'
+  
+  # 起始目录
+  cd /storage/emulated/0/Documents/proj
   ```
 
 - 禁用gitstatus，`nano ~/.p10k.zsh`，然后输入下面行（gitstatus有bug，无法初始化）

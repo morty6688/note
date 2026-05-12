@@ -36,7 +36,7 @@
          "无序列表": "Ctrl+.",
          "源代码模式": "Ctrl+g",
          "打开文件夹": "Ctrl+Shift+O",
-         "删除线": "alt+shift+d",
+         "删除线": "alt+d",
          "内联公式": "ctrl+q",
          "代码": "ctrl+`",
          // "删除...": "Delete"
