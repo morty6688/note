@@ -505,6 +505,39 @@ si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rus
   	SIGTSTP = Signal(18)
   ```
 
+##### Android
+
+- 安装[Android Studio](https://developer.android.com/studio?hl=zh-cn)，然后下载sdk，配好环境变量，[路径](C:\Users\morty\AppData\Local\Android\Sdk\platform-tools)
+
+- adb调试，用usb连接手机，打开开发者模式和usb调试
+
+  - 常用命令：
+
+    - 查看设备
+
+      ```
+      adb devices
+      ```
+
+    - 冻结应用与解冻
+
+      ```
+      adb shell pm disable-user 应用包名
+      ```
+
+      ```
+      adb shell pm enable 应用包名
+      ```
+
+    - 软卸载与软重装系统应用（有的系统应用无法冻结，可以软卸载。但是有的app依赖documentsui，卸载了又打不开，蛋疼）
+
+      ```
+      adb shell pm uninstall --user 0 com.google.android.documentsui
+      ```
+
+      ```
+      adb shell pm install-existing --user 0 com.google.android.documentsui
+      ```
 
 #####  php（可选）
 

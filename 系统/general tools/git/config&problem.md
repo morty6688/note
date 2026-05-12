@@ -54,7 +54,7 @@
 
 - 安装zsh和powerlevel10k：
 
-  - zsh地址：[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)
+  - zsh地址：[zsh](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64)，可以把这个地址放到`win+v`的多重剪贴板里
 
     - powerlevel10k（使用bash运行以下命令）：
       ```
