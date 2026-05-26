@@ -53,7 +53,7 @@
 
 ### 插件
 
-- 安装[typora_plugin](https://github.com/obgnail/typora_plugin)，按照步骤替换文件
+- 安装[typora_plugin](https://github.com/obgnail/typora_plugin)，按照步骤替换文件（注意要在resources下复制整个plugin文件夹。建议把这个链接也放到win多重剪贴板）
 
   - 安装：用everything搜window.html，打开所在目录把解压出来的plugin复制进去，然后进入/plugin/bin目录运行ps脚本
   
