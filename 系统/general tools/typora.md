@@ -53,10 +53,8 @@
 
 ### 插件
 
-- 安装[typora_plugin](https://github.com/obgnail/typora_plugin)，按照步骤替换文件（注意要在resources下复制整个plugin文件夹。建议把这个链接也放到win多重剪贴板）
+- 安装[typora_plugin](https://github.com/obgnail/typora_plugin)（用everything搜window.html，打开所在目录把**解压出来的plugin文件夹**复制进去，然后进入/plugin/bin目录运行ps脚本）（建议把这个链接也放到win多重剪贴板）
 
-  - 安装：用everything搜window.html，打开所在目录把解压出来的plugin复制进去，然后进入/plugin/bin目录运行ps脚本
-  
   - 把自动编号功能关掉
   
   - 标签页管理 - 快捷键 - 去掉==ctrl+`==用于切换标签页的快捷键
@@ -65,7 +63,6 @@
   
   - 需要开启的插件：
     - 光标历史
-  
 
 ### 其他配置
 

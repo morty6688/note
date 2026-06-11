@@ -234,6 +234,10 @@
   
   # go
   alias gmt='go mod tidy'
+  
+  # vibe
+  alias oc='opencode'
+  alias mm='mimo'
   ```
   
   - 测试代理可以用：

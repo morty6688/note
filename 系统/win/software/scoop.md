@@ -584,6 +584,20 @@ si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rus
   xdebug.remote_handler=dbgp
   ```
 
+#### vibe coding
+
+##### opencode
+
+```
+npm i -g opencode-ai
+```
+
+##### mimo
+
+```
+npm install -g @mimo-ai/cli
+```
+
 #### docker环境
 
 - 安装[docker-desktop](https://www.docker.com/products/docker-desktop/)
@@ -649,3 +663,4 @@ si ripgrep make pandoc latex switchhosts telnet innounp orange dbeaver
 ### Chrome：
 
 - 屏幕闪烁：https://www.reddit.com/r/chrome/comments/15uuyry/artifactsflickering_on_chrome_w10/。解决办法：把angle显卡后端设为d3d9。**该问题似乎已修复**。
+
