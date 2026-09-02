@@ -238,6 +238,7 @@
   # vibe
   alias oc='opencode'
   alias mm='mimo'
+  alias cdx='codex'
   ```
   
   - 测试代理可以用：

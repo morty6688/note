@@ -586,6 +586,12 @@ si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rus
 
 #### vibe coding
 
+##### chatgpt（有客户端了）
+
+```
+npm install -g @openai/codex
+```
+
 ##### opencode
 
 ```

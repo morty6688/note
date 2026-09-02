@@ -53,7 +53,7 @@
 
 ### 插件
 
-- 安装[typora_plugin](https://github.com/obgnail/typora_plugin)（用everything搜window.html，打开所在目录把**解压出来的plugin文件夹**复制进去，然后进入/plugin/bin目录运行ps脚本）（建议把这个链接也放到win多重剪贴板）
+- 安装[typora_plugin](https://github.com/obgnail/typora_plugin)（用everything搜window.html，打开所在目录把**解压出来的plugin文件夹**复制进去，然后进入/plugin/bin目录运行ps1脚本，**typora升级以后重新进这个目录运行一遍ps1脚本**）（建议把这个链接也放到win多重剪贴板）
 
   - 把自动编号功能关掉
   
