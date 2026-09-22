@@ -61,6 +61,28 @@
   
   - 悬浮动作按钮：距右边框改为20px
   
+  - 最新版默认只有6个按钮，全局搜索 `settings.user.toml` ，将action_buttons部分改为
+  
+    ```toml
+    [action_buttons]
+    POSITION_RIGHT = "20px"
+    
+    BUTTONS = [
+      # 现有 6 个
+      { enable = true, coordinate = [0, 0], size = "16px", icon = "fa fa-indent", callback = "md_padding" },
+      { enable = true, coordinate = [1, 0], size = "16px", icon = "fa fa-search", callback = "search_multi" },
+      { enable = true, coordinate = [2, 0], size = "16px", icon = "fa fa-gear", callback = "preferences" },
+    
+      { enable = true, coordinate = [0, 1], size = "16px", icon = "fa fa-sitemap fa-rotate-270", callback = "markmap.onButtonClick" },
+      { enable = true, coordinate = [1, 1], size = "16px", icon = "fa fa-image", callback = "image_viewer" },
+      { enable = true, coordinate = [2, 1], size = "16px", icon = "fa fa-th-list", callback = "right_outline" },
+    
+      # 加回来的两个
+      { enable = true, coordinate = [3, 0], size = "22px", icon = "fa fa-caret-down", evil = "() => this.utils.jumpToEdge(false)" },
+      { enable = true, coordinate = [3, 1], size = "22px", icon = "fa fa-caret-up", evil = "() => this.utils.jumpToEdge(true)" },
+    ]
+    ```
+  
   - 需要开启的插件：
     - 光标历史
 
