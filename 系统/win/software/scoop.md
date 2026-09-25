@@ -13,7 +13,7 @@ irm get.scoop.sh | iex
     ```
 
     - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成基本配置
-    - [win terminal配置](win_terminal.md)，卸载自带的终端，按文档完成win terminal的设置
+    - [win terminal配置](win_terminal.md)，卸载电脑自带的windows-terminal，然后按文档完成scoop版win terminal的设置
     
 1. 代理
 
