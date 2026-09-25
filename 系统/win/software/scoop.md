@@ -13,7 +13,7 @@ irm get.scoop.sh | iex
     ```
 
     - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成基本配置
-    - [win terminal配置](win_terminal.md)，完成win terminal的设置
+    - [win terminal配置](win_terminal.md)，卸载自带的终端，按文档完成win terminal的设置
     
 1. 代理
 
@@ -99,7 +99,7 @@ s info openjdk
 ### 开发工具安装
 
 ```
-si oraclejdk-lts maven gradle visualvm python312 uv nvm go protobuf solidity rustup
+si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
 ```
 
 #### 具体语言配置
