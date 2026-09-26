@@ -41,7 +41,7 @@
      - 打开自动将所选内容复制到剪贴板（设置 - 交互）
 
 
-2. 添加右键菜单
+2. 添加右键菜单（ai做不了，原因不明）
    -  https://github.com/morty6688/windowsterminal-shell-scoop
 
 
