@@ -207,7 +207,7 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
     python -m venv .venv
     ```
 
-- 一些常用可部署仓库：
+- （可选）一些常用可部署仓库：
 
   - [MinerU](https://github.com/opendatalab/MinerU/blob/master/README_zh-CN.md)，用于将pdf转换为markdown
 
@@ -274,7 +274,7 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
     alias ca='conda activate'
     alias cda='conda deactivate'
     alias cc='conda create --name'
-    alias cr='conda remove --name'
+    alias crn='conda remove --name'
     alias cel='conda env list'
     
     # pip
@@ -282,18 +282,24 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
     alias pl='pip list'
     ```
 
+  - 列出环境
+
+    ```
+    conda env list(cel)
+    ```
+
   - channel
 
     ```
     conda install -c conda-forge ta-lib
     ```
-
+  
   - can't find conda.exe: find conda.sh in global win files and refer to [this](https://stackoverflow.com/questions/75639901/why-did-activating-the-conda-environment-fail)
-
-  - 设置默认不开启环境：
-
+  
+  - 设置默认不开启base环境：
+  
     ```
-    conda config --set auto_activate_base false
+    conda config --set auto_activate false
     ```
 
 
