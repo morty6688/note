@@ -207,6 +207,67 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
     python -m venv .venv
     ```
 
+- anaconda3：
+
+  ```
+  si extras/anaconda3
+  conda init
+  ```
+
+  - alias
+
+    ```
+    # anaconda alias
+    alias c='conda'
+    alias ci='conda install'
+    alias cu='conda update'
+    alias cr='conda remove'
+    alias cl='conda list'
+    alias ca='conda activate'
+    alias cda='conda deactivate'
+    alias cc='conda create --name'
+    alias crn='conda remove --name'
+    alias cel='conda env list'
+    
+    # pip
+    alias pi='pip install'
+    alias pl='pip list'
+    ```
+  
+  - 设置默认不开启base环境：
+  
+    ```
+    conda config --set auto_activate false
+    ```
+  
+  - 其他：
+  
+    - 列出环境
+  
+      ```
+      conda env list(cel)
+      ```
+
+    - channel
+  
+      ```
+      conda install -c conda-forge ta-lib
+      ```
+
+    - ~~can't find conda.exe: find conda.sh in global win files and refer to [this](https://stackoverflow.com/questions/75639901/why-did-activating-the-conda-environment-fail)~~
+  
+    - （直接用powershell）~~在.zshrc中添加下列语句，来解决zsh+bash无法激活环境的问题（参考[讨论](https://github.com/conda/conda/issues/9922)）~~：
+  
+      ```
+      # anaconda3
+      # >>> conda initialize >>>
+      # !! Contents within this block are managed by 'conda init' !!
+      eval "$('/c/Users/lijian/scoop/apps/anaconda3/current/App/Scripts/conda.exe' 'shell.zsh' 'hook' | sed -e 's/"$CONDA_EXE" $_CE_M $_CE_CONDA "$@"/"$CONDA_EXE" $_CE_M $_CE_CONDA "$@" | tr -d \x27\\r\x27/g')"
+      # <<< conda initialize <<<
+      
+      export PYTHONIOENCODING=UTF-8
+      ```
+  
 - （可选）一些常用可部署仓库：
 
   - [MinerU](https://github.com/opendatalab/MinerU/blob/master/README_zh-CN.md)，用于将pdf转换为markdown
@@ -242,66 +303,6 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
       ```
       mineru-gradio --server-port 8080
       ```
-
-- （可选，venv和uv也够用了）anaconda3：
-
-  ```
-  si extras/anaconda3
-  conda init
-  ```
-
-  - 在.zshrc中添加下列语句，来解决zsh+bash无法激活环境的问题（参考[讨论](https://github.com/conda/conda/issues/9922)）：
-
-    ```
-    # anaconda3
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    eval "$('/c/Users/lijian/scoop/apps/anaconda3/current/App/Scripts/conda.exe' 'shell.zsh' 'hook' | sed -e 's/"$CONDA_EXE" $_CE_M $_CE_CONDA "$@"/"$CONDA_EXE" $_CE_M $_CE_CONDA "$@" | tr -d \x27\\r\x27/g')"
-    # <<< conda initialize <<<
-    
-    export PYTHONIOENCODING=UTF-8
-    ```
-
-  - alias
-
-    ```
-    # anaconda alias
-    alias c='conda'
-    alias ci='conda install'
-    alias cu='conda update'
-    alias cr='conda remove'
-    alias cl='conda list'
-    alias ca='conda activate'
-    alias cda='conda deactivate'
-    alias cc='conda create --name'
-    alias crn='conda remove --name'
-    alias cel='conda env list'
-    
-    # pip
-    alias pi='pip install'
-    alias pl='pip list'
-    ```
-
-  - 列出环境
-
-    ```
-    conda env list(cel)
-    ```
-
-  - channel
-
-    ```
-    conda install -c conda-forge ta-lib
-    ```
-  
-  - can't find conda.exe: find conda.sh in global win files and refer to [this](https://stackoverflow.com/questions/75639901/why-did-activating-the-conda-environment-fail)
-  
-  - 设置默认不开启base环境：
-  
-    ```
-    conda config --set auto_activate false
-    ```
-
 
 - （可选）cuDNN（不一定要装，一般用不到这么底层的东西。更多的是用在虚拟环境中，可以添加下面的bucket，方便查看cudnn版本）
 
