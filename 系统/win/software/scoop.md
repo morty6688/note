@@ -99,14 +99,47 @@ s info openjdk
 ### 开发工具安装
 
 ```
-si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
+si openjdk25 maven gradle visualvm python312 poetry uv extras/anaconda3 nvm go protobuf solidity rustup
 ```
+
+#### 编程相关scoop软件
+
+```
+si ripgrep make pandoc latex switchhosts telnet innounp orange dbeaver
+```
+
+- 其他可选：tabby，filezilla
 
 #### 具体语言配置
 
 ##### java
 
 - 历史遗留oracle-jdk1.8：https://github.com/frekele/oracle-java/releases/tag/8u202-b08
+
+- [idea](https://www.jetbrains.com/idea/download/)（vibe coding大环境下，用处已经很有限了，可能就跑一下http文件和启动项目这种地方还有点用）
+
+  - 常见问题：
+
+    - winnat问题，重启网络（使用管理员模式）：
+
+      ```
+      net stop winnat
+      net start winnat
+      ```
+
+      - IDEA有时会卡在开始界面无法启动，查idea.log发现是`java.net.BindException: *Address already in use*: *bind*`，这说明IDEA启动需要的端口被占用，使用该命令重启
+
+      - 有时idea启动应用说端口被占用，但是使用`netstat -ano|findstr 8080 `结果为空，可能是端口处于tcp排除范围，使用`netsh interface ipv4 show excludedportrange protocol=tcp`可以看到排除范围，这时也可以用上述命令重启
+
+      - 改变某个文件夹的分隔符：*File* → *File Properties*→ *Line Separators*，重新格式化也可以在右键菜单里找到
+
+    - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked；**或者删除.idea然后重新右键菜单打开当前项目，不要从idea的最近项目里打开**
+
+    - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
+
+    - terminal修改path：`C:\Users\morty\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
+
+    - 其他设置可以直接同步
 
 - maven换源（~/.m2）：
 
@@ -207,15 +240,16 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
     python -m venv .venv
     ```
 
+- poetry
+
 - anaconda3：
 
   ```
-  si extras/anaconda3
   conda init
   ```
-
+  
   - alias
-
+  
     ```
     # anaconda alias
     alias c='conda'
@@ -247,13 +281,13 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
       ```
       conda env list(cel)
       ```
-
+  
     - channel
   
       ```
       conda install -c conda-forge ta-lib
       ```
-
+  
     - ~~can't find conda.exe: find conda.sh in global win files and refer to [this](https://stackoverflow.com/questions/75639901/why-did-activating-the-conda-environment-fail)~~
   
     - （直接用powershell）~~在.zshrc中添加下列语句，来解决zsh+bash无法激活环境的问题（参考[讨论](https://github.com/conda/conda/issues/9922)）~~：
@@ -323,7 +357,7 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
   nvm use lts
   ```
 
-- 然后安装pnpm或yarn（优先用pnpm，切换node版本后将这些都重装一遍）
+- 然后安装包管理工具（yarn，pnpm，bun）（优先用pnpm，切换node版本后将这些都重装一遍）
 
   - 查看npm全局包
 
@@ -409,6 +443,8 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
       bun upgrade
       ```
 
+- 项目工具：
+
   - nestjs
 
     ```
@@ -427,40 +463,40 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
     pnpm create vue@latest
     ```
 
-- 配置：
+    - 项目具体配置：
 
-  ```
-  pna vite-plugin-vue-devtools unplugin-vue-setup-extend-plus unplugin-auto-import vite-plugin-compression vite-plugin-svg-icons @vitejs/plugin-vue-jsx vite-plugin-compression2 @eslint/eslintrc
-  ```
-
-  - `unplugin-auto-import`：
-
-    - js环境：`vite.config.js`中添加以下代码
-
-      ```js
-      AutoImport({
-        imports: ['vue'],
-        dts: false,
-        eslintrc: {
-          enabled: true,
-        },
-      }),
+      ```
+      pna vite-plugin-vue-devtools unplugin-vue-setup-extend-plus unplugin-auto-import vite-plugin-compression vite-plugin-svg-icons @vitejs/plugin-vue-jsx vite-plugin-compression2 @eslint/eslintrc
       ```
 
-      `eslint.config.js/mjs`中添加以下代码，以禁用 ESLint对auto import的error of no-undef
+      - `unplugin-auto-import`：
 
-      ```js
-      import { FlatCompat } from '@eslint/eslintrc'
-      
-      const compat = new FlatCompat()
-      
-      export default [
-        // existing contents
-        ...compat.extends('./.eslintrc-auto-import.json')
-      ]
-      ```
+        - js环境：`vite.config.js`中添加以下代码
 
-    - ts环境：修改`vite.config.ts`中`dts`为`true`或者`'src/auto-imports.d.ts'`，会自动生成类型文件；`eslint.config.js/mjs`中同样添加上面代码；同时在`tsconfig.app.json`的`include`项中添加配置：`"*.d.ts"`
+          ```js
+          AutoImport({
+            imports: ['vue'],
+            dts: false,
+            eslintrc: {
+              enabled: true,
+            },
+          }),
+          ```
+
+          `eslint.config.js/mjs`中添加以下代码，以禁用 ESLint对auto import的error of no-undef
+
+          ```js
+          import { FlatCompat } from '@eslint/eslintrc'
+          
+          const compat = new FlatCompat()
+          
+          export default [
+            // existing contents
+            ...compat.extends('./.eslintrc-auto-import.json')
+          ]
+          ```
+
+        - ts环境：修改`vite.config.ts`中`dts`为`true`或者`'src/auto-imports.d.ts'`，会自动生成类型文件；`eslint.config.js/mjs`中同样添加上面代码；同时在`tsconfig.app.json`的`include`项中添加配置：`"*.d.ts"`
 
 - 问题：
 
@@ -593,7 +629,7 @@ si openjdk25 maven gradle visualvm python312 uv nvm go protobuf solidity rustup
 
 #### vibe coding
 
-##### chatgpt（有客户端了）
+##### chatgpt（cli工具用来加入别的模型）
 
 ```
 npm install -g @openai/codex
@@ -617,47 +653,9 @@ npm install -g @mimo-ai/cli
   - 把前面的装完再装这个，这个装完会重启系统并安装wsl
   - 数据库及中间件配置见[docker_env_win](../../general%20tools/docker_desktop/docker_env_win.md)
 
-#### 编程相关scoop软件
-
-```
-si ripgrep make pandoc latex switchhosts telnet innounp orange dbeaver
-```
-
-- 其他可选：tabby，filezilla
-
 #### 注意事项
 
 - 可以用类似`scoop reset openjdk`来切换像java一样的开发工具版本（24/12/10切换失败）
-
-
-### 其他
-
-- idea（vibe coding大环境下，不确定以后还需不需要用）
-
-  - 常见问题：
-
-    - winnat问题，重启网络（使用管理员模式）：
-
-      ```
-      net stop winnat
-      net start winnat
-      ```
-    
-      - IDEA有时会卡在开始界面无法启动，查idea.log发现是`java.net.BindException: *Address already in use*: *bind*`，这说明IDEA启动需要的端口被占用，使用该命令重启
-    
-      - 有时idea启动应用说端口被占用，但是使用`netstat -ano|findstr 8080 `结果为空，可能是端口处于tcp排除范围，使用`netsh interface ipv4 show excludedportrange protocol=tcp`可以看到排除范围，这时也可以用上述命令重启
-
-      - 改变某个文件夹的分隔符：*File* → *File Properties*→ *Line Separators*，重新格式化也可以在右键菜单里找到
-    
-    - 有时打开idea发现没有显示root目录：*File* → *Project Structure* → *Modules*, clicked on + and then *Import Module*, found root folder, selected it and it worked；**或者删除.idea然后重新右键菜单打开当前项目，不要从idea的最近项目里打开**
-
-    - 有时启动项目报一个奇怪的错类似`input length = 1`，需要修改file encoding项为utf-8，这个选项每次启动新项目都会重置，很奇葩
-
-    - terminal修改path：`C:\Users\morty\scoop\apps\git\current\bin\bash.exe`，设置选中时复制
-    
-    - 其他设置可以直接同步
-
-- [~~KBLAutoSwitch~~](https://github.com/flyinclouds/KBLAutoSwitch)：根据程序自动切换输入法，还有一些bug存在
 
 ## 问题
 
