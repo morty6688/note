@@ -2,19 +2,21 @@
 
 ### 基本安装
 
-安装（ powershell 1.0 里运行，不需要管理员权限）：
+#### 安装
+
+在powershell 1.0 里运行，不需要管理员权限：
 
 ```
 irm get.scoop.sh | iex
 ```
 
 0. ```
-    scoop install git powershell windows-terminal
-    ```
+     scoop install git powershell windows-terminal
+     ```
 
-    - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成基本配置
-    - [win terminal配置](win_terminal.md)，卸载电脑自带的windows-terminal，然后按文档完成scoop版win terminal的设置
-    
+     - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成基本配置
+     - [win terminal配置](win_terminal.md)，卸载电脑自带的windows-terminal，然后按文档完成scoop版win terminal的设置
+
 1. 代理
 
     ```
@@ -39,29 +41,31 @@ irm get.scoop.sh | iex
    scoop bucket add lemon https://github.com/hoilc/scoop-lemon
    scoop bucket add nirsoft-alternative https://github.com/ScoopInstaller/Nirsoft.git
    ```
-   
+
 3. 进阶配置
-   
+
    - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成进阶配置
    - powershell：更新时切换成 powershell 1.0 去更新。同时记得设置两个powershell的别名，见[powershell](powershell.md)
    - 在vs code里select default profile：git bash
 
-#### 安装 aria2
+4. aria2
 
-```
-si aria2
-s config aria2-split 32
-s config aria2-max-connection-per-server 16
-s config aria2-min-split-size 1M
-```
+    ```
+    si aria2
+    s config aria2-split 32
+    s config aria2-max-connection-per-server 16
+    s config aria2-min-split-size 1M
+    ```
 
-- 有时候aria2会有问题：
+    - 有时候aria2会有问题：
 
-  ```
-  scoop config aria2-enabled false
-  ```
+      ```
+      scoop config aria2-enabled false
+      ```
 
-#### 更新
+#### 其他用法
+
+##### 更新
 
 ```
 sl
@@ -76,7 +80,7 @@ sho git
 suh git
 ```
 
-#### 清除缓存（安装失败时清除残留）
+##### 清除缓存（安装失败时清除残留）
 
 ```
 s cache
@@ -84,13 +88,13 @@ s cache rm qbittorrent
 s cache rm -a
 ```
 
-#### 删除旧版本
+##### 删除旧版本
 
 ```
 scu -a
 ```
 
-#### 软件信息
+##### 软件信息
 
 ```
 s info openjdk
@@ -657,9 +661,9 @@ npm install -g @mimo-ai/cli
 
 - 可以用类似`scoop reset openjdk`来切换像java一样的开发工具版本（24/12/10切换失败）
 
-## 问题
+### 问题
 
-### Git相关
+#### Git相关
 
 - error: Your local changes to the following files would be overwritten by merge:
 
@@ -671,7 +675,5 @@ npm install -g @mimo-ai/cli
     sup
     ```
 
-### Chrome：
 
-- 屏幕闪烁：https://www.reddit.com/r/chrome/comments/15uuyry/artifactsflickering_on_chrome_w10/。解决办法：把angle显卡后端设为d3d9。**该问题似乎已修复**。
 
