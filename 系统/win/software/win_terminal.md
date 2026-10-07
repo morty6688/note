@@ -21,7 +21,7 @@
          "name": "bash",
          "icon": "C:\\Users\\morty\\scoop\\apps\\git\\current\\usr\\share\\git\\git-for-windows.ico",
          "commandline": "C:\\Users\\morty\\scoop\\apps\\git\\current\\bin\\bash.exe -i -l",
-         "startingDirectory": "D:\\project\\self\\test",
+         "startingDirectory": "D:\\project\\self",
          "font": 
          {
            "face": "MesloLGS NF",
@@ -41,6 +41,8 @@
        ```
      
      - 然后把bash配置文件改成默认（设置 - 启动 - 默认配置文件），保存
+
+     - 将 bash 和 PowerShell 两个配置的“起始目录”都设置为 `D:\project\self`（设置 - 配置文件 - 对应配置 - 起始目录）；JSON 中对应 `"startingDirectory": "D:\\project\\self"`。
      
      - 将窗口大小改成120*25（设置 - 启动 - 启动大小）。将bash和powershell的字体大小都设置为10（修改位置：具体配置文件 - 外观）。
      
