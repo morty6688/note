@@ -4,57 +4,60 @@
 
 #### 安装
 
-在powershell 1.0 里运行，不需要管理员权限：
+在非管理员 Windows PowerShell 5.1 中运行（路径中的 v1.0 不代表实际版本）：
 
 ```
-irm get.scoop.sh | iex
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+irm https://get.scoop.sh | iex
 ```
 
-0. ```
-     scoop install git powershell windows-terminal
-     ```
+0. 如果首次安装需要代理，先启动本地代理，用下面的命令替代上面的 `irm` 安装命令：
 
-     - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成基本配置
-     - [win terminal配置](win_terminal.md)，卸载电脑自带的windows-terminal，然后按文档完成scoop版win terminal的设置
+   ```powershell
+   Invoke-RestMethod https://get.scoop.sh -Proxy 'http://127.0.0.1:1130' -OutFile "$env:TEMP\scoop-install.ps1"
+   & "$env:TEMP\scoop-install.ps1" -Proxy 'http://127.0.0.1:1130'
+   ```
 
-1. 代理
+1. 安装后先配置代理，再安装 Git、添加 extras、安装 PowerShell 7 和 Terminal（不使用代理时跳过代理命令）：
 
-    ```
-    scoop config proxy 127.0.0.1:1130
-    scoop update
-    ```
+   ```powershell
+   scoop config proxy 127.0.0.1:1130
+   scoop install git
+   git config --global http.proxy 'socks5://127.0.0.1:1130'
+   scoop bucket add extras
+   scoop install pwsh windows-terminal
+   ```
 
-    - 取消代理
-
-      ```
-      scoop config rm proxy
-      ```
+   - PowerShell 7 当前包名是 `pwsh`，不是 `powershell`。
+   - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成基本配置。
+   - [win terminal配置](win_terminal.md)：备份原配置，安装、配置并验证 Scoop 版能正常启动后，再卸载商店版。
+   - 取消 Scoop 代理：`scoop config rm proxy`；取消 Git 代理：`git config --global --unset http.proxy`。
 
 2. 添加仓库
 
    ```
    scoop bucket add java
    scoop bucket add versions
-   scoop bucket add extras
    scoop bucket add nonportable
    scoop bucket add dorado https://github.com/chawyehsu/dorado
    scoop bucket add lemon https://github.com/hoilc/scoop-lemon
    scoop bucket add nirsoft-alternative https://github.com/ScoopInstaller/Nirsoft.git
+   scoop update
    ```
 
 3. 进阶配置
 
    - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成进阶配置
-   - powershell：更新时切换成 powershell 1.0 去更新。同时记得设置两个powershell的别名，见[powershell](powershell.md)
+   - PowerShell 7：更新自身时切换到 Windows PowerShell 5.1，执行 `scoop update pwsh`。同时记得设置两个powershell的别名，见[powershell](powershell.md)
    - 在vs code里select default profile：git bash
 
 4. aria2
 
     ```
-    si aria2
-    s config aria2-split 32
-    s config aria2-max-connection-per-server 16
-    s config aria2-min-split-size 1M
+    scoop install aria2
+    scoop config aria2-split 32
+    scoop config aria2-max-connection-per-server 16
+    scoop config aria2-min-split-size 1M
     ```
 
     - 有时候aria2会有问题：
@@ -62,6 +65,25 @@ irm get.scoop.sh | iex
       ```
       scoop config aria2-enabled false
       ```
+
+#### 安装与下载失败
+
+- 下载中断、缓存不完整或哈希校验失败时，清除对应包缓存后重试，不要跳过哈希校验：
+
+  ```powershell
+  scoop cache rm pwsh
+  scoop install pwsh
+  ```
+
+- 仓库完整拉取过慢时可使用浅克隆。以下仅适用于 extras 首次添加失败、没有需要保留的本地修改的情况；自定义 Scoop 安装路径时需替换目录：
+
+  ```powershell
+  scoop bucket rm extras
+  git clone --depth=1 https://github.com/ScoopInstaller/Extras "$env:USERPROFILE\scoop\buckets\extras"
+  scoop bucket list
+  ```
+
+  确认仓库的 Manifests 数量正常再继续安装。
 
 #### 其他用法
 

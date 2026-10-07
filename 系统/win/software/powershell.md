@@ -1,14 +1,16 @@
 ## powershell
 
-#### 1.0版本
+#### Windows PowerShell 5.1
 
 - 可以右键开始菜单图标去打开
 - 位置：`C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`
-- 作用：有时还是需要用这个最古老的powershell去执行一些涉及到bash、新版powershell、zsh自身的命令。
+- 作用：有时还是需要用系统自带的 Windows PowerShell 5.1去执行一些涉及到bash、新版powershell、zsh自身的命令。
+
+路径中的 `v1.0` 是历史目录名，不代表实际版本；运行 `$PSVersionTable.PSVersion` 查看版本。
 
 #### alias
 
-- 需要分别创建powershell 1.0和最新版powershell的配置文件，在两个powershell中分别运行以下命令，然后直接保存打开的文件即可：
+- 需要分别创建Windows PowerShell 5.1 和 PowerShell 7的配置文件，在两个powershell中分别运行以下命令，然后直接保存打开的文件即可：
 
   ```powershell
   code $PROFILE
@@ -18,7 +20,7 @@
 
   ```powershell
   # scoop
-  New-Alias -Name s -Value scoop
+  Set-Alias -Name s -Value scoop
   function sup {
       param (
           [Parameter(Mandatory = $false)]
@@ -59,6 +61,8 @@
   ```
 
   - 注意`sli`和`sin`命令相比bash版本多了一个字母，不过一般也不会用这两个命令。powershell里主要用`sup`和`scu`。
+
+- 使用 `Set-Alias`，重复加载配置时不会因别名已存在而报错。
 
 - 其他命令：
 

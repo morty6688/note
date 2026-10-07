@@ -38,7 +38,7 @@
     git config --global --unset http.proxy
     ```
 
-- 配置ssh-key，将生成的.pub公钥添加到目标仓库
+- 配置 ssh-key：先检查 `~/.ssh` 是否已有密钥，不要覆盖已有密钥；没有时再生成。将 `.pub` 公钥添加到 [GitHub SSH keys](https://github.com/settings/keys)，不要上传私钥。
 
   ```
   ssh-keygen -t ed25519 -C "你的邮箱"	
