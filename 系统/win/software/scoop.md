@@ -39,12 +39,10 @@ irm https://get.scoop.sh | iex
    scoop bucket add java
    scoop bucket add versions
    scoop bucket add nonportable
-   scoop bucket add dorado https://github.com/chawyehsu/dorado
-   scoop bucket add lemon https://github.com/hoilc/scoop-lemon
    scoop bucket add nirsoft-alternative https://github.com/ScoopInstaller/Nirsoft.git
    scoop update
    ```
-
+   
 3. 进阶配置
 
    - [git配置与问题记录](../../general%20tools/git/config&problem.md)，完成进阶配置
@@ -125,7 +123,7 @@ s info openjdk
 ### 开发工具安装
 
 ```
-si openjdk25 maven gradle visualvm python312 poetry uv extras/anaconda3 nvm go protobuf solidity rustup
+si openjdk25 maven gradle visualvm python312 poetry uv extras/anaconda3 nvm go protobuf solidity rustup mitmproxy
 ```
 
 #### 编程相关scoop软件
@@ -285,14 +283,16 @@ si ripgrep make pandoc latex switchhosts telnet innounp orange dbeaver
     alias cl='conda list'
     alias ca='conda activate'
     alias cda='conda deactivate'
-    alias cc='conda create --name'
-    alias crn='conda remove --name'
+    alias cc='conda create -n'
+    alias crn='conda remove --all -n'
     alias cel='conda env list'
     
     # pip
     alias pi='pip install'
     alias pl='pip list'
     ```
+  
+    - `cc myenv python=3.12`，命令末尾指定环境
   
   - 设置默认不开启base环境：
   
