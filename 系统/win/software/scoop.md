@@ -608,6 +608,10 @@ si ripgrep make pandoc latex switchhosts telnet innounp orange dbeaver
       adb shell pm install-existing --user 0 com.google.android.documentsui
       ```
 
+##### Visual Studio
+
+- [安装链接](https://visualstudio.microsoft.com/zh-hans/)：不用vs有时也需要安装`使用C++的桌面开发`
+
 #####  php（可选）
 
 - 安装：
