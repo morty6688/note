@@ -53,16 +53,18 @@
 
 ### 插件
 
-- 安装[typora_plugin](https://github.com/obgnail/typora_plugin)（用everything搜window.html，打开所在目录把**解压出来的plugin文件夹**复制进去，然后进入/plugin/bin目录运行ps1脚本，**typora升级以后重新进这个目录运行一遍ps1脚本**）（建议把这个链接也放到win多重剪贴板）
+- 安装[typora_plugin](https://github.com/obgnail/typora_plugin/releases)（用everything搜window.html，打开所在目录把**解压出来的plugin文件夹**复制进去，然后进入/plugin/bin目录运行ps1脚本）
 
-  - 把自动编号功能关掉
-  
+  - 关掉自动编号功能
+
+  - 开启光标历史功能
+
   - 标签页管理 - 快捷键 - 去掉==ctrl+`==用于切换标签页的快捷键
-  
+
   - 悬浮动作按钮：距右边框改为20px
-  
+
   - 最新版默认只有6个按钮，全局搜索 `settings.user.toml` ，将action_buttons部分改为
-  
+
     ```toml
     [action_buttons]
     POSITION_RIGHT = "20px"
@@ -82,9 +84,8 @@
       { enable = true, coordinate = [3, 1], size = "22px", icon = "fa fa-caret-up", evil = "() => this.utils.jumpToEdge(true)" },
     ]
     ```
-  
-  - 需要开启的插件：
-    - 光标历史
+
+- 设置完成后，开启**自动升级**
 
 ### 其他配置
 

@@ -680,12 +680,16 @@ npm install -g @mimo-ai/cli
 #### docker环境
 
 - 安装[docker-desktop](https://www.docker.com/products/docker-desktop/)
-  - 把前面的装完再装这个，这个装完会重启系统并安装wsl
-  - 数据库及中间件配置见[docker_env_win](../../general%20tools/docker_desktop/docker_env_win.md)
+  - 装之前**先装wsl**；装好后把网络模式改为mirrored，记得保存
+  
+    ```
+    wsl --install
+    ```
+  - （可选）数据库及中间件配置见[docker_env_win](../../general%20tools/docker_desktop/docker_env_win.md)
 
 #### 注意事项
 
-- 可以用类似`scoop reset openjdk`来切换像java一样的开发工具版本（24/12/10切换失败）
+- 可以用类似`scoop reset openjdk`来切换像java一样的开发工具版本
 
 ### 问题
 
