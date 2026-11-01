@@ -12,24 +12,42 @@
    pkg install git
    ```
 
-2. 文件管理根目录
+2. 文件管理根目录（`/storage/emulated/0/`），所以：
 
    ```
-   cd /storage/emulated/0/
+   mkdir /storage/emulated/0/project
    ```
 
-   - 可以在根目录下创建新目录，也可以直接放到Documents下面（由于documentsui有闪退bug，所以只能采取折中办法：把项目目录都放到Documents下面）
+   - 也可以直接放到Documents下面（如果documentsui有闪退bug，只能采取折中办法：把项目目录都放到Documents下面）
 
 3. ```
-   git config --global http.proxy socks5://127.0.0.1:19802
-   git config --global https.proxy socks5://127.0.0.1:19802
+   git config --global http.proxy socks5://127.0.0.1:1130
+   git config --global https.proxy socks5://127.0.0.1:1130
    ```
 
+   ```
+   ssh-keygen -t ed25519 -C "your_email@example.com"
+   ```
+   
+   - 如果是tun模式，改用：
+   
+     ```
+     mkdir -p ~/.ssh
+     
+     cat >> ~/.ssh/config <<'EOF'
+     Host github.com
+         HostName ssh.github.com
+         Port 443
+         User git
+     EOF
+     
+     chmod 600 ~/.ssh/config
+     ```
+   
 4. ```
-   ssh-keygen -t ed25519 -C 
    ssh -T git@github.com
    ```
-
+   
 5. ```
    cat /data/data/com.termux/files/home/.ssh/id_ed25519.pub
    ```
@@ -49,11 +67,18 @@
   chsh -s zsh
   ```
 
-- powerlevel10k：还是那两条命令安装
+- powerlevel10k：
+
+  ```
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+  echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+  ```
 
 - 修改.zshrc（`nano ~/.zshrc`）
 
   ```
+  cat >> ~/.zshrc <<'EOF'
+  
   # git alias
   alias g='git'
   alias gc='git clone'
@@ -79,10 +104,14 @@
   alias nz='nano ~/.zshrc'
   
   # 起始目录
-  cd /storage/emulated/0/Documents/proj
+  cd /storage/emulated/0/Documents/project
+  
+  EOF
+  
+  source ~/.zshrc
   ```
 
-- 禁用gitstatus，`nano ~/.p10k.zsh`，然后输入下面行（gitstatus有bug，无法初始化）
+- （偶发）禁用gitstatus，`nano ~/.p10k.zsh`，然后输入下面行（gitstatus有bug，无法初始化）
 
   ```
   typeset -g POWERLEVEL9K_DISABLE_GITSTATUS=true
