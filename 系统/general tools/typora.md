@@ -55,7 +55,7 @@
 
 - 安装[typora_plugin](https://github.com/obgnail/typora_plugin/releases)（用everything搜window.html，打开所在目录把**解压出来的plugin文件夹**复制进去，然后进入/plugin/bin目录运行ps1脚本）
 
-  - 关掉自动编号功能
+  - 关掉自动编号，中文括号配对功能
 
   - 开启光标历史功能
 
