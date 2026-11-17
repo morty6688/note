@@ -123,7 +123,7 @@ s info openjdk
 ### 开发工具安装
 
 ```
-si openjdk25 maven gradle visualvm python312 poetry uv extras/anaconda3 nvm go protobuf solidity rustup mitmproxy
+si openjdk25 maven gradle visualvm python312 poetry uv extras/anaconda3 go protobuf solidity rustup mitmproxy
 ```
 
 #### 编程相关scoop软件
@@ -376,12 +376,22 @@ si ripgrep make pandoc latex switchhosts telnet innounp orange dbeaver
 
 ##### js/ts
 
-- **用nvm来管理node版本**
+- **用 winget 安装 nvm，再用 nvm 管理 Node.js 版本**
+
+  nvm 不再通过 Scoop 安装。使用 [NVM for Windows 官方安装渠道](https://docs.nvm-windows.com/install/installers/)，Community 版保留默认安装目录 `%LOCALAPPDATA%\Author Software\nvm`。
+
+  ```powershell
+  winget install --id AuthorSoftware.NVMWindows --exact --source winget
+  ```
+
+  安装后重新打开终端，再安装并启用 Node.js：
 
   ```
   nvm install lts
   nvm use lts
   ```
+
+  若从 Scoop 版迁移，先记录 `nvm list`、`nvm config list` 和全局包，并备份 Node 版本目录；执行 `scoop uninstall nvm` 时不要加 `--purge`。安装新版 nvm 后检查原有版本是否被识别，必要时用 `nvm config set root="原版本目录的父目录"` 指向保留的数据，再用 `nvm use <版本号>`、`node -v`、`npm -v` 和 `npm list -g --depth=0` 验证。原版本可用就保留；不可用则用新版 nvm 卸载并重装对应版本，再恢复需要的全局包。
 
 - 然后安装包管理工具（yarn，pnpm，bun）（优先用pnpm，切换node版本后将这些都重装一遍）
 
@@ -528,6 +538,30 @@ si ripgrep make pandoc latex switchhosts telnet innounp orange dbeaver
 
   - idea控制台有时会输出乱码，在package.json中添加`chcp 65001 &&` 切换
 
+###### vibe coding
+
+这些 CLI 统一通过 npm 安装，放在 JS/TS 环境配置下管理；切换 Node 版本后需在新版本中重新安装。
+
+- Codex CLI（cli工具用来加入别的模型）
+
+  ```
+  npm install -g @openai/codex
+  ```
+
+- OpenCode
+
+  ```
+  npm install -g opencode-ai
+  ```
+
+- MiMo CLI
+
+  ```
+  npm install -g @mimo-ai/cli
+  ```
+
+安装后执行 `nvm reshim` 刷新入口，再用 `codex --version`、`opencode --version` 和 `mimo --version` 检查。登录和模型配置按各工具提示完成。
+
 ##### go
 
 - 代理（换源）：
@@ -656,26 +690,6 @@ si ripgrep make pandoc latex switchhosts telnet innounp orange dbeaver
   xdebug.remote_port=10000
   xdebug.remote_handler=dbgp
   ```
-
-#### vibe coding
-
-##### chatgpt（cli工具用来加入别的模型）
-
-```
-npm install -g @openai/codex
-```
-
-##### opencode
-
-```
-npm i -g opencode-ai
-```
-
-##### mimo
-
-```
-npm install -g @mimo-ai/cli
-```
 
 #### docker环境
 
